@@ -8,11 +8,8 @@
 
 # Vue-Video-Player
 Video/Live player for Vue.js
-<<<<<<< HEAD
 基于 [video.js](https://github.com/videojs/video.js) + [videojs-resolution-switcher](https://github.com/kmoskwiak/videojs-resolution-switcher) + [videojs-contrib-hls](https://github.com/videojs/videojs-contrib-hls)
 
-=======
->>>>>>> c8bf70f1e5d572f15e8b82d142c12f716667b938
 
 ## V1.0.0
 
@@ -22,11 +19,7 @@ Video/Live player for Vue.js
   - 可根据环境自动降级为flash播放
 
 # Example
-<<<<<<< HEAD
 [Demo](https://surmon-china.github.io/vue-video-player)
-=======
-[Demos](https://surmon-china.github.io/vue-video-player)
->>>>>>> c8bf70f1e5d572f15e8b82d142c12f716667b938
 
 
 # Use Setup
@@ -44,11 +37,7 @@ import Vue from 'vue'
 import VideoPlayer from 'vue-video-player'
 
 
-<<<<<<< HEAD
 ## require with Node.js/Webpack
-=======
-## require with Webpack
->>>>>>> c8bf70f1e5d572f15e8b82d142c12f716667b938
 var Vue = require('vue')
 ...
 var VideoPlayer = require('vue-video-player')
@@ -61,7 +50,6 @@ Vue.use(VideoPlayer)
 <video-player :options="videoOptions"></video-player>
 
 
-<<<<<<< HEAD
 # component config example 1(video)
 data () {
   return {
@@ -71,19 +59,11 @@ data () {
         src: 'http://techslides.com/demos/sample-videos/small.webm',
         muted: true
       }
-=======
-# component config example 1
-data () {
-  return {
-     videoOptions: {
-      src: 'http://7xnbft.com2.z0.glb.clouddn.com/sample_video_M.mp4'
->>>>>>> c8bf70f1e5d572f15e8b82d142c12f716667b938
     }
   }
 }
 
 
-<<<<<<< HEAD
 # component config example 2(video)
 data () {
   return {
@@ -92,16 +72,6 @@ data () {
         { type: "video/mp4", src: 'http://7xnbft.com2.z0.glb.clouddn.com/sample_video_H.mp4', label: '原画', res: 1 },
         { type: "video/mp4", src: 'http://7xnbft.com2.z0.glb.clouddn.com/sample_video_M.mp4', label: '高清', res: 2 },
         { type: "video/mp4", src: 'http://7xnbft.com2.z0.glb.clouddn.com/sample_video_L.mp4', label: '流畅', res: 3 }
-=======
-# component config example 2
-data () {
-  return {
-    videoOptions: {
-      src: [
-        { type: "video/mp4", src: 'http://7xnbft.com2.z0.glb.clouddn.com/sample_video_M.mp4', label: '原画', res: 1 },
-        { type: "video/mp4", src: 'http://7xnbft.com2.z0.glb.clouddn.com/sample_video_M.mp4', label: '高清', res: 2 },
-        { type: "video/mp4", src: 'http://7xnbft.com2.z0.glb.clouddn.com/sample_video_M.mp4', label: '流畅', res: 3 }
->>>>>>> c8bf70f1e5d572f15e8b82d142c12f716667b938
       ],
       language: 'zh-CN',
       playbackRates: [0.7, 1.0, 1.3, 1.5, 1.7],
@@ -111,7 +81,6 @@ data () {
   }
 }
 
-<<<<<<< HEAD
 # component config example 3(live)
 data () {
   return {
@@ -139,17 +108,6 @@ data () {
 [video.js](https://github.com/videojs/video.js)
 
 [video.js api](http://docs.videojs.com/docs/api/player.html#Methodsmuted)
-=======
-```
-
-# 全部 API
-
-
-
-# More Config
-
-[https://github.com/videojs/video.js](https://github.com/videojs/video.js)
->>>>>>> c8bf70f1e5d572f15e8b82d142c12f716667b938
 
 [videojs-resolution-switcher](https://github.com/kmoskwiak/videojs-resolution-switcher)
 
