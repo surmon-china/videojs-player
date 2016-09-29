@@ -1,0 +1,142 @@
+.video-player {
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+
+.video-player .video-js {
+  width: 100%;
+}
+
+.video-player .video-js .vjs-control:before {
+  font-size: 2.2em;
+  line-height: 1.6em;
+}
+
+.video-player .vjs-playback-rate .vjs-playback-rate-value {
+  font-size: 1.5em;
+  line-height: 2.2em;
+}
+
+.video-player .video-js .vjs-play-progress {
+  background-color: #fff; 
+}
+
+.video-player .video-js .vjs-play-progress:before {
+  position: absolute;
+  top: -0.36em;
+  right: -0.5em;
+  font-size: 1.5em!important;
+  border-radius: 100%;
+  animation: player-thumb 2s infinite ease-in-out;
+}
+
+@keyframes player-thumb {
+  0% {
+    text-shadow: 0px 0px 18px rgba(255,255,255, 0);
+  }
+  50% {
+    text-shadow: 0px 0px 18px rgba(255,255,255,.9);
+  }
+  100% {
+    text-shadow: 0px 0px 18px rgba(255,255,255, 0);
+  }
+}
+
+@-webkit-keyframes player-thumb {
+  0% {
+    text-shadow: 0px 0px 18px rgba(255,255,255,0);
+  }
+  50% {
+    text-shadow: 0px 0px 18px rgba(255,255,255,.3);
+  }
+  100% {
+    text-shadow: 0px 0px 18px rgba(255,255,255,0);
+  }
+}
+
+.video-player .vjs-menu li {
+  font-size: 1.4em;
+  line-height: 1.8em;
+}
+
+// 清晰度插件
+.video-player .vjs-resolution-button .vjs-resolution-button-label {
+  font-size: 1.35em;
+  line-height: 2.5em;
+  font-family: "PingFang SC","Helvetica Neue","Hiragino Sans GB","Segoe UI","Microsoft YaHei","微软雅黑",sans-serif;
+}
+
+.video-player .vjs-resolution-button {
+  color: #ccc;
+  flex: none;
+  border: 4;
+  font-family: "PingFang SC","Helvetica Neue","Hiragino Sans GB","Segoe UI","Microsoft YaHei","微软雅黑",sans-serif;
+}
+
+.video-player .video-js .vjs-progress-control:hover .vjs-progress-holder {
+  font-size: 1.5;
+}
+
+/*
+.video-js .vjs-control.vjs-playback-rate {
+  text-transform: uppercase;
+}
+
+.video-js .vjs-control.vjs-playback-rate .vjs-menu .vjs-menu-content .vjs-menu-item {
+  text-transform: uppercase;
+}
+*/
+
+.video-player .vjs-resolution-button .vjs-resolution-button-staticlabel:before {
+  // content: '\f110';
+  font-size: 1.8em;
+  line-height: 1.67;
+}
+
+.video-player .vjs-resolution-button .vjs-resolution-button-label {
+  font-size: 1.4em;
+  line-height: 2.6em;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  box-sizing: inherit;
+}
+
+.video-player .vjs-control.vjs-resolution-button {
+  width: 5em;
+}
+
+.video-player .vjs-resolution-button .vjs-menu {
+  left: 0;
+  width: 100%
+}
+
+.video-player .vjs-resolution-button ul.vjs-menu-content {
+  width: 100%;
+}
+
+.video-player .vjs-resolution-button .vjs-menu li {
+  text-transform: none;
+  font-size: 1.4em;
+  font-family: "PingFang SC","Helvetica Neue","Hiragino Sans GB","Segoe UI","Microsoft YaHei","微软雅黑",sans-serif;
+}
+
+.video-player .video-js .vjs-current-time,
+.video-player .video-js .vjs-time-divider,
+.video-player .video-js .vjs-duration {
+  display: block;
+}
+
+.video-player .video-js.live .vjs-current-time,
+.video-player .video-js.live .vjs-time-divider,
+.video-player .video-js.live .vjs-duration {
+  display: none;
+}
+
+.video-player .video-js.live .vjs-live-control.vjs-control {
+  display: block!important;
+}
