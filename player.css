@@ -1,142 +1,180 @@
-.video-player {
+.video-js.vjs-custom-skin {
   width: 100%;
-  height: 100%;
-  position: relative;
-}
-
-.video-player .video-js {
-  width: 100%;
-}
-
-.video-player .video-js .vjs-control:before {
-  font-size: 2.2em;
-  line-height: 1.6em;
-}
-
-.video-player .vjs-playback-rate .vjs-playback-rate-value {
-  font-size: 1.5em;
-  line-height: 2.2em;
-}
-
-.video-player .video-js .vjs-play-progress {
-  background-color: #fff; 
-}
-
-.video-player .video-js .vjs-play-progress:before {
-  position: absolute;
-  top: -0.36em;
-  right: -0.5em;
-  font-size: 1.5em!important;
-  border-radius: 100%;
-  animation: player-thumb 2s infinite ease-in-out;
-}
-
-@keyframes player-thumb {
-  0% {
-    text-shadow: 0px 0px 18px rgba(255,255,255, 0);
-  }
-  50% {
-    text-shadow: 0px 0px 18px rgba(255,255,255,.9);
-  }
-  100% {
-    text-shadow: 0px 0px 18px rgba(255,255,255, 0);
-  }
-}
-
-@-webkit-keyframes player-thumb {
-  0% {
-    text-shadow: 0px 0px 18px rgba(255,255,255,0);
-  }
-  50% {
-    text-shadow: 0px 0px 18px rgba(255,255,255,.3);
-  }
-  100% {
-    text-shadow: 0px 0px 18px rgba(255,255,255,0);
-  }
-}
-
-.video-player .vjs-menu li {
-  font-size: 1.4em;
-  line-height: 1.8em;
-}
-
-// 清晰度插件
-.video-player .vjs-resolution-button .vjs-resolution-button-label {
-  font-size: 1.35em;
-  line-height: 2.5em;
   font-family: "PingFang SC","Helvetica Neue","Hiragino Sans GB","Segoe UI","Microsoft YaHei","微软雅黑",sans-serif;
 }
 
-.video-player .vjs-resolution-button {
-  color: #ccc;
-  flex: none;
-  border: 4;
-  font-family: "PingFang SC","Helvetica Neue","Hiragino Sans GB","Segoe UI","Microsoft YaHei","微软雅黑",sans-serif;
+.video-js.vjs-custom-skin .vjs-menu-button-inline.vjs-slider-active,.video-js.vjs-custom-skin .vjs-menu-button-inline:focus,.video-js.vjs-custom-skin .vjs-menu-button-inline:hover,.video-js.vjs-no-flex .vjs-menu-button-inline {
+  width: 10em
 }
 
-.video-player .video-js .vjs-progress-control:hover .vjs-progress-holder {
-  font-size: 1.5;
+.video-js.vjs-custom-skin .vjs-controls-disabled .vjs-big-play-button {
+  display: none!important
 }
 
-/*
-.video-js .vjs-control.vjs-playback-rate {
-  text-transform: uppercase;
+.video-js.vjs-custom-skin .vjs-control {
+  width: 3em
 }
 
-.video-js .vjs-control.vjs-playback-rate .vjs-menu .vjs-menu-content .vjs-menu-item {
-  text-transform: uppercase;
-}
-*/
-
-.video-player .vjs-resolution-button .vjs-resolution-button-staticlabel:before {
-  // content: '\f110';
-  font-size: 1.8em;
-  line-height: 1.67;
+.video-js.vjs-custom-skin .vjs-control.vjs-live-control{
+  width: auto;
+  padding-left: .5em;
+  letter-spacing: .1em;
 }
 
-.video-player .vjs-resolution-button .vjs-resolution-button-label {
-  font-size: 1.4em;
-  line-height: 2.6em;
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  text-align: center;
-  box-sizing: inherit;
+.video-js.vjs-custom-skin .vjs-menu-button-inline:before {
+  width: 1.5em
 }
 
-.video-player .vjs-control.vjs-resolution-button {
-  width: 5em;
+.vjs-menu-button-inline .vjs-menu {
+  left: 3em
 }
 
-.video-player .vjs-resolution-button .vjs-menu {
-  left: 0;
-  width: 100%
+.vjs-paused.vjs-has-started.video-js.vjs-custom-skin .vjs-big-play-button,.video-js.vjs-ended .vjs-big-play-button,.video-js.vjs-paused .vjs-big-play-button {
+  display: block
 }
 
-.video-player .vjs-resolution-button ul.vjs-menu-content {
-  width: 100%;
+.video-js.vjs-custom-skin .vjs-load-progress div,.vjs-seeking .vjs-big-play-button,.vjs-waiting .vjs-big-play-button {
+  display: none!important
 }
 
-.video-player .vjs-resolution-button .vjs-menu li {
-  text-transform: none;
-  font-size: 1.4em;
-  font-family: "PingFang SC","Helvetica Neue","Hiragino Sans GB","Segoe UI","Microsoft YaHei","微软雅黑",sans-serif;
+.video-js.vjs-custom-skin .vjs-mouse-display:after,.video-js.vjs-custom-skin .vjs-play-progress:after {
+  padding: 0 .4em .3em
 }
 
-.video-player .video-js .vjs-current-time,
-.video-player .video-js .vjs-time-divider,
-.video-player .video-js .vjs-duration {
-  display: block;
-}
-
-.video-player .video-js.live .vjs-current-time,
-.video-player .video-js.live .vjs-time-divider,
-.video-player .video-js.live .vjs-duration {
+.video-js.vjs-ended .vjs-loading-spinner {
   display: none;
 }
 
-.video-player .video-js.live .vjs-live-control.vjs-control {
-  display: block!important;
+.video-js.vjs-ended .vjs-big-play-button {
+  display: block !important;
+}
+
+video-js.vjs-ended .vjs-big-play-button,.video-js.vjs-paused .vjs-big-play-button,.vjs-paused.vjs-has-started.video-js.vjs-custom-skin .vjs-big-play-button {
+  display: block
+}
+
+.video-js.vjs-custom-skin .vjs-big-play-button {
+  top: 50%;
+  left: 50%;
+  margin-left: -1.5em;
+  margin-top: -1em
+}
+
+.video-js.vjs-custom-skin .vjs-big-play-button {
+  background-color: rgba(0,0,0,0.45);
+  font-size: 3.5em;
+  // border-radius: 50%;
+  height: 2em !important;
+  line-height: 2em !important;
+  margin-top: -1em !important
+}
+
+.video-js:hover .vjs-big-play-button,.video-js.vjs-custom-skin .vjs-big-play-button:focus,.video-js.vjs-custom-skin .vjs-big-play-button:active {
+  background-color: rgba(36,131,213,0.9)
+}
+
+.video-js.vjs-custom-skin .vjs-loading-spinner {
+  border-color: rgba(36,131,213,0.8)
+}
+
+.video-js.vjs-custom-skin .vjs-control-bar2 {
+  background-color: #000000
+}
+
+.video-js.vjs-custom-skin .vjs-control-bar {
+  // background-color: rgba(0,0,0,0.3) !important;
+  color: #ffffff;
+  font-size: 14px
+}
+
+.video-js.vjs-custom-skin .vjs-play-progress,.video-js.vjs-custom-skin  .vjs-volume-level {
+  background-color: #2483d5
+}
+
+.video-js.vjs-custom-skin .vjs-play-progress:before {
+  top: -0.3em;
+}
+
+.video-js.vjs-custom-skin .vjs-progress-control:hover .vjs-progress-holder {
+  font-size: 1.3em;
+}
+
+vjs-menu-button-popup.vjs-volume-menu-button-vertical .vjs-menu {
+  left: 0em;
+}
+
+.video-js.vjs-custom-skin .vjs-menu li {
+  padding: 0;
+  line-height: 2em;
+  font-size: 1.1em;
+  font-family: "PingFang SC","Helvetica Neue","Hiragino Sans GB","Segoe UI","Microsoft YaHei","微软雅黑",sans-serif;
+}
+
+.video-js.vjs-custom-skin .vjs-time-tooltip,
+.video-js.vjs-custom-skin .vjs-mouse-display:after, 
+.video-js.vjs-custom-skin .vjs-play-progress:after {
+  border-radius: 0;
+  font-size: 1em;
+  padding: 0;
+  width: 3em;
+  height: 1.5em;
+  line-height: 1.5em;
+  top: -3em;
+}
+
+.video-js.vjs-custom-skin .vjs-menu-button-popup .vjs-menu {
+  width: 5em;
+  left: -1em;
+}
+
+.video-js.vjs-custom-skin .vjs-menu-button-popup.vjs-volume-menu-button-vertical .vjs-menu {
+  left: 0;
+}
+
+.video-js.vjs-custom-skin .vjs-control-bar .vjs-resolution-button .vjs-menu {
+  // order: 4;
+}
+
+// 排序顺序
+.video-js.vjs-custom-skin .vjs-control-bar .vjs-play-control {
+  order: 0;
+}
+
+.video-js.vjs-custom-skin .vjs-control-bar .vjs-time-control {
+  min-width: 1em;
+  padding: 0;
+  margin: 0 .1em;
+  text-align: center;
+  display: block;
+  order: 1;
+}
+
+.video-js.vjs-custom-skin .vjs-control-bar .vjs-playback-rate .vjs-playback-rate-value{
+  font-size: 1.2em;
+  line-height: 2.4;
+}
+
+.video-js.vjs-custom-skin .vjs-progress-control.vjs-control {
+  order: 2;
+}
+
+.video-js.vjs-custom-skin .vjs-control-bar .vjs-volume-menu-button {
+  order: 3;
+}
+
+.video-js.vjs-custom-skin .vjs-control-bar .vjs-resolution-button {
+  order: 4;
+}
+
+.video-js.vjs-custom-skin .vjs-control-bar .vjs-resolution-button .vjs-resolution-button-label {
+  display: block;
+  line-height: 3em;
+}
+
+.video-js.vjs-custom-skin .vjs-control-bar .vjs-playback-rate {
+  order: 5;
+}
+
+.video-js.vjs-custom-skin .vjs-control-bar .vjs-fullscreen-control {
+  order: 6;
 }

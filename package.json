@@ -1,6 +1,6 @@
 {
   "name": "vue-video-player",
-  "version": "1.0.0",
+  "version": "1.2.0",
   "description": "Video Player component for Vue.js",
   "main": "index.js",
   "scripts": {
@@ -28,6 +28,7 @@
   "homepage": "https://github.com/surmon-china/vue-video-player#readme",
   "dependencies": {
     "video.js": "^5.11.7",
+    "videojs-youtube": "^2.1.1",
     "videojs-contrib-hls": "^3.6.0",
     "videojs-resolution-switcher": "^0.4.2"
   }

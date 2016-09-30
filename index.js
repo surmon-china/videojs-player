@@ -5,12 +5,12 @@
  *
  */
 
-var component = require('./component.vue')
+var player = require('./player.vue')
 
 var videoPlayerBuild = function(Vue) {
 
   // component
-  Vue.component('video-player', component)
+  Vue.component('video-player', player)
 }
 
 var videoPlayer = {

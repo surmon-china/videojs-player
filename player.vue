@@ -1,18 +1,18 @@
 <template>
   <div class="video-player">
-    <video class="video-js vjs-default-skin" :class="{ 'live': options.live }"></video>
+    <video class="video-js vjs-custom-skin" :class="{ 'live': options.live }"></video>
   </div>
 </template>
 
 <script>
 
   // load
-  var videojs = require('video.js')
+  window.videojs = require('video.js')
   var languages = require('./languages.js')
-  var videojsContribHls = require('videojs-contrib-hls')
-  var videojsResolutionSwitcher = require('videojs-resolution-switcher')
-  require('video.js/dist/video-js.css')
-  // require('video.js/dist/video-js.swf')
+  require('videojs-youtube')
+  require('videojs-contrib-hls')
+  require('videojs-resolution-switcher')
+  require('video.js/dist/alt/video-js-cdn.css')
   
   // config
   videojs.options.flash.swf = "https://cdn.bootcss.com/video.js/5.13.0/video-js.swf"
@@ -52,30 +52,45 @@
         options.playbackRates = options.playbackRates || false
         // player defaultSrcReId
         options.defaultSrcReId = options.defaultSrcReId || 1
+        // default muted
         options.muted = options.muted || false
+
+        if (typeof options.source !== 'object') {
+          throw new Error('video resource must be a object or array')
+        }
 
         // controlBar config 控制条的dom结构控制
         var controlBar = {
           remainingTimeDisplay: false,
-          durationDisplay: {},
-          currentTimeDisplay: {},
+          playToggle: {},
+          progressControl: {},
+          fullscreenToggle: {},
           volumeMenuButton: {
             inline: false,
             vertical: true
           }
         }
 
+        if (options.live) {
+          controlBar.timeDivider = false
+          controlBar.durationDisplay = false
+          controlBar.currentTimeDisplay = false
+        }
+
         // build player config
         var video_options = {
-          'controls': options.controls || true, 
+          'controls': options.controls !== undefined ? options.controls : true, 
           'autoplay': options.autoplay !== undefined ? options.autoplay : true,
           'preload': options.preload || 'auto',
-          'poster': options.poster ||  'images/qrcode.png',
+          'poster': options.poster ||  '',
           'wdith': options.wdith || '100%',
-          'height': options.height || 380,
+          'height': options.height || 360,
           'controlBar': options.controlBar || controlBar,
           'language': options.language || 'en',
-          'techOrder': options.techOrder || ['html5', 'flash']
+          'techOrder': options.techOrder || ['html5', 'flash', 'youtube'],
+          'flash': { hls: { withCredentials: false }},
+          'html5': { hls: { withCredentials: false }},
+          'youtube': { "ytControls": options.ytControls ? Number(options.ytControls) : 0 }
         }
 
         // 添加指定语言
@@ -84,16 +99,14 @@
 
         // 非直播情况
         if (!options.live) {
-          if (typeof options.source == 'object') {
-            if (!!options.source.src) {
-              // 单独播放资源
-              video_options.sources = [options.source]
-            } else {
-              // 多清晰度版本播放资源
-              video_options.plugins = { videoJsResolutionSwitcher: { default: options.defaultSrcReId, dynamicLabel: true }}
-            }
+
+          // 单独播放资源
+          if (!!options.source.src) {
+            video_options.sources = [options.source]
+
+          // 多清晰度版本播放资源
           } else {
-            throw new Error('video player src must be a object or array, 播放器src属性必须是数组或对象')
+            video_options.plugins = { videoJsResolutionSwitcher: { default: options.defaultSrcReId, dynamicLabel: true }}
           }
 
           // 是否使用播放速度控制
@@ -106,36 +119,29 @@
         this.player = null
         this.player = videojs(this.$el.children[0], video_options, function() {
 
-          // console.log('Player loaded!')
-          var is_live = !!options.live
-
           // 是否应用多版本切换清晰度
-          if (!is_live) {
-            if (typeof options.source == 'object' && !!options.source.length) {
-              // console.log('resolutionchange')
+          if (!options.live) {
+            if (!!options.source.length) {
               this.updateSrc(options.source)
-              // { type: "video/mp4", src: 'http://7xnbft.com2.z0.glb.clouddn.com/sample_video_M.mp4', label: '高清', res: 2 }
               this.on('resolutionchange', function(){
-                // console.info('分辨率切换至新地址：', _this, this.src())
                 _this.$dispatch('player', { resolutionchange: this.src()})
               })
             }
           }
 
-          // is_live
-          if (is_live) {
-            console.log('live video', options.source)
-            if (typeof options.source == 'string') {
-              this.src({ src: options.source, type: 'application/x-mpegURL', withCredentials: false })
-              // var hls = this.tech({ IWillNotUseThisInPlugins: true }).hls
-              // 直播每次的切片请求
-              this.tech_.hls.xhr.beforeRequest = function(options) {
-                // console.log(options)
-                return options
-              }
-            } else {
-              throw new Error('live type src must be a string url')
+          if (options.live) {
+
+            // console.log('live video', this, options.source)
+            this.src(options.source)
+
+            // var hls = this.tech({ IWillNotUseThisInPlugins: true }).hls
+            // 直播每次的切片请求
+            /*
+            this.tech_.hls.xhr.beforeRequest = function(options) {
+              console.log(options)
+              return options
             }
+            */
           }
 
           // 监听播放
@@ -157,8 +163,6 @@
           // 监听时间
           this.on('timeupdate', function() { _this.$dispatch('player', { currentTime: this.currentTime() }) })
         })
-
-        
       },
       // 释放播放器
       dispose: function() {
@@ -175,8 +179,10 @@
         if (action == 'play') this.player.play()
         if (action == 'pause') this.player.pause()
         if (action == 'refresh') {
-          this.player.currentTime(0)
-          this.player.play()
+          if (!this.options.live) {
+            this.player.currentTime(0)
+            this.player.play()
+          }
         }
       }
     }
