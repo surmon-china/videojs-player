@@ -55,9 +55,9 @@ data () {
      videoOptions: {
       source: {
         type: "video/webm", 
-        src: 'http://techslides.com/demos/sample-videos/small.webm',
-        techOrder: ['flash']
-      }
+        src: 'http://techslides.com/demos/sample-videos/small.webm'
+      },
+      techOrder: ['flash']
     }
   }
 }
