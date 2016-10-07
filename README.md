@@ -7,7 +7,7 @@
 
 
 # Vue-Video-Player
-Video/Live player for Vue.js
+Video/Live player for Vue.js(1.x ~ 2.x)
 基于 [video.js](https://github.com/videojs/video.js) + [videojs-resolution-switcher](https://github.com/kmoskwiak/videojs-resolution-switcher) + [videojs-contrib-hls](https://github.com/videojs/videojs-contrib-hls)
 
 - 支持HlS流媒体（.m3u8）直播、各种普通类型视频
@@ -15,15 +15,19 @@ Video/Live player for Vue.js
 - 普通视频可支持多种播放速度切换
 - 可根据环境自动降级为flash播放
 - 可播放Youtube视频
+- 支持Vue.js(1.x ~ 2.x)全版本
+- 基于Video.js有丰富的API和文档支持
 
 # Example
-[Demo](https://surmon-china.github.io/vue-video-player)
+[Demo Page](https://surmon-china.github.io/vue-video-player)
 
 
 # Use Setup
 
+
+### Install vue-video-player
+
 ``` bash
-# install vue-video-player
 npm install vue-video-player --save
 ```
 
@@ -41,6 +45,21 @@ var VideoPlayer = require('vue-video-player')
 
 // use
 Vue.use(VideoPlayer)
+
+// --------------------------------------
+
+
+// or use with component(ES6)
+import Vue from 'vue'
+// ...
+import { videoPlayer } from 'vue-video-player'
+
+// use
+export default {
+  components: {
+    videoPlayer
+  }
+}
 ```
 
 ``` html

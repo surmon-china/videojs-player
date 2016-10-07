@@ -14,6 +14,7 @@ var videoPlayerBuild = function(Vue) {
 }
 
 var videoPlayer = {
+  videoPlayer: player,
   install: function(Vue) {
     videoPlayerBuild(Vue)
   }

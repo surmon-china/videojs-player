@@ -30,6 +30,11 @@
         this.initialize()
       }
     },
+    mounted: function() {
+      if (this.options) {
+        this.initialize()
+      }
+    },
     beforeDestory: function() {
       this.dispose()
     },
@@ -145,23 +150,31 @@
           }
 
           // 监听播放
-          this.on('play', function() { _this.$dispatch('player', { play: true }) })
+          this.on('play', function() {
+            if (_this.$dispatch) _this.$dispatch('player', { play: true })
+          })
 
           // 监听暂停
-          this.on('pause', function() { _this.$dispatch('player', { pause: true }) })
+          this.on('pause', function() { 
+            if (_this.$dispatch) _this.$dispatch('player', { pause: true }) 
+          })
 
           // 监听结束
-          this.on('ended', function() { _this.$dispatch('player', { ended: true }) })
+          this.on('ended', function() { 
+            if (_this.$dispatch) _this.$dispatch('player', { ended: true }) 
+          })
 
           // 元文件信息
           this.on('loadeddata', function() {
             if (!options.live && !!options.start) this.currentTime(options.start)
-            _this.$dispatch('player', { loadeddata: true })
+            if (_this.$dispatch) _this.$dispatch('player', { loadeddata: true })
             this.muted(_this.options.muted)
           })
 
           // 监听时间
-          this.on('timeupdate', function() { _this.$dispatch('player', { currentTime: this.currentTime() }) })
+          this.on('timeupdate', function() { 
+            if (_this.$dispatch) _this.$dispatch('player', { currentTime: this.currentTime() })
+          })
         })
       },
       // 释放播放器
