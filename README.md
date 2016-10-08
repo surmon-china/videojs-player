@@ -63,52 +63,108 @@ export default {
 ```
 
 ``` html
-<!-- Use in components -->
+<!-- Use in component(Vue.js1.X) -->
 <video-player :options="videoOptions"></video-player>
+
+<!-- Use in component(Vue.js2.X) -->
+<video-player :options="videoOptions" @playerStateChanged="playerStateChanged"></video-player>
+
+<!-- parent component to control the player do something -->
+<button @click="playerAction('play')">Play</button>
+<button @click="playerAction('pause')">Pause</button>
+<button @click="playerAction('refresh')">Refresh</button>
 ```
 
 ``` javascript
 // component config example 1(video)
-data () {
-  return {
-     videoOptions: {
-      source: {
-        type: "video/webm", 
-        src: 'http://techslides.com/demos/sample-videos/small.webm'
-      },
-      techOrder: ['flash']
+export default {
+  data () {
+    return {
+       videoOptions: {
+        source: {
+          type: "video/webm", 
+          src: 'https://cdn.theguardian.tv/webM/2015/07/20/150716YesMen_synd_768k_vp8.webm'
+        }
+      }
     }
   }
 }
 
 
 // component config example 2(video)
-data () {
-  return {
-    videoOptions: {
-      source: [
-        { type: "video/mp4", src: 'http://example.com/sample_video_H.mp4', label: '原画', res: 1 },
-        { type: "video/mp4", src: 'http://example.com/sample_video_M.mp4', label: '高清', res: 2 },
-        { type: "video/mp4", src: 'http://example.com/sample_video_L.mp4', label: '流畅', res: 3 }
-      ],
-      language: 'zh-CN',
-      playbackRates: [0.7, 1.0, 1.3, 1.5, 1.7],
-      poster: 'http://cn.vuejs.org/images/logo.png',
-      defaultSrcReId: 2
+export default {
+  data () {
+    return {
+      videoOptions: {
+        source: [
+          { type: "video/mp4", src: 'http://example.com/sample_video_H.mp4', label: '原画', res: 1 },
+          { type: "video/mp4", src: 'http://example.com/sample_video_M.mp4', label: '高清', res: 2 },
+          { type: "video/mp4", src: 'http://example.com/sample_video_L.mp4', label: '流畅', res: 3 }
+        ],
+        language: 'zh-CN',
+        playbackRates: [0.7, 1.0, 1.3, 1.5, 1.7],
+        poster: 'http://cn.vuejs.org/images/logo.png',
+        defaultSrcReId: 2
+      }
     }
   }
 }
 
+
 // component config example 3(live)
-data () {
-  return {
-     videoOptions: {
-      source: {
-        type: 'application/x-mpegURL',
-        src: 'https://example.net/live/playlist.m3u8',
-        withCredentials: false
-      },
-      live: true
+export default {
+  data () {
+    return {
+       videoOptions: {
+        source: {
+          type: 'application/x-mpegURL',
+          src: 'https://example.net/live/playlist.m3u8',
+          withCredentials: false
+        },
+        live: true
+      }
+    }
+  }
+}
+
+//-------------------------------------------------------------
+
+// playerStateChanged callback example(Vue.js1.X)
+export default {
+  events: {
+    'playerStateChanged': function (playerCurrentState) {
+      console.log(playerCurrentState)
+    }
+  }
+}
+
+
+// playerStateChanged callback example(Vue.js2.X)
+export default {
+  methods: {
+    playerStateChanged(playerCurrentState) {
+      console.log(playerCurrentState)
+    }
+  }
+}
+
+//-------------------------------------------------------------
+
+// playerAction event example(Vue.js1.X)
+export default {
+  methods: {
+    playerAction: function(action) {
+      this.$broadcast('playerAction', action)
+    }
+  }
+}
+
+
+// playerAction event example(Vue.js2.X)
+export default {
+  methods: {
+    playerAction(action) {
+      this.$emit('playerAction', action)
     }
   }
 }

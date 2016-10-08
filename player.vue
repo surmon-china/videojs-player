@@ -7,15 +7,7 @@
 <script>
 
   // load
-  window.videojs = require('video.js')
   var languages = require('./languages.js')
-  require('videojs-youtube')
-  require('videojs-contrib-hls')
-  require('videojs-resolution-switcher')
-  require('video.js/dist/alt/video-js-cdn.css')
-  
-  // config
-  videojs.options.flash.swf = "https://cdn.bootcss.com/video.js/5.13.0/video-js.swf"
 
   export default {
     name: 'video-player',
@@ -24,6 +16,15 @@
         type: Object,
         required: true
       },
+    },
+    created: function () {
+      // Vue2.0 $on监听父组件命令
+      if (this.$parent) {
+        var _this = this
+        this.$parent.$on('playerAction', function (action){
+          _this.doAction(action)
+        })
+      }
     },
     ready: function() {
       if (this.options) {
@@ -129,7 +130,8 @@
             if (!!options.source.length) {
               this.updateSrc(options.source)
               this.on('resolutionchange', function(){
-                _this.$dispatch('player', { resolutionchange: this.src()})
+                _this.$emit && _this.$emit('playerStateChanged', { resolutionchange: this.src() })
+                _this.$dispatch && _this.$dispatch('playerStateChanged', { resolutionchange: this.src() })
               })
             }
           }
@@ -151,29 +153,34 @@
 
           // 监听播放
           this.on('play', function() {
-            if (_this.$dispatch) _this.$dispatch('player', { play: true })
+            _this.$emit && _this.$emit('playerStateChanged', { play: true })
+            _this.$dispatch && _this.$dispatch('playerStateChanged', { play: true })
           })
 
           // 监听暂停
-          this.on('pause', function() { 
-            if (_this.$dispatch) _this.$dispatch('player', { pause: true }) 
+          this.on('pause', function() {
+            _this.$emit && _this.$emit('playerStateChanged', { pause: true })
+            _this.$dispatch && _this.$dispatch('playerStateChanged', { pause: true })
           })
 
           // 监听结束
           this.on('ended', function() { 
-            if (_this.$dispatch) _this.$dispatch('player', { ended: true }) 
+            _this.$emit && _this.$emit('playerStateChanged', { ended: true })
+            _this.$dispatch && _this.$dispatch('playerStateChanged', { ended: true })
           })
 
           // 元文件信息
           this.on('loadeddata', function() {
             if (!options.live && !!options.start) this.currentTime(options.start)
-            if (_this.$dispatch) _this.$dispatch('player', { loadeddata: true })
             this.muted(_this.options.muted)
+            _this.$emit && _this.$emit('playerStateChanged', { loadeddata: true })
+            _this.$dispatch && _this.$dispatch('playerStateChanged', { loadeddata: true })
           })
 
           // 监听时间
-          this.on('timeupdate', function() { 
-            if (_this.$dispatch) _this.$dispatch('player', { currentTime: this.currentTime() })
+          this.on('timeupdate', function() {
+            _this.$emit && _this.$emit('playerStateChanged', { currentTime: this.currentTime() })
+            _this.$dispatch && _this.$dispatch('playerStateChanged', { currentTime: this.currentTime() })
           })
         })
       },
@@ -184,11 +191,11 @@
           this.player = null
           delete this.player
         }
-      }
-    },
-    events: {
-      'player': function(action) {
+      },
+      // 操作播放器
+      doAction: function(action) {
         // console.log(action)
+        if (!this.player) return
         if (action == 'play') this.player.play()
         if (action == 'pause') this.player.pause()
         if (action == 'refresh') {
@@ -197,6 +204,12 @@
             this.player.play()
           }
         }
+      }
+    },
+    // Vue1.X监听父组件传播下来的事件
+    events: {
+      'playerAction': function(action) {
+        this.doAction(action)
       }
     }
   }
