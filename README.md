@@ -10,6 +10,7 @@
 Video/Live player for Vue.js(1.x ~ 2.x)
 基于 [video.js](https://github.com/videojs/video.js) + [videojs-resolution-switcher](https://github.com/kmoskwiak/videojs-resolution-switcher) + [videojs-contrib-hls](https://github.com/videojs/videojs-contrib-hls)
 
+- [增加]：可以配置在IOS（非safari）环境下，默认播放是否全屏
 - 支持HlS流媒体（.m3u8）直播、各种普通类型视频
 - 普通视频可支持多种分辨率切换
 - 普通视频可支持多种播放速度切换
@@ -121,7 +122,9 @@ export default {
           src: 'https://example.net/live/playlist.m3u8',
           withCredentials: false
         },
-        live: true
+        live: true,
+        // IOS微信内置浏览器默认播放不全屏
+        playsinline: true
       }
     }
   }
@@ -177,6 +180,7 @@ export default {
 
 | protype        | type | description | example |
 | :------------- |:---------------|:---------------| :------ |
+| playsinline    | Boolean      |  the player default play auto fullscreen in IOS(!safari) (Y/n) default: true |       |
 | source         | Object/Array |  the player source src(required) |       |
 | muted          | Boolean      |  default: false                     |       |
 | autoplay       | Boolean      |  default: true                    |       |

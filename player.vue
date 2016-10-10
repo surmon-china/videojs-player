@@ -60,6 +60,8 @@
         options.defaultSrcReId = options.defaultSrcReId || 1
         // default muted
         options.muted = options.muted || false
+        // playsinline
+        options.playsinline = options.playsinline !== undefined ? options.playsinline : true;
 
         if (typeof options.source !== 'object') {
           throw new Error('video resource must be a object or array')
@@ -102,6 +104,11 @@
         // 添加指定语言
         var language = video_options.language
         videojs.addLanguage(language, languages[language])
+
+        // 是否应用IOS下的禁止自动全屏
+        var playsinline = options.playsinline
+        playsinline && this.$el.children[0].setAttribute('webkit-playsinline', playsinline)
+        
 
         // 非直播情况
         if (!options.live) {
