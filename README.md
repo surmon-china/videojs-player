@@ -187,12 +187,12 @@ export default {
 | start          | Number       |  player start time(default: 0)  |       |
 | live           | Boolean      |  player is live? |
 | playbackRates  | Array        |  player play backrates | [0.7, 1.0, 1.3, 1.5, 1.7] |
-| defaultSrcReId | Number       |  当有多个资源时，用于指定默认播放哪一种（分辨率）资源(default:　1) |
+| defaultSrcReId | Number       |  When there are multiple sources, used to specify the default source (default:　1) |
 | controls       | Boolean      |  player controls display or hidden |
 | preload        | Boolean      |  player preload ? |
 | poster         | String       |  player poster(default: '') | 'http://adasd.jpg' / 'data:image/png;base64,iVB...' |
-| wdith          | Number       |  player width (default: 100%) |
-| height         | Number       |  player width (height: 360) |
+| width          | Number       |  player width (default: 100%) |
+| height         | Number       |  player height (default: 360) |
 | controlBar     | Object       |  player controlBar dsipaly config | need to video.js api doc
 | language       | String       |  player language(default: 'en') |
 | techOrder      | Array        |  player support video type (default: example) | ['html5', 'flash', 'youtube'] | 
