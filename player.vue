@@ -64,19 +64,19 @@
         options.playsinline = options.playsinline !== undefined ? options.playsinline : true;
 
         if (typeof options.source !== 'object') {
-          throw new Error('video resource must be a object or array')
+          return console.error('video resource must be a object or array')
         } else {
           // 检查是否设置了播放源，如果没有设置播放源，直接返回
           if (options.source instanceof Array) {
-            for (var i = 0, length= options.source.length; i < length; i++) {
+            for (var i = 0, length = options.source.length; i < length; i++) {
               var item = options.source[i];
               if (!item.src) {
-                return;
+                return console.error('video resource is illegitimate')
               }
             }
           } else {
             if (!options.source.src) {
-              return;
+              return console.error('video resource is illegitimate')
             }
           }
         }
@@ -109,7 +109,7 @@
           'height': options.height || 360,
           'controlBar': options.controlBar || controlBar,
           'language': options.language || 'en',
-          'techOrder': options.techOrder || ['html5', 'flash', 'youtube'],
+          'techOrder': options.techOrder || ['html5', 'flash'],
           'flash': { hls: { withCredentials: false }},
           'html5': { hls: { withCredentials: false }},
           'youtube': { "ytControls": options.ytControls ? Number(options.ytControls) : 0 }
@@ -123,6 +123,8 @@
         var playsinline = options.playsinline
         playsinline && this.$el.children[0].setAttribute('webkit-playsinline', playsinline)
         
+        // 是否适用youtube
+        if (video_options.techOrder.indexOf('youtube') > -1) require('videojs-youtube')
 
         // 非直播情况
         if (!options.live) {
@@ -236,14 +238,36 @@
     watch: {
       // 观察选项的动态变化，选项变化了就重新初始化播放器
       options: {
-        handler: function (val, oldVal) {
-          this.options = val;
-          
-          if (this.player) {
-            // 播放器已经存在，直接切换视频源
-            this.player.src(this.options.source);
+        handler: function (newVal, oldVal) {
+          var options = newVal
+
+          if (typeof options.source !== 'object') {
+            this.dispose()
+            console.error('video resource must be a object or array')
           } else {
-            this.initialize();
+
+            // 检查是否设置了播放源，如果没有设置播放源，直接返回
+            if (options.source instanceof Array) {
+              for (var i = 0, length = options.source.length; i < length; i++) {
+                var item = options.source[i]
+                if (!item.src) {
+                  this.dispose()
+                  return console.error('video resource is illegitimate')
+                }
+              }
+            } else {
+              if (!options.source.src) {
+                this.dispose()
+                return console.error('video resource is illegitimate')
+              }
+            }
+          }
+
+          // 播放器已经存在，直接切换视频源
+          if (this.player) {
+            this.player.src(this.options.source)
+          } else {
+            this.initialize()
           }
         },
         deep: true

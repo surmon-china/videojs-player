@@ -1,6 +1,6 @@
 {
   "name": "vue-video-player",
-  "version": "2.1.0",
+  "version": "2.2.0",
   "description": "Video Player component for Vue.js(1.x ~ 2.x)",
   "main": "index.js",
   "scripts": {
@@ -14,6 +14,7 @@
     "vue-video-player",
     "vue.js video player",
     "vue.js video",
+    "vue video.js"
     "vue.js player"
   ],
   "author": {

@@ -6,7 +6,6 @@
  */
 
 window.videojs = require('video.js')
-require('videojs-youtube')
 require('videojs-contrib-hls/dist/videojs-contrib-hls.js')
 require('videojs-resolution-switcher')
 require('video.js/dist/alt/video-js-cdn.css')
