@@ -36,7 +36,7 @@
         this.initialize()
       }
     },
-    beforeDestory: function() {
+    beforeDestroy: function() {
       this.dispose()
     },
     methods: {
