@@ -101,7 +101,7 @@
 
         // build player config
         var video_options = {
-          'controls': options.controls !== undefined ? options.controls : true, 
+          'controls': options.controls !== undefined ? options.controls : true,
           'autoplay': options.autoplay !== undefined ? options.autoplay : true,
           'preload': options.preload || 'auto',
           'poster': options.poster ||  '',
@@ -122,9 +122,9 @@
         // 是否应用IOS下的禁止自动全屏
         var playsinline = options.playsinline
         playsinline && this.$el.children[0].setAttribute('webkit-playsinline', playsinline)
-        
+
         // 是否适用youtube
-        if (video_options.techOrder.indexOf('youtube') > -1) require('videojs-youtube')
+        // if (video_options.techOrder.indexOf('youtube') > -1) require('videojs-youtube')
 
         // 非直播情况
         if (!options.live) {
@@ -187,7 +187,7 @@
           })
 
           // 监听结束
-          this.on('ended', function() { 
+          this.on('ended', function() {
             _this.$emit && _this.$emit('playerStateChanged', { ended: true })
             _this.$dispatch && _this.$dispatch('playerStateChanged', { ended: true })
           })

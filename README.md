@@ -10,6 +10,7 @@
 Video/Live player for Vue.js(1.x ~ 2.x)
 基于 [video.js](https://github.com/videojs/video.js) + [videojs-resolution-switcher](https://github.com/kmoskwiak/videojs-resolution-switcher) + [videojs-contrib-hls](https://github.com/videojs/videojs-contrib-hls) + [videojs-youtube](https://github.com/videojs/videojs-youtube)
 
+- [增加]：配置选项
 - [增加]：可以配置在IOS（非safari）环境下，默认播放是否全屏
 - 支持HlS流媒体（.m3u8）直播、各种普通类型视频
 - 普通视频可支持多种分辨率切换
@@ -44,11 +45,19 @@ var Vue = require('vue')
 ...
 var VideoPlayer = require('vue-video-player')
 
+// The default is to turn off some of the features, you can choose according to their use of certain features enabled, do not enable the introduction will not require the corresponding file. 默认有些功能是不开启的，比如youtube国内不能用，则默认是关闭的，如果不启用对应的功能，则不会引入对应的包，减少项目代码体积，当然也有可能意味着对应的功能可能会出错，true 是开启，false是关闭，正常情况使用者不需要care就可以。
+
+// Example(Only applies to the current global mode). 用配置项的话仅支持全局模式来配置，否则不会生效
+VideoPlayer.config({
+  youtube: true, // default false
+  switcher: false, // default true
+  hls: false // default true
+})
+
 // use
 Vue.use(VideoPlayer)
 
 // --------------------------------------
-
 
 // or use with component(ES6)
 import Vue from 'vue'
@@ -83,7 +92,7 @@ export default {
     return {
        videoOptions: {
         source: {
-          type: "video/webm", 
+          type: "video/webm",
           src: 'https://cdn.theguardian.tv/webM/2015/07/20/150716YesMen_synd_768k_vp8.webm'
         }
       }
@@ -213,7 +222,7 @@ export default {
 | height         | Number       |  player height (default: 360) |
 | controlBar     | Object       |  player controlBar dsipaly config | need to video.js api doc
 | language       | String       |  player language(default: 'en') |
-| techOrder      | Array        |  player support video type (default: example) | ['html5', 'flash', 'youtube'] | 
+| techOrder      | Array        |  player support video type (default: example) | ['html5', 'flash', 'youtube'] |
 
 
 
