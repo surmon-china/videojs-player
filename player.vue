@@ -107,6 +107,7 @@
           'poster': options.poster ||  '',
           'wdith': options.wdith || '100%',
           'height': options.height || 360,
+          'fluid': options.fluid || false,
           'controlBar': options.controlBar || controlBar,
           'language': options.language || 'en',
           'techOrder': options.techOrder || ['html5', 'flash'],
