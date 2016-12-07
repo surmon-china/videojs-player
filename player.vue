@@ -5,36 +5,35 @@
 </template>
 
 <script>
-
-  // load
   var languages = require('./languages.js')
-
   export default {
     name: 'video-player',
+    data: function () {
+      return {
+        customEventName: 'player-state-changed'
+      }
+    },
     props: {
+      configs: {
+        type: Object,
+        default: function () {
+          return {
+            youtube: false,
+            switcher: true,
+            hls: true
+          }
+        }
+      },
       options: {
         type: Object,
         required: true
       },
     },
-    created: function () {
-      // Vue2.0 $on监听父组件命令
-      if (this.$parent) {
-        var _this = this
-        this.$parent.$on('playerAction', function (action){
-          _this.doAction(action)
-        })
-      }
-    },
     ready: function() {
-      if (this.options) {
-        this.initialize()
-      }
+      if (this.options) { this.initialize() }
     },
     mounted: function() {
-      if (this.options) {
-        this.initialize()
-      }
+      if (this.options) { this.initialize() }
     },
     beforeDestroy: function() {
       this.dispose()
@@ -45,6 +44,11 @@
       initialize: function() {
 
         // console.log('init build player')
+
+        var configs = this.configs
+        if (configs.hls) require('videojs-contrib-hls/dist/videojs-contrib-hls.js')
+        if (configs.youtube) require('videojs-youtube')
+        if (configs.switcher) require('videojs-resolution-switcher')
 
         // init
         var options = this.options
@@ -63,19 +67,24 @@
         // playsinline
         options.playsinline = options.playsinline !== undefined ? options.playsinline : true;
 
+        // 自定义事件名称
+        var customEventName = options.customEventName || this.customEventName
+
         if (typeof options.source !== 'object') {
+          this.dispose()
           return console.error('video resource must be a object or array')
         } else {
-          // 检查是否设置了播放源，如果没有设置播放源，直接返回
           if (options.source instanceof Array) {
             for (var i = 0, length = options.source.length; i < length; i++) {
               var item = options.source[i];
               if (!item.src) {
+                this.dispose()
                 return console.error('video resource is illegitimate')
               }
             }
           } else {
             if (!options.source.src) {
+              this.dispose()
               return console.error('video resource is illegitimate')
             }
           }
@@ -93,6 +102,7 @@
           }
         }
 
+        // 直播
         if (options.live) {
           controlBar.timeDivider = false
           controlBar.durationDisplay = false
@@ -134,7 +144,7 @@
           if (!!options.source.src) {
             video_options.sources = [options.source]
 
-          // 多清晰度版本播放资源
+          // 多播放源切换
           } else {
             video_options.plugins = { videoJsResolutionSwitcher: { default: options.defaultSrcReId, dynamicLabel: true }}
           }
@@ -154,8 +164,8 @@
             if (!!options.source.length) {
               this.updateSrc(options.source)
               this.on('resolutionchange', function(){
-                _this.$emit && _this.$emit('playerStateChanged', { resolutionchange: this.src() })
-                _this.$dispatch && _this.$dispatch('playerStateChanged', { resolutionchange: this.src() })
+                _this.$emit && _this.$emit(customEventName, { resolutionchange: this.src() })
+                _this.$dispatch && _this.$dispatch(customEventName, { resolutionchange: this.src() })
               })
             }
           }
@@ -177,34 +187,34 @@
 
           // 监听播放
           this.on('play', function() {
-            _this.$emit && _this.$emit('playerStateChanged', { play: true })
-            _this.$dispatch && _this.$dispatch('playerStateChanged', { play: true })
+            _this.$emit && _this.$emit(customEventName, { play: true })
+            _this.$dispatch && _this.$dispatch(customEventName, { play: true })
           })
 
           // 监听暂停
           this.on('pause', function() {
-            _this.$emit && _this.$emit('playerStateChanged', { pause: true })
-            _this.$dispatch && _this.$dispatch('playerStateChanged', { pause: true })
+            _this.$emit && _this.$emit(customEventName, { pause: true })
+            _this.$dispatch && _this.$dispatch(customEventName, { pause: true })
           })
 
           // 监听结束
           this.on('ended', function() {
-            _this.$emit && _this.$emit('playerStateChanged', { ended: true })
-            _this.$dispatch && _this.$dispatch('playerStateChanged', { ended: true })
+            _this.$emit && _this.$emit(customEventName, { ended: true })
+            _this.$dispatch && _this.$dispatch(customEventName, { ended: true })
           })
 
           // 元文件信息
           this.on('loadeddata', function() {
             if (!options.live && !!options.start) this.currentTime(options.start)
             this.muted(_this.options.muted)
-            _this.$emit && _this.$emit('playerStateChanged', { loadeddata: true })
-            _this.$dispatch && _this.$dispatch('playerStateChanged', { loadeddata: true })
+            _this.$emit && _this.$emit(customEventName, { loadeddata: true })
+            _this.$dispatch && _this.$dispatch(customEventName, { loadeddata: true })
           })
 
           // 监听时间
           this.on('timeupdate', function() {
-            _this.$emit && _this.$emit('playerStateChanged', { currentTime: this.currentTime() })
-            _this.$dispatch && _this.$dispatch('playerStateChanged', { currentTime: this.currentTime() })
+            _this.$emit && _this.$emit(customEventName, { currentTime: this.currentTime() })
+            _this.$dispatch && _this.$dispatch(customEventName, { currentTime: this.currentTime() })
           })
         })
       },
@@ -212,28 +222,8 @@
       dispose: function() {
         if (!!this.player && !!this.player.dispose) {
           this.player.dispose()
-          this.player = null
           delete this.player
         }
-      },
-      // 操作播放器
-      doAction: function(action) {
-        // console.log(action)
-        if (!this.player) return
-        if (action == 'play') this.player.play()
-        if (action == 'pause') this.player.pause()
-        if (action == 'refresh') {
-          if (!this.options.live) {
-            this.player.currentTime(0)
-            this.player.play()
-          }
-        }
-      }
-    },
-    // Vue1.X监听父组件传播下来的事件
-    events: {
-      'playerAction': function(action) {
-        this.doAction(action)
       }
     },
     watch: {
@@ -241,13 +231,10 @@
       options: {
         handler: function (newVal, oldVal) {
           var options = newVal
-
           if (typeof options.source !== 'object') {
             this.dispose()
-            console.error('video resource must be a object or array')
+            return console.error('video resource must be a object or array')
           } else {
-
-            // 检查是否设置了播放源，如果没有设置播放源，直接返回
             if (options.source instanceof Array) {
               for (var i = 0, length = options.source.length; i < length; i++) {
                 var item = options.source[i]
@@ -263,13 +250,8 @@
               }
             }
           }
-
-          // 播放器已经存在，直接切换视频源
-          if (this.player) {
-            this.player.src(this.options.source)
-          } else {
-            this.initialize()
-          }
+          if (this.player) this.player.src(this.options.source)
+          if (!this.player) this.initialize()
         },
         deep: true
       }
