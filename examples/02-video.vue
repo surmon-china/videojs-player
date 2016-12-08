@@ -13,7 +13,7 @@
     <md-card-media>
       <div class="item">
         <div class="player">
-          <video-player :options="videoOptions" ref="videoPlayer"></video-player>
+          <video-player :options="videoOptions" @state="playerStateChanged" ref="videoPlayer"></video-player>
         </div>
         <div class="codemirror">
           <codemirror v-model="code" :options="editorOption"></codemirror>
@@ -83,7 +83,8 @@ const code =
           },
           techOrder: ["flash"],
           poster: "http://www.freemake.com/blog/wp-content/uploads/2015/06/videojs-logo.jpg",
-          autoplay: false
+          autoplay: false,
+          customEventName: 'state'
         }
       }
     },
@@ -92,6 +93,11 @@ const code =
         return this.$refs.videoPlayer.player
       }
     },
+    methods: {
+      playerStateChanged(playerCurrentState) {
+        console.log(playerCurrentState)
+      }
+    }
   }
 </script>
 
