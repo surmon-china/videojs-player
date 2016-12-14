@@ -220,8 +220,11 @@
       },
       // 释放播放器
       dispose: function() {
-        if (!!this.player && !!this.player.dispose) {
-          this.player.dispose()
+        if (!!this.player && !!videojs) {
+          // this.player.dispose()
+          this.player.pause()
+          videojs(this.$el).dispose()
+          videojs(this.$el.children[0]).dispose()
           delete this.player
         }
       }
