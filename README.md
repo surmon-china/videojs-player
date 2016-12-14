@@ -86,10 +86,10 @@ export default {
 <video-player :options="videoOptions" :config="{ youtube: true }"></video-player>
 
 <!-- Use in component(Vue.js2.X) && event callback -->
-<video-player :options="videoOptions" @playerStateChanged="playerStateChanged"></video-player>
+<video-player :options="videoOptions" @player-state-changed="playerStateChanged"></video-player>
 
 <!-- Use in component(Vue.js2.X) && custom event name && ref property-->
-<video-player :options="videoOptions" @my-player-state-changed="playerStateChanged" ref="myPlayer"></video-player>
+<video-player :options="videoOptions" @my-player-state-changed-event-custom-name="playerStateChanged" ref="myPlayer"></video-player>
 ```
 
 ``` javascript
@@ -102,7 +102,7 @@ export default {
           type: "video/webm",
           src: 'https://cdn.theguardian.tv/webM/2015/07/20/150716YesMen_synd_768k_vp8.webm',
           // if you need custom player state changed event name, you can config it like this
-          customEventName: 'my-player-state-changed'
+          customEventName: 'my-player-state-changed-event-custom-name'
         }
       }
     }
@@ -195,7 +195,7 @@ export default {
   mounted: {
     console.log('this is current player object', this.player)
     this.player.pause()
-    // do something...
+    // and do something...
   }
 }
 ```
@@ -223,7 +223,7 @@ export default {
 | controlBar     | Object       |  player controlBar dsipaly config | need to video.js api doc
 | language       | String       |  player language(default: 'en') |
 | techOrder      | Array        |  player support video type (default: example) | ['html5', 'flash', 'youtube'] |
-| customEventName| String       |  player state changed event name (default: example) | 'playerStateChanged' |
+| customEventName| String       |  player state changed event name (default: example) | 'player-state-changed' |
 
 
 # Credits
