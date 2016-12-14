@@ -10,8 +10,8 @@
 Video/Live player for Vue.js(1.x ~ 2.x)
 基于 [video.js](https://github.com/videojs/video.js) + [videojs-resolution-switcher](https://github.com/kmoskwiak/videojs-resolution-switcher) + [videojs-contrib-hls](https://github.com/videojs/videojs-contrib-hls) + [videojs-youtube](https://github.com/videojs/videojs-youtube)
 
-> ### V2.4.1
-> 优化销毁方法
+> ### V2.4.2
+> 优化SPA应用下的销毁方法
 
 > ### V2.4.0
 > 重构Example页面，修改获取对象的方式，优化销毁方法，增加自定义事件名称

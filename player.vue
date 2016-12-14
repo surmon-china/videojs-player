@@ -222,9 +222,8 @@
       dispose: function() {
         if (!!this.player && !!videojs) {
           // this.player.dispose()
-          this.player.pause()
+          this.player.pause && this.player.pause()
           videojs(this.$el).dispose()
-          videojs(this.$el.children[0]).dispose()
           delete this.player
         }
       }
