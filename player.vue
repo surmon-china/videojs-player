@@ -79,13 +79,13 @@
               var item = options.source[i];
               if (!item.src) {
                 this.dispose()
-                return console.error('video resource is illegitimate')
+                return console.warn('video resource is illegitimate')
               }
             }
           } else {
             if (!options.source.src) {
               this.dispose()
-              return console.error('video resource is illegitimate')
+              return console.warn('video resource is illegitimate')
             }
           }
         }
@@ -242,13 +242,13 @@
                 var item = options.source[i]
                 if (!item.src) {
                   this.dispose()
-                  return console.error('video resource is illegitimate')
+                  return console.warn('video resource is illegitimate')
                 }
               }
             } else {
               if (!options.source.src) {
                 this.dispose()
-                return console.error('video resource is illegitimate')
+                return console.warn('video resource is illegitimate')
               }
             }
           }
