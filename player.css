@@ -49,7 +49,7 @@
   display: block !important;
 }
 
-video-js.vjs-ended .vjs-big-play-button,.video-js.vjs-paused .vjs-big-play-button,.vjs-paused.vjs-has-started.video-js.vjs-custom-skin .vjs-big-play-button {
+.video-js.vjs-ended .vjs-big-play-button,.video-js.vjs-paused .vjs-big-play-button,.vjs-paused.vjs-has-started.video-js.vjs-custom-skin .vjs-big-play-button {
   display: block
 }
 
@@ -63,7 +63,7 @@ video-js.vjs-ended .vjs-big-play-button,.video-js.vjs-paused .vjs-big-play-butto
 .video-js.vjs-custom-skin .vjs-big-play-button {
   background-color: rgba(0,0,0,0.45);
   font-size: 3.5em;
-  // border-radius: 50%;
+   /*border-radius: 50%;*/
   height: 2em !important;
   line-height: 2em !important;
   margin-top: -1em !important
@@ -82,7 +82,7 @@ video-js.vjs-ended .vjs-big-play-button,.video-js.vjs-paused .vjs-big-play-butto
 }
 
 .video-js.vjs-custom-skin .vjs-control-bar {
-  // background-color: rgba(0,0,0,0.3) !important;
+   /*background-color: rgba(0,0,0,0.3) !important;*/
   color: #ffffff;
   font-size: 14px
 }
@@ -99,7 +99,7 @@ video-js.vjs-ended .vjs-big-play-button,.video-js.vjs-paused .vjs-big-play-butto
   font-size: 1.3em;
 }
 
-vjs-menu-button-popup.vjs-volume-menu-button-vertical .vjs-menu {
+.vjs-menu-button-popup.vjs-volume-menu-button-vertical .vjs-menu {
   left: 0em;
 }
 
@@ -132,10 +132,10 @@ vjs-menu-button-popup.vjs-volume-menu-button-vertical .vjs-menu {
 }
 
 .video-js.vjs-custom-skin .vjs-control-bar .vjs-resolution-button .vjs-menu {
-  // order: 4;
+   /*order: 4;*/
 }
 
-// 排序顺序
+ /*排序顺序*/
 .video-js.vjs-custom-skin .vjs-control-bar .vjs-play-control {
   order: 0;
 }
