@@ -21,8 +21,8 @@
       // Vue2.0 $on监听父组件命令
       if (this.$parent) {
         var _this = this
-        this.$parent.$on('playerAction', function (action){
-          _this.doAction(action)
+        this.$parent.$on('playerAction', function (action, options){
+          _this.doAction(action, options);
         })
       }
     },
@@ -43,8 +43,6 @@
 
       // 构建播放器
       initialize: function() {
-
-        // console.log('init build player')
 
         // init
         var options = this.options
@@ -201,6 +199,16 @@
             _this.$dispatch && _this.$dispatch('playerStateChanged', { loadeddata: true })
           })
 
+          this.on('waiting', function() {
+            _this.$emit && _this.$emit('playerStateChanged', { waiting: true })
+            _this.$dispatch && _this.$dispatch('playerStateChanged', { waiting: true })
+          })
+
+          this.on('playing', function() {
+            _this.$emit && _this.$emit('playerStateChanged', { playing: true })
+            _this.$dispatch && _this.$dispatch('playerStateChanged', { playing: true })
+          })
+
           // 监听时间
           this.on('timeupdate', function() {
             _this.$emit && _this.$emit('playerStateChanged', { currentTime: this.currentTime() })
@@ -217,9 +225,10 @@
         }
       },
       // 操作播放器
-      doAction: function(action) {
+      doAction: function(action, options) {
         // console.log(action)
         if (!this.player) return
+        if (action == 'sliderDrag') this.player.currentTime(options.currentTime);
         if (action == 'play') this.player.play()
         if (action == 'pause') this.player.pause()
         if (action == 'refresh') {
