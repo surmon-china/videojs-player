@@ -115,7 +115,7 @@
           'autoplay': options.autoplay !== undefined ? options.autoplay : true,
           'preload': options.preload || 'auto',
           'poster': options.poster ||  '',
-          'wdith': options.wdith || '100%',
+          'width': options.width || '100%',
           'height': options.height || 360,
           'fluid': options.fluid || false,
           'controlBar': options.controlBar || controlBar,
