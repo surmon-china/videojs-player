@@ -19,7 +19,7 @@ var videoPlayer = {
     if (!configs) return
     configs.hls = configs.hls !== undefined ? configs.hls : true
     configs.switcher = configs.switcher !== undefined ? configs.switcher : true
-    if (configs.hls) require('videojs-contrib-hls/dist/videojs-contrib-hls.js')
+    if (configs.hls) require('videojs-contrib-hls')
     if (configs.youtube) require('videojs-youtube')
     if (configs.switcher) require('videojs-resolution-switcher')
   },

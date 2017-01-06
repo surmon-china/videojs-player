@@ -29,6 +29,16 @@
         required: true
       },
     },
+
+    created: function () {
+      // Vue2.0 $on监听父组件命令
+      if (this.$parent) {
+        var _this = this
+        this.$parent.$on('playerAction', function (action, options){
+          _this.doAction(action, options);
+        })
+      }
+    },
     ready: function() {
       if (this.options) { this.initialize() }
     },
@@ -211,6 +221,16 @@
             _this.$dispatch && _this.$dispatch(customEventName, { loadeddata: true })
           })
 
+          this.on('waiting', function() {
+            _this.$emit && _this.$emit('playerStateChanged', { waiting: true })
+            _this.$dispatch && _this.$dispatch('playerStateChanged', { waiting: true })
+          })
+
+          this.on('playing', function() {
+            _this.$emit && _this.$emit('playerStateChanged', { playing: true })
+            _this.$dispatch && _this.$dispatch('playerStateChanged', { playing: true })
+          })
+
           // 监听时间
           this.on('timeupdate', function() {
             _this.$emit && _this.$emit(customEventName, { currentTime: this.currentTime() })
@@ -226,6 +246,26 @@
           videojs(this.$el).dispose()
           delete this.player
         }
+      },
+      // 操作播放器
+      doAction: function(action, options) {
+        // console.log(action)
+        if (!this.player) return
+        if (action == 'sliderDrag') this.player.currentTime(options.currentTime);
+        if (action == 'play') this.player.play()
+        if (action == 'pause') this.player.pause()
+        if (action == 'refresh') {
+          if (!this.options.live) {
+            this.player.currentTime(0)
+            this.player.play()
+          }
+        }
+      }
+    },
+    // Vue1.X监听父组件传播下来的事件
+    events: {
+      'playerAction': function(action) {
+        this.doAction(action)
       }
     },
     watch: {
