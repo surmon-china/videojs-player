@@ -10,6 +10,16 @@
 Video/Live player for Vue.js(1.x ~ 2.x)
 基于 [video.js](https://github.com/videojs/video.js) + [videojs-resolution-switcher](https://github.com/kmoskwiak/videojs-resolution-switcher) + [videojs-contrib-hls](https://github.com/videojs/videojs-contrib-hls) + [videojs-youtube](https://github.com/videojs/videojs-youtube)
 
+> ### V2.4.4
+> debug，修复低级bug
+
+> ### V2.4.2
+> 优化SPA应用下的销毁方法
+
+> ### V2.4.0
+> 重构Example页面，修改获取对象的方式，优化销毁方法，增加自定义事件名称
+
+> ### 之前版本
 - [完善]：配置选项
 - [增加]：配置选项
 - [增加]：可以配置在IOS（非safari）环境下，默认播放是否全屏
@@ -37,22 +47,21 @@ npm install vue-video-player --save
 ``` javascript
 // import with ES6
 import Vue from 'vue'
-...
 import VideoPlayer from 'vue-video-player'
-
 
 // require with Node.js/Webpack
 var Vue = require('vue')
-...
 var VideoPlayer = require('vue-video-player')
 
-// The default is to turn off some of the features, you can choose according to their use of certain features enabled, do not enable the introduction will not require the corresponding file. 默认有些功能是不开启的，比如youtube国内不能用，则默认是关闭的，如果不启用对应的功能，则不会引入对应的包，减少项目代码体积，当然也有可能意味着对应的功能可能会出错，true 是开启，false是关闭，正常情况使用者不需要care就可以。
+// The default is to turn off some of the features, you can choose according to their use of certain features enabled, do not enable the introduction will not require the corresponding file.
+// 默认有些功能是不开启的，比如youtube国内不能用，则默认是关闭的，如果不启用对应的功能，则不会引入对应的包，减少项目代码体积，当然也有可能意味着对应的功能可能会出错，true 是开启，false是关闭，正常情况使用者不需要care就可以。
 
-// Example(Only applies to the current global mode). 用配置项的话仅支持全局模式来配置，否则不会生效
+// You can configure the global function switch (of course, will be covered by local switches), where non-mandatory
+// 可以在这里配置全局的功能开关（当然也会被局部开关给覆盖），这里非必选
 VideoPlayer.config({
-  youtube: true, // default false
-  switcher: false, // default true
-  hls: false // default true
+  youtube: true,  // default false（youtube的支持）
+  switcher: true, // default true（播放源切换功能）
+  hls: true       // default true（直播功能的支持）
 })
 
 // use
@@ -62,7 +71,6 @@ Vue.use(VideoPlayer)
 
 // or use with component(ES6)
 import Vue from 'vue'
-// ...
 import { videoPlayer } from 'vue-video-player'
 
 // use
@@ -74,35 +82,37 @@ export default {
 ```
 
 ``` html
-<!-- Use in component(Vue.js1.X) -->
+<!-- Use in component(Vue.js1.X && Vue.js2.X) -->
 <video-player :options="videoOptions"></video-player>
 
-<!-- Use in component(Vue.js2.X) -->
-<video-player :options="videoOptions" @playerStateChanged="playerStateChanged"></video-player>
+<!-- Use in component(Vue.js1.X && Vue.js2.X && function switch config) -->
+<video-player :options="videoOptions" :config="{ youtube: true }"></video-player>
 
-<!-- parent component to control the player do something -->
-<button @click="playerAction('play')">Play</button>
-<button @click="playerAction('pause')">Pause</button>
-<button @click="playerAction('refresh')">Refresh</button>
+<!-- Use in component(Vue.js2.X) && event callback -->
+<video-player :options="videoOptions" @player-state-changed="playerStateChanged"></video-player>
+
+<!-- Use in component(Vue.js2.X) && custom event name && ref property-->
+<video-player :options="videoOptions" @my-player-state-changed-event-custom-name="playerStateChanged" ref="myPlayer"></video-player>
 ```
 
 ``` javascript
-// component config example 1(video)
+// base - player config example
 export default {
   data () {
     return {
        videoOptions: {
         source: {
           type: "video/webm",
-          src: 'https://cdn.theguardian.tv/webM/2015/07/20/150716YesMen_synd_768k_vp8.webm'
+          src: 'https://cdn.theguardian.tv/webM/2015/07/20/150716YesMen_synd_768k_vp8.webm',
+          // if you need custom player state changed event name, you can config it like this
+          customEventName: 'my-player-state-changed-event-custom-name'
         }
       }
     }
   }
 }
 
-
-// component config example 2(video)
+// playbackRates switch and sources switch - player config example
 export default {
   data () {
     return {
@@ -121,8 +131,7 @@ export default {
   }
 }
 
-
-// component config example 3(live)
+// live - player config example
 export default {
   data () {
     return {
@@ -132,15 +141,13 @@ export default {
           src: 'https://example.net/live/playlist.m3u8',
           withCredentials: false
         },
-        live: true,
-        // IOS微信内置浏览器默认播放不全屏
-        playsinline: true
+        live: true
       }
     }
   }
 }
 
-// component config example 4(youtube)
+// youtube - player config example
 export default {
   data () {
     return {
@@ -159,18 +166,18 @@ export default {
 }
 
 //-------------------------------------------------------------
+// player state changed callback event
 
-// playerStateChanged callback example(Vue.js1.X)
+// events with Vue.js1.x
 export default {
   events: {
-    'playerStateChanged': function (playerCurrentState) {
+    playerStateChanged(playerCurrentState) {
       console.log(playerCurrentState)
     }
   }
 }
 
-
-// playerStateChanged callback example(Vue.js2.X)
+// methods with Vue.js2.x
 export default {
   methods: {
     playerStateChanged(playerCurrentState) {
@@ -180,23 +187,18 @@ export default {
 }
 
 //-------------------------------------------------------------
+// get current player object in parent component
 
-// playerAction event example(Vue.js1.X)
 export default {
-  methods: {
-    playerAction: function(action) {
-      this.$broadcast('playerAction', action)
+  computed: {
+    player() {
+      return this.$refs.myPlayer.player
     }
-  }
-}
-
-
-// playerAction event example(Vue.js2.X)
-export default {
-  methods: {
-    playerAction(action) {
-      this.$emit('playerAction', action)
-    }
+  },
+  mounted: {
+    console.log('this is current player object', this.player)
+    this.player.pause()
+    // and do something...
   }
 }
 ```
@@ -224,7 +226,7 @@ export default {
 | controlBar     | Object       |  player controlBar dsipaly config | need to video.js api doc
 | language       | String       |  player language(default: 'en') |
 | techOrder      | Array        |  player support video type (default: example) | ['html5', 'flash', 'youtube'] |
-
+| customEventName| String       |  player state changed event name (default: example) | 'player-state-changed' |
 
 
 # Credits

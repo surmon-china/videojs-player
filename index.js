@@ -10,6 +10,7 @@ require('video.js/dist/alt/video-js-cdn.css')
 videojs.options.flash.swf = "https://cdn.bootcss.com/video.js/5.13.0/video-js.swf"
 var player = require('./player.vue')
 var videoPlayerBuild = function(Vue) {
+  // videoPlayer.config()
   Vue.component('video-player', player)
 }
 var videoPlayer = {
@@ -23,6 +24,7 @@ var videoPlayer = {
     if (configs.switcher) require('videojs-resolution-switcher')
   },
   install: function(Vue) {
+    videoPlayer.config({})
     videoPlayerBuild(Vue)
   }
 }
