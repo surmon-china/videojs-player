@@ -222,13 +222,13 @@
           })
 
           this.on('waiting', function() {
-            _this.$emit && _this.$emit('playerStateChanged', { waiting: true })
-            _this.$dispatch && _this.$dispatch('playerStateChanged', { waiting: true })
+            _this.$emit && _this.$emit(customEventName, { waiting: true })
+            _this.$dispatch && _this.$dispatch(customEventName, { waiting: true })
           })
 
           this.on('playing', function() {
-            _this.$emit && _this.$emit('playerStateChanged', { playing: true })
-            _this.$dispatch && _this.$dispatch('playerStateChanged', { playing: true })
+            _this.$emit && _this.$emit(customEventName, { playing: true })
+            _this.$dispatch && _this.$dispatch(customEventName, { playing: true })
           })
 
           // 监听时间
