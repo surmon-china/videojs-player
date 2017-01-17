@@ -21,6 +21,7 @@ var videoPlayer = {
     configs.switcher = configs.switcher !== undefined ? configs.switcher : true
     if (configs.hls) require('videojs-contrib-hls')
     if (configs.youtube) require('videojs-youtube')
+    if (configs.vimeo) require('videojs-vimeo')
     if (configs.switcher) require('videojs-resolution-switcher')
   },
   install: function(Vue) {
