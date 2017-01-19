@@ -8,7 +8,7 @@
 
 # Vue-Video-Player
 Video/Live player for Vue.js(1.x ~ 2.x)
-基于 [video.js](https://github.com/videojs/video.js) + [videojs-resolution-switcher](https://github.com/kmoskwiak/videojs-resolution-switcher) + [videojs-contrib-hls](https://github.com/videojs/videojs-contrib-hls) + [videojs-youtube](https://github.com/videojs/videojs-youtube)
+基于 [video.js](https://github.com/videojs/video.js) + [videojs-resolution-switcher](https://github.com/kmoskwiak/videojs-resolution-switcher) + [videojs-contrib-hls](https://github.com/videojs/videojs-contrib-hls) + [videojs-youtube](https://github.com/videojs/videojs-youtube) + [videojs-vimeo](https://github.com/videojs/videojs-vimeo)
 
 > ### V2.4.5
 > ...
@@ -168,6 +168,23 @@ export default {
   }
 }
 
+// vimeo - player config example
+export default {
+  data () {
+    return {
+      videoOptions: {
+        source: {
+          type: "video/vimeo",
+          src: "https://vimeo.com/167054481"
+        },
+        techOrder: ["vimeo"],
+        autoplay: false,
+        controls: false
+      }
+    }
+  }
+}
+
 //-------------------------------------------------------------
 // player state changed callback event
 
@@ -228,7 +245,7 @@ export default {
 | height         | Number       |  player height (default: 360) |
 | controlBar     | Object       |  player controlBar dsipaly config | need to video.js api doc
 | language       | String       |  player language(default: 'en') |
-| techOrder      | Array        |  player support video type (default: example) | ['html5', 'flash', 'youtube'] |
+| techOrder      | Array        |  player support video type (default: example) | ['html5', 'flash', 'youtube', 'vimeo'] |
 | customEventName| String       |  player state changed event name (default: example) | 'player-state-changed' |
 
 
@@ -243,6 +260,8 @@ export default {
 [videojs-contrib-hls](https://github.com/videojs/videojs-contrib-hls)
 
 [videojs-youtube](https://github.com/videojs/videojs-youtube)
+
+[videojs-vimeo](https://github.com/videojs/videojs-vimeo)
 
 
 # Author Blog

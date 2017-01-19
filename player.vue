@@ -19,6 +19,7 @@
         default: function () {
           return {
             youtube: false,
+            vimeo: false,
             switcher: true,
             hls: true
           }
@@ -58,6 +59,7 @@
         var configs = this.configs
         if (configs.hls) require('videojs-contrib-hls/dist/videojs-contrib-hls.js')
         if (configs.youtube) require('videojs-youtube')
+        if (configs.vimeo) require('videojs-vimeo')
         if (configs.switcher) require('videojs-resolution-switcher')
 
         // init
