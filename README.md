@@ -10,6 +10,10 @@
 Video/Live player for Vue.js(1.x ~ 2.x)
 基于 [video.js](https://github.com/videojs/video.js) + [videojs-resolution-switcher](https://github.com/kmoskwiak/videojs-resolution-switcher) + [videojs-contrib-hls](https://github.com/videojs/videojs-contrib-hls) + [videojs-youtube](https://github.com/videojs/videojs-youtube) + [videojs-vimeo](https://github.com/videojs/videojs-vimeo)
 
+
+> ### V2.5.0
+> Added vimeo support
+
 > ### V2.4.5
 > ...
 
