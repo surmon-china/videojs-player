@@ -238,6 +238,16 @@
             _this.$emit && _this.$emit(customEventName, { currentTime: this.currentTime() })
             _this.$dispatch && _this.$dispatch(customEventName, { currentTime: this.currentTime() })
           })
+
+          this.on('canplay', function() {
+            _this.$emit && _this.$emit(customEventName, { canplay: true })
+            _this.$dispatch && _this.$dispatch(customEventName, { canplay: true })
+          })
+
+          this.on('canplaythrough', function() {
+            _this.$emit && _this.$emit(customEventName, { canplaythrough: true })
+            _this.$dispatch && _this.$dispatch(customEventName, { canplaythrough: true })
+          })
         })
       },
       // 释放播放器
