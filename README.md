@@ -93,7 +93,7 @@ export default {
 <video-player :options="videoOptions"></video-player>
 
 <!-- Use in component(Vue.js1.X && Vue.js2.X && function switch config) -->
-<video-player :options="videoOptions" :config="{ youtube: true }"></video-player>
+<video-player :options="videoOptions" :configs="{ youtube: true }"></video-player>
 
 <!-- Use in component(Vue.js2.X) && event callback -->
 <video-player :options="videoOptions" @player-state-changed="playerStateChanged"></video-player>
