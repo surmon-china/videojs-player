@@ -57,7 +57,7 @@
         // console.log('init build player')
 
         var configs = this.configs
-        if (configs.hls) require('videojs-contrib-hls/dist/videojs-contrib-hls.js')
+        if (configs.hls) require('videojs-contrib-hls')
         if (configs.youtube) require('videojs-youtube')
         if (configs.vimeo) require('videojs-vimeo')
         if (configs.switcher) require('videojs-resolution-switcher')
