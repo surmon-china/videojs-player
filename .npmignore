@@ -1,5 +1,4 @@
 # Dependency directories
 node_modules
-
 examples
-/examples
+nuxt-ssr-example

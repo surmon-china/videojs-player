@@ -2,7 +2,7 @@
   <md-card>
     <md-card-actions v-md-ink-ripple>
       <div class="md-subhead">
-        <span>Only Flash && custom event name / 仅使用Flash模式播放 && 自定义事件名称</span>
+        <span>Only Flash & custom event name / 仅使用Flash模式播放 & 自定义事件名称</span>
       </div>
       <md-button class="md-icon-button"
                  target="_blank"
@@ -13,10 +13,10 @@
     <md-card-media>
       <div class="item">
         <div class="player">
-          <video-player :options="videoOptions" @state="playerStateChanged" ref="videoPlayer"></video-player>
-        </div>
-        <div class="codemirror">
-          <codemirror v-model="code" :options="editorOption"></codemirror>
+          <video-player :options="playerOptions" 
+                        @changed="playerStateChanged($event)" 
+                        ref="videoPlayer">
+          </video-player>
         </div>
       </div>
     </md-card-media>
@@ -24,24 +24,22 @@
 </template>
 
 <script>
-const code =
-`<template>
-  <video-player :options="videoOptions" @state="playerStateChanged" ref="videoPlayer"></video-player>
-</template>
+  export default {
+    data() {
+      return {
+        playerOptions: {
+          // component options
+          customEventName: 'changed',
 
-<script>
-  export default {
-    data() {
-      return {
-        videoOptions: {
-          source: {
+          // component options
+          autoplay: false,
+          sources: [{
             type: "video/mp4",
             src: "http://vjs.zencdn.net/v/oceans.mp4"
-          },
-          techOrder: ["flash"],
-          poster: "http://www.freemake.com/blog/wp-content/uploads/2015/06/videojs-logo.jpg",
-          autoplay: false,
-          customEventName: 'state'
+          }],
+          language: 'zh-CN',
+          techOrder: ['flash'],
+          poster: "/static/images/author-2.jpg"
         }
       }
     },
@@ -52,50 +50,7 @@ const code =
     },
     methods: {
       playerStateChanged(playerCurrentState) {
-        console.log(playerCurrentState)
-      }
-    }
-  }
-<\/script>`
-  export default {
-    data() {
-      return {
-        code,
-        editorOption: {
-          tabSize: 4,
-          styleActiveLine: true,
-          lineNumbers: true,
-          line: true,
-          foldGutter: true,
-          styleSelectedText: true,
-          gutters: ["CodeMirror-linenumbers", "CodeMirror-foldgutter"],
-          highlightSelectionMatches: { showToken: /\w/, annotateScrollbar: true },
-          mode: 'text/x-vue',
-          keyMap: "sublime",
-          matchBrackets: true,
-          showCursorWhenSelecting: true,
-          theme: "base16-dark"
-        },
-        videoOptions: {
-          source: {
-            type: "video/mp4",
-            src: "http://vjs.zencdn.net/v/oceans.mp4"
-          },
-          techOrder: ["flash"],
-          poster: "http://www.freemake.com/blog/wp-content/uploads/2015/06/videojs-logo.jpg",
-          autoplay: false,
-          customEventName: 'state'
-        }
-      }
-    },
-    computed: {
-      player() {
-        return this.$refs.videoPlayer.player
-      }
-    },
-    methods: {
-      playerStateChanged(playerCurrentState) {
-        console.log(playerCurrentState)
+        // console.log('example 2: state changed', playerCurrentState)
       }
     }
   }

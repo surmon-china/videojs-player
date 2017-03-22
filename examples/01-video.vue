@@ -13,10 +13,20 @@
     <md-card-media>
       <div class="item">
         <div class="player">
-          <video-player :options="videoOptions" @player-state-changed="playerStateChanged" ref="videoPlayer"></video-player>
-        </div>
-        <div class="codemirror">
-          <codemirror v-model="code" :options="editorOption"></codemirror>
+          <video-player  ref="videoPlayer"
+                         :options="playerOptions"
+                         @play="onPlayerPlay($event)"
+                         @pause="onPlayerPause($event)"
+                         @ended="onPlayerEnded($event)"
+                         @loadeddata="onPlayerLoadeddata($event)"
+                         @waiting="onPlayerWaiting($event)"
+                         @playing="onPlayerPlaying($event)"
+                         @timeupdate="onPlayerTimeupdate($event)"
+                         @canplay="onPlayerCanplay($event)"
+                         @canplaythrough="onPlayerCanplaythrough($event)"
+                         @ready="playerReadied"
+                         @statechanged="playerStateChanged($event)">
+          </video-player>
         </div>
       </div>
     </md-card-media>
@@ -24,62 +34,33 @@
 </template>
 
 <script>
-const code =
-`<template>
-  <video-player :options="videoOptions" @player-state-changed="playerStateChanged"></video-player>
-</template>
-
-<script>
   export default {
     data() {
       return {
-        videoOptions: {
-          source: {
+        playerOptions: {
+
+          // component options
+          start: 0,
+          playsinline: false,
+
+          // videojs options
+          muted: true,
+          language: 'en',
+          playbackRates: [0.7, 1.0, 1.5, 2.0],
+          sources: [{
             type: "video/mp4",
-            src: "http://assets7.ign.com/videos/zencoder/2016/06/15/960/7080c56a76e2b74ec8ecfe4c224441d4-1500000-1466028542-w.mp4"
-          },
-          poster: "http://assets1.ignimgs.com/thumbs/userUploaded/2016/6/15/zelda-1466028489388_large.jpg",
-          autoplay: false,
-          muted: false
+            src: "https://cdn.theguardian.tv/webM/2015/07/20/150716YesMen_synd_768k_vp8.webm"
+          }],
+          poster: "/static/images/author.jpg",
         }
       }
     },
-    methods: {
-      playerStateChanged(playerCurrentState) {
-        console.log(playerCurrentState)
-      }
-    }
-  }
-<\/script>`
-  export default {
-    data() {
-      return {
-        code,
-        editorOption: {
-          tabSize: 4,
-          styleActiveLine: true,
-          lineNumbers: true,
-          line: true,
-          foldGutter: true,
-          styleSelectedText: true,
-          gutters: ["CodeMirror-linenumbers", "CodeMirror-foldgutter"],
-          highlightSelectionMatches: { showToken: /\w/, annotateScrollbar: true },
-          mode: 'text/x-vue',
-          keyMap: "sublime",
-          matchBrackets: true,
-          showCursorWhenSelecting: true,
-          theme: "base16-dark"
-        },
-        videoOptions: {
-          source: {
-            type: "video/mp4",
-            src: "http://assets7.ign.com/videos/zencoder/2016/06/15/960/7080c56a76e2b74ec8ecfe4c224441d4-1500000-1466028542-w.mp4"
-          },
-          poster: "http://assets1.ignimgs.com/thumbs/userUploaded/2016/6/15/zelda-1466028489388_large.jpg",
-          autoplay: false,
-          muted: false
-        }
-      }
+    mounted() {
+      // console.log('this is current player instance object', this.player)
+      setTimeout(() => {
+        // console.log('dynamic change options', this)
+        this.playerOptions.muted = false
+      }, 2000)
     },
     computed: {
       player() {
@@ -87,8 +68,43 @@ const code =
       }
     },
     methods: {
+      // listen event
+      onPlayerPlay(player) {
+        // console.log('player play!', player)
+      },
+      onPlayerPause(player) {
+        // console.log('player pause!', player)
+      },
+      onPlayerEnded(player) {
+        // console.log('player ended!', player)
+      },
+      onPlayerLoadeddata(player) {
+        // console.log('player Loadeddata!', player)
+      },
+      onPlayerWaiting(player) {
+        // console.log('player Waiting!', player)
+      },
+      onPlayerPlaying(player) {
+        // console.log('player Playing!', player)
+      },
+      onPlayerTimeupdate(player) {
+        // console.log('player Timeupdate!', player.currentTime())
+      },
+      onPlayerCanplay(player) {
+        // console.log('player Canplay!', player)
+      },
+      onPlayerCanplaythrough(player) {
+        // console.log('player Canplaythrough!', player)
+      },
+
+      // or listen state event
       playerStateChanged(playerCurrentState) {
-        // console.log(playerCurrentState)
+        // console.log('player current update state', playerCurrentState)
+      },
+
+      // player is ready
+      playerReadied(player) {
+        console.log('example 01: the player is readied', player)
       }
     }
   }
