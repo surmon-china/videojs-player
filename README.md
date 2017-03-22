@@ -59,9 +59,9 @@ export default {
 ### Use the difference（使用方法的区别）
 
 *SSR and the only difference in the use of the SPA:*
-SPA uses the `component`, find quill instance by `ref attribute`.
-SSR use `directive`, find quill instance by `directive arg`.
-Other configurations, events are the same.
+- SPA uses the `component`, find quill instance by `ref attribute`.
+- SSR use `directive`, find quill instance by `directive arg`.
+- Other configurations, events are the same.
 
 ### Use in SSR
 
