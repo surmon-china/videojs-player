@@ -1,15 +1,13 @@
 [![GitHub issues](https://img.shields.io/github/issues/surmon-china/vue-video-player.svg?style=flat-square)](https://github.com/surmon-china/vue-video-player/issues)
 [![GitHub forks](https://img.shields.io/github/forks/surmon-china/vue-video-player.svg?style=flat-square)](https://github.com/surmon-china/vue-video-player/network)
 [![GitHub stars](https://img.shields.io/github/stars/surmon-china/vue-video-player.svg?style=flat-square)](https://github.com/surmon-china/vue-video-player/stargazers)
-[![Twitter](https://img.shields.io/twitter/url/https/github.com/surmon-china/vue-video-player.svg?style=flat-square)](https://twitter.com/intent/tweet?text=Wow:&url=%5Bobject%20Object%5D)
+[![Twitter](https://img.shields.io/twitter/url/https/github.com/surmon-china/vue-video-player.svg?style=flat-square)](https://twitter.com/intent/tweet?url=https://github.com/surmon-china/vue-video-player)
 
 [![NPM](https://nodei.co/npm/vue-video-player.png?downloads=true&downloadRank=true&stars=true)](https://nodei.co/npm/vue-video-player/)
 
 
 # Vue-Video-Player
-Video.js player component for Vue2.
-
-Build by [video.js](https://github.com/videojs/video.js).
+[Video.js](https://github.com/videojs/video.js) player component for Vue2.
 
 
 # Example
@@ -37,15 +35,17 @@ var Vue = require('vue')
 var VueVideoPlayer = require('vue-video-player')
 
 
-// or import 'vue-quill-editor/ssr' to used in Nuxt.js/ssr
-var VueVideoPlayer = require('vue-video-player/ssr')
-
-
-// mount with global (If used in nuxt.js / SSR, you should keep it only in a browser-built environment)
+// mount with global
 Vue.use(VueVideoPlayer)
 
 
-// mount with component(can't work in ssr)
+// If used in Nuxt.js/SSR, you should keep it only in browser build environment
+if (process.BROWSER_BUILD) {
+  const VueVideoPlayer = require('vue-video-player/ssr')
+  Vue.use(VueVideoPlayer)
+}
+
+// mount with component(can't work in Nuxt.js/SSR)
 import { videoPlayer } from 'vue-video-player'
 
 export default {
@@ -59,8 +59,8 @@ export default {
 ### Use the difference（使用方法的区别）
 
 *SSR and the only difference in the use of the SPA:*
-- SPA uses the `component`, find quill instance by `ref attribute`.
-- SSR use `directive`, find quill instance by `directive arg`.
+- SPA uses the `component`, find videojs instance by `ref attribute`.
+- SSR use `directive`, find videojs instance by `directive arg`.
 - Other configurations, events are the same.
 
 ### Use in SSR
