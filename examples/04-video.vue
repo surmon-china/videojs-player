@@ -27,21 +27,6 @@
   export default {
     data() {
       return {
-        editorOption: {
-          tabSize: 4,
-          styleActiveLine: true,
-          lineNumbers: true,
-          line: true,
-          foldGutter: true,
-          styleSelectedText: true,
-          gutters: ["CodeMirror-linenumbers", "CodeMirror-foldgutter"],
-          highlightSelectionMatches: { showToken: /\w/, annotateScrollbar: true },
-          mode: 'text/x-vue',
-          keyMap: "sublime",
-          matchBrackets: true,
-          showCursorWhenSelecting: true,
-          theme: "base16-dark"
-        },
         playerOptions: {
           // videojs and plugin options
           sources: [{
