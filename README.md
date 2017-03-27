@@ -200,6 +200,7 @@ export default {
 - [videojs-contrib-hls](https://github.com/videojs/videojs-contrib-hls)
 - [videojs-youtube](https://github.com/videojs/videojs-youtube)
 - [videojs-vimeo](https://github.com/videojs/videojs-vimeo)
+- [videojs-hotkeys](https://github.com/ctd1500/videojs-hotkeys)
 - [more ...](https://github.com/search?o=desc&q=videojs+plugin&s=stars&type=Repositories&utf8=%E2%9C%93)
 
 
