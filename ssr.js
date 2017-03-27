@@ -1,11 +1,5 @@
 
 const videojs = window.videojs = require('video.js')
-const eventEmit = function (vnode, name, data) {
-  var handlers = (vnode.data && vnode.data.on) || (vnode.componentOptions && vnode.componentOptions.listeners)
-  if (handlers && handlers[name]) {
-    handlers[name].fns(data)
-  }
-}
 
 var videoPlayer = {
   install: function(Vue) {
@@ -65,6 +59,13 @@ var videoPlayer = {
           }
 
           // console.log(options)
+
+          var eventEmit = function (vnode, name, data) {
+            var handlers = (vnode.data && vnode.data.on) || (vnode.componentOptions && vnode.componentOptions.listeners)
+            if (handlers && handlers[name]) {
+              handlers[name].fns(data)
+            }
+          }
 
           // emit event
           var emitPlayerState = function (event, value) {
