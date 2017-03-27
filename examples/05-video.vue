@@ -21,6 +21,7 @@
 </template>
 
 <script>
+  // youtube plugin
   require('videojs-youtube')
   require('videojs-contrib-hls/dist/videojs-contrib-hls')
   export default {

@@ -23,6 +23,7 @@
 </template>
 
 <script>
+  // resolution-switcher plugin
   require('videojs-resolution-switcher')
   require('videojs-resolution-switcher/lib/videojs-resolution-switcher.css')
   export default {

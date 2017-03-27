@@ -23,6 +23,7 @@
 </template>
 
 <script>
+  // hls plugin
   require('videojs-contrib-hls/dist/videojs-contrib-hls')
   export default {
     data() {

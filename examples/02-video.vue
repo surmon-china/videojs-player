@@ -2,7 +2,7 @@
   <md-card>
     <md-card-actions v-md-ink-ripple>
       <div class="md-subhead">
-        <span>Only Flash & custom event name / 仅使用Flash模式播放 & 自定义事件名称</span>
+        <span>Only Flash & custom event name & hotkeys plugin / 仅使用Flash模式播放 & 自定义事件名称 & 热键插件</span>
       </div>
       <md-button class="md-icon-button"
                  target="_blank"
@@ -14,6 +14,7 @@
       <div class="item">
         <div class="player">
           <video-player :options="playerOptions" 
+                        @ready="playerIsReady"
                         @changed="playerStateChanged($event)" 
                         ref="videoPlayer">
           </video-player>
@@ -24,6 +25,8 @@
 </template>
 
 <script>
+  // hotkeys plugin
+  require('videojs-hotkeys')
   export default {
     data() {
       return {
@@ -39,7 +42,7 @@
           }],
           language: 'zh-CN',
           techOrder: ['flash'],
-          poster: "/static/images/author-2.jpg"
+          poster: "/vue-video-player/static/images/author-2.jpg"
         }
       }
     },
@@ -51,6 +54,14 @@
     methods: {
       playerStateChanged(playerCurrentState) {
         // console.log('example 2: state changed', playerCurrentState)
+      },
+      playerIsReady(player) {
+        console.log('example 2 ready!', player)
+        player.hotkeys({
+          volumeStep: 0.1,
+          seekStep: 5,
+          enableModifiersForNumbers: false
+        })
       }
     }
   }
