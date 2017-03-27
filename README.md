@@ -11,6 +11,9 @@
 [Video.js](https://github.com/videojs/video.js) player component for Vue2.
 
 
+# Update
+The latest version of the update, I hope the component itself is a simple and lightweight player, in addition to the videojs core library itself, no other packages; if you need other videojs extensions, you need to import the corresponding scriptjs plugin in the entry script file or component script Resource package.
+
 # Example
 [Demo Page](https://surmon-china.github.io/vue-video-player)
 
@@ -45,6 +48,10 @@ if (process.BROWSER_BUILD) {
   const VueVideoPlayer = require('vue-video-player/ssr')
   Vue.use(VueVideoPlayer)
 }
+
+// If you need to use more videojs extensions, you can introduce the corresponding videojs plug-in package before the vue program is instantiated, such as:
+require('some-videojs-plugin')
+// require more plugin resource...
 
 // mount with component(can't work in Nuxt.js/SSR)
 import { videoPlayer } from 'vue-video-player'
@@ -117,6 +124,8 @@ export default {
 </template>
 
 <script>
+  // Similarly, you can also introduce the plugin resource pack you want to use within the component
+  // require('some-videojs-plugin')
   export default {
     data() {
       return {
@@ -201,7 +210,7 @@ export default {
 - [videojs-youtube](https://github.com/videojs/videojs-youtube)
 - [videojs-vimeo](https://github.com/videojs/videojs-vimeo)
 - [videojs-hotkeys](https://github.com/ctd1500/videojs-hotkeys)
-- [more ...](https://github.com/search?o=desc&q=videojs+plugin&s=stars&type=Repositories&utf8=%E2%9C%93)
+- [more plugins...](https://github.com/search?o=desc&q=videojs+plugin&s=stars&type=Repositories&utf8=%E2%9C%93)
 
 
 # Author Blog
