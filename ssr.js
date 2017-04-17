@@ -12,8 +12,10 @@ var videoPlayer = {
         }
       },
       inserted: function (el, binding, vnode) {
+
+        var customInstanceName = vnode.data.attrs ? vnode.data.attrs.playerInstanceName : binding.arg
         var _this = vnode.context
-        var instanceName = binding.arg
+        var instanceName = customInstanceName || 'player'
         var options = binding.value || {}
         var player = _this[instanceName]
 
