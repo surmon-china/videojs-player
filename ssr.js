@@ -13,8 +13,8 @@ var videoPlayer = {
       },
       inserted: function (el, binding, vnode) {
 
-        var customInstanceName = vnode.data.attrs ? vnode.data.attrs.playerInstanceName : binding.arg
         var _this = vnode.context
+        var customInstanceName = vnode.data.attrs ? vnode.data.attrs.playerInstanceName : binding.arg
         var instanceName = customInstanceName || 'player'
         var options = binding.value || {}
         var player = _this[instanceName]
@@ -129,7 +129,8 @@ var videoPlayer = {
       },
       unbind: function (el, binding, vnode) {
         var _this = vnode.context
-        var instanceName = binding.arg
+        var customInstanceName = vnode.data.attrs ? vnode.data.attrs.playerInstanceName : binding.arg
+        var instanceName = customInstanceName || 'player'
         var player = _this[instanceName]
         if (player && videojs) {
           player.pause && player.pause()
