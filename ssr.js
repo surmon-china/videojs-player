@@ -89,7 +89,9 @@ var videoPlayer = {
 
             this.on('loadeddata', function() {
               this.muted(options.muted)
-              this.currentTime(options.start)
+              if (!!videoOptions.start) {
+                this.currentTime(videoOptions.start)
+              }
               emitPlayerState('loadeddata', true)
             })
 

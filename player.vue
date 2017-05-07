@@ -108,7 +108,9 @@
 
           this.on('loadeddata', function() {
             this.muted(videoOptions.muted)
-            this.currentTime(videoOptions.start)
+            if (!!videoOptions.start) {
+              this.currentTime(videoOptions.start)
+            }
             emitPlayerState('loadeddata', true)
           })
 
