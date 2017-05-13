@@ -4,7 +4,7 @@ const videojs = window.videojs = require('video.js')
 var videoPlayer = {
   install: function(Vue) {
     Vue.directive('video-player', {
-      bind: function  (el, binding, vnode) {
+      bind: function(el, binding, vnode) {
         if (!el.children.length) {
           var video = document.createElement('video')
           video.className = 'video-js vjs-custom-skin'
@@ -89,8 +89,8 @@ var videoPlayer = {
 
             this.on('loadeddata', function() {
               this.muted(options.muted)
-              if (!!videoOptions.start) {
-                this.currentTime(videoOptions.start)
+              if (!!options.start) {
+                this.currentTime(options.start)
               }
               emitPlayerState('loadeddata', true)
             })
