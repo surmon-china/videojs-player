@@ -100,7 +100,7 @@
         // console.log(videoOptions)
 
         // avoid error "VIDEOJS: ERROR: Unable to find plugin: __ob__"
-        delete videoOptions.plugins.__ob__;
+        delete videoOptions.plugins.__ob__
         this.player = videojs(this.$el.children[0], videoOptions, function() {
 
           // player readied
