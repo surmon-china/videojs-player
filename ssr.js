@@ -60,7 +60,9 @@ var videoPlayer = {
             }
           }
 
-          delete options.plugins.__ob__
+          if (options.plugins) {
+            delete options.plugins.__ob__
+          }
           // console.log(options)
 
           var eventEmit = function (vnode, name, data) {
