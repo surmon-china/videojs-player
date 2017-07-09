@@ -1,6 +1,6 @@
 <template>
   <md-card>
-    <md-card-actions v-md-ink-ripple>
+    <md-card-actions>
       <div class="md-subhead">
         <span>playbackRate switch & source switch / 播放速度切换 & 播放源切换</span>
       </div>

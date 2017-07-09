@@ -1,6 +1,6 @@
 <template>
   <md-card>
-    <md-card-actions v-md-ink-ripple>
+    <md-card-actions>
       <div class="md-subhead">
         <span>Base Config / 基本示例</span>
       </div>

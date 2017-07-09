@@ -1,6 +1,6 @@
 <template>
   <md-card>
-    <md-card-actions v-md-ink-ripple>
+    <md-card-actions>
       <div class="md-subhead">
         <span>HLS Live / 直播</span>
       </div>

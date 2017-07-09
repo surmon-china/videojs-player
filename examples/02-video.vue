@@ -1,6 +1,6 @@
 <template>
   <md-card>
-    <md-card-actions v-md-ink-ripple>
+    <md-card-actions>
       <div class="md-subhead">
         <span>Only Flash & custom event name & hotkeys plugin / 仅使用Flash模式播放 & 自定义事件名称 & 热键插件</span>
       </div>
