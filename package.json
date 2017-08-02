@@ -22,7 +22,7 @@
     "email": "surmon@foxmail.com",
     "url": "http://surmon.me"
   },
-  "license": "GPL",
+  "license": "MIT OR GPL-3.0",
   "bugs": {
     "url": "https://github.com/surmon-china/vue-video-player/issues"
   },
