@@ -212,6 +212,14 @@ export default {
 - [videojs-hotkeys](https://github.com/ctd1500/videojs-hotkeys)
 - [more plugins...](https://github.com/search?o=desc&q=videojs+plugin&s=stars&type=Repositories&utf8=%E2%9C%93)
 
+# License
+
+Licensed under either of
+
+ * MIT license ([LICENSE-MIT](LICENSE-MIT) or http://opensource.org/licenses/MIT)
+ * GNU General Public License, version 3 ([LICENSE-GPL](LICENSE-GPL) or https://opensource.org/licenses/GPL-3.0)
+
+at your option.
 
 # Author Blog
 [Surmon](https://surmon.me)
