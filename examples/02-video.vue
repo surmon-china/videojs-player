@@ -2,7 +2,7 @@
   <md-card>
     <md-card-actions>
       <div class="md-subhead">
-        <span>Only Flash & custom event name & hotkeys plugin / 仅使用Flash模式播放 & 自定义事件名称 & 热键插件</span>
+        <span>Custom event name & hotkeys plugin & flash plugin / Flash插件 & 自定义事件名称 & 热键插件</span>
       </div>
       <md-button class="md-icon-button"
                  target="_blank"
@@ -13,10 +13,12 @@
     <md-card-media>
       <div class="item">
         <div class="player">
-          <video-player :options="playerOptions" 
+          <video-player class="vjs-custom-skin"
+                        ref="videoPlayer"
+                        :options="playerOptions"
+                        customEventName="changed"
                         @ready="playerIsReady"
-                        @changed="playerStateChanged($event)" 
-                        ref="videoPlayer">
+                        @changed="playerStateChanged($event)">
           </video-player>
         </div>
       </div>
@@ -25,16 +27,13 @@
 </template>
 
 <script>
-  // hotkeys plugin
+  // videojs hotkeys plugin
+  require('videojs-flash')
   require('videojs-hotkeys')
   export default {
     data() {
       return {
         playerOptions: {
-          // component options
-          customEventName: 'changed',
-
-          // component options
           autoplay: false,
           sources: [{
             type: "video/mp4",
@@ -60,7 +59,11 @@
         player.hotkeys({
           volumeStep: 0.1,
           seekStep: 5,
-          enableModifiersForNumbers: false
+          enableModifiersForNumbers: false,
+          fullscreenKey: function(event, player) {
+            // override fullscreen to trigger when pressing the F key or Ctrl+Enter
+            return ((event.which === 70) || (event.ctrlKey && event.which === 13));
+          }
         })
       }
     }

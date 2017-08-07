@@ -1,7 +1,7 @@
 {
   "name": "vue-video-player",
-  "version": "3.1.4",
-  "description": "Video Player component for Vue2",
+  "version": "4.0.0-rc1",
+  "description": "Video Player component for Vue",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -12,10 +12,10 @@
   },
   "keywords": [
     "vue-video-player",
-    "vue.js video player",
-    "vue.js video",
+    "vue video player",
+    "vue video",
     "vue videojs",
-    "vue.js player"
+    "vue player"
   ],
   "author": {
     "name": "Surmon",
@@ -28,6 +28,6 @@
   },
   "homepage": "https://github.com/surmon-china/vue-video-player#readme",
   "dependencies": {
-    "video.js": "^5.11.7"
+    "video.js": "^6.2.4"
   }
 }

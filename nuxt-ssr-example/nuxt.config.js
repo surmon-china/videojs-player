@@ -1,7 +1,7 @@
 module.exports = {
   // some nuxt config...
   plugins: [
-    '~plugins/nuxt-video-player-plugin.js',
+    { src: '~plugins/nuxt-video-player-plugin.js', ssr: false }
   ],
   // some nuxt config...
   css: [

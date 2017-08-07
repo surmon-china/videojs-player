@@ -8,11 +8,13 @@
 
 
 # Vue-Video-Player
-[Video.js](https://github.com/videojs/video.js) player component for Vue2.
+[Video.js](https://github.com/videojs/video.js) player component for Vue.
 
 
 # Update
-The latest version of the update, I hope the component itself is a simple and lightweight player, in addition to the videojs core library itself, no other packages; if you need other videojs extensions, you need to import the corresponding scriptjs plugin in the entry script file or component script Resource package.
+Updated to video.js 6+.
+
+todo: example page && ssr && cdn script.
 
 # Example
 [Demo Page](https://surmon-china.github.io/vue-video-player)
@@ -29,6 +31,11 @@ npm install vue-video-player --save
 ### Vue mount
 
 ``` javascript
+// require videojs style [and custom videojs theme]
+require('video.js/dist/video-js.css')
+require('vue-video-player/src/custom-theme.css')
+
+
 // import
 import Vue from 'vue'
 import VueVideoPlayer from 'vue-video-player'
@@ -44,14 +51,17 @@ Vue.use(VueVideoPlayer)
 
 
 // If used in Nuxt.js/SSR, you should keep it only in browser build environment
-if (process.BROWSER_BUILD) {
+if (process.browser) {
   const VueVideoPlayer = require('vue-video-player/ssr')
   Vue.use(VueVideoPlayer)
 }
 
 // If you need to use more videojs extensions, you can introduce the corresponding videojs plug-in package before the vue program is instantiated, such as:
-require('some-videojs-plugin')
-// require more plugin resource...
+const { videojs } = VueVideoPlayer
+videojs.plugin('myPlugin', myPluginFunction)
+videojs.addLanguage('ml', myLanguageObject)
+videojs.registerPlugin('examplePlugin', examplePlugin)
+// videojs.[methods]...
 
 // mount with component(can't work in Nuxt.js/SSR)
 import { videoPlayer } from 'vue-video-player'
@@ -101,8 +111,12 @@ export default {
 
 ``` vue
 <template>
-  <video-player  ref="videoPlayer"
+  <video-player  class="video-player-box"
+                 ref="videoPlayer"
                  :options="playerOptions"
+                 :start="0"
+                 :playsinline="true"
+                 customEventName="customstateevent"
 
                  title="you can listen some event if you need"
                  @play="onPlayerPlay($event)"
@@ -130,11 +144,6 @@ export default {
     data() {
       return {
         playerOptions: {
-
-          // component options
-          start: 0,
-          playsinline: false,
-
           // videojs options
           muted: true,
           language: 'en',
@@ -193,10 +202,7 @@ export default {
 
 - video.js api
   * [video.js api](http://docs.videojs.com/docs/api/player.html#Methodsmuted)
-
-
-# Videojs Issues
-- [videojs-contrib-hls](https://github.com/videojs/videojs-contrib-hls/issues/600)
+  * [video.js docs](http://docs.videojs.com/#)
 
 
 # Credits
@@ -210,6 +216,8 @@ export default {
 - [videojs-youtube](https://github.com/videojs/videojs-youtube)
 - [videojs-vimeo](https://github.com/videojs/videojs-vimeo)
 - [videojs-hotkeys](https://github.com/ctd1500/videojs-hotkeys)
+- [videojs-flash](https://github.com/videojs/videojs-flash)
+- [videojs-contrib-ads](https://github.com/videojs/videojs-contrib-ads)
 - [more plugins...](https://github.com/search?o=desc&q=videojs+plugin&s=stars&type=Repositories&utf8=%E2%9C%93)
 
 # License

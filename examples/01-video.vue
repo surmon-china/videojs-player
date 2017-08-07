@@ -13,8 +13,10 @@
     <md-card-media>
       <div class="item">
         <div class="player">
-          <video-player  ref="videoPlayer"
+          <video-player  class="vjs-custom-skin"
+                         ref="videoPlayer"
                          :options="playerOptions"
+                         :playsinline="true"
                          @play="onPlayerPlay($event)"
                          @pause="onPlayerPause($event)"
                          @ended="onPlayerEnded($event)"
@@ -37,13 +39,8 @@
   export default {
     data() {
       return {
+        // videojs options
         playerOptions: {
-
-          // component options
-          start: 0,
-          playsinline: false,
-
-          // videojs options
           muted: true,
           language: 'en',
           playbackRates: [0.7, 1.0, 1.5, 2.0],
@@ -58,8 +55,8 @@
     mounted() {
       // console.log('this is current player instance object', this.player)
       setTimeout(() => {
-        // console.log('dynamic change options', this)
-        this.playerOptions.muted = false
+        // console.log('dynamic change options', this.player)
+        this.player.muted(false)
       }, 2000)
     },
     computed: {
@@ -104,7 +101,9 @@
 
       // player is ready
       playerReadied(player) {
-        console.log('example 01: the player is readied', player)
+        // seek to 10s
+        player.currentTime(10)
+        // console.log('example 01: the player is readied', player)
       }
     }
   }

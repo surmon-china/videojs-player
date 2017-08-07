@@ -2,7 +2,7 @@
   <md-card>
     <md-card-actions>
       <div class="md-subhead">
-        <span>Youtube / youtube视频</span>
+        <span>rtmp / 直播</span>
       </div>
       <md-button class="md-icon-button"
                  target="_blank"
@@ -13,7 +13,8 @@
     <md-card-media>
       <div class="item">
         <div class="player">
-          <video-player :options="playerOptions"></video-player>
+          <video-player class="vjs-custom-skin" :options="playerOptions">
+          </video-player>
         </div>
       </div>
     </md-card-media>
@@ -21,32 +22,18 @@
 </template>
 
 <script>
-  // youtube plugin
-  require('videojs-youtube')
-  require('videojs-contrib-hls/dist/videojs-contrib-hls')
+  require('videojs-flash')
   export default {
     data() {
       return {
         playerOptions: {
           sources: [{
-            type: "video/youtube",
-            src: "https://www.youtube.com/watch?v=iD_MyDbP_ZE"
+            type: "rtmp/mp4",
+            src: "rtmp://184.72.239.149/vod/&mp4:BigBuckBunny_115k.mov"
           }],
-          plugins: {
-            videoJsResolutionSwitcher: {
-              default: 'low',
-              dynamicLabel: true
-            }
-          },
-          techOrder: ['youtube'],
-          autoplay: false,
-          controls: false,
-          youtube: {
-            ytControls: 2,
-            customVars: { 
-              wmode: 'transparent' 
-            }
-          }
+          techOrder: ['flash'],
+          autoplay: true,
+          controls: true
         }
       }
     }

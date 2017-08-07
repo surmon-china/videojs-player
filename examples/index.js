@@ -4,7 +4,7 @@ import example03 from './03-video.vue'
 import example04 from './04-video.vue'
 import example05 from './05-video.vue'
 
-module.exports = {
+export default {
   example01,
   example02,
   example03,

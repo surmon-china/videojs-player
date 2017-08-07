@@ -1,47 +1,58 @@
 <template>
   <div class="video-player">
-    <video class="video-js vjs-custom-skin"></video>
+    <video class="video-js"></video>
   </div>
 </template>
 
 <script>
-  window.videojs = require('video.js')
-  require('video.js/dist/video-js.css')
   var languages = require('./languages.js')
+  window.videojs = require('video.js')
+  videojs = videojs.default || videojs
   export default {
     name: 'video-player',
     props: {
       options: {
         type: Object,
         required: true
+      },
+      start: {
+        type: Number,
+        default: function() {
+          return 0
+        }
+      },
+      playsinline: {
+        type: Boolean,
+        default: function() {
+          return false
+        }
+      },
+      customEventName: {
+        type: String,
+        default: function() {
+          return 'statechanged'
+        }
       }
     },
-    mounted() {
+    mounted: function() {
       if (!this.player) { 
         this.initialize()
       }
     },
-    beforeDestroy() {
+    beforeDestroy: function() {
       if (this.player) { 
         this.dispose()
       }
     },
     methods: {
-      initialize() {
+      initialize: function() {
 
         // init
         var self = this
         this.player = null
 
-        // options
+        // videojs options
         var videoOptions = Object.assign({
-
-          // component options
-          start: 0,
-          playsinline: false,
-          customEventName: 'statechanged',
-
-          // videojs options
           autoplay: false,
           controls: true,
           preload: 'auto',
@@ -60,8 +71,7 @@
               vertical: true
             }
           },
-          techOrder: ['html5', 'flash'],
-          playbackRates: [],
+          techOrder: ['html5'],
           plugins:{}
         }, this.options)
 
@@ -78,21 +88,21 @@
         videojs.addLanguage(language, languages[language])
 
         // ios fullscreen
-        var playsinline = videoOptions.playsinline
+        var playsinline = this.playsinline
         if (playsinline) {
           this.$el.children[0].setAttribute('playsinline', playsinline)
           this.$el.children[0].setAttribute('webkit-playsinline', playsinline)
         }
 
         // emit event
-        var emitPlayerState = function (event, value) {
+        var emitPlayerState = function(event, value) {
           if (event) {
             self.$emit(event, self.player)
           }
           if (value) {
             var values = {}
             values[event] = value
-            self.$emit(videoOptions.customEventName, values)
+            self.$emit(self.customEventName, values)
           }
         }
 
@@ -106,56 +116,34 @@
         this.player = videojs(this.$el.children[0], videoOptions, function() {
 
           // player readied
-          self.$emit('ready', self.player)
+          self.$emit('ready', self.player);
 
-          this.on('loadeddata', function() {
-            this.muted(videoOptions.muted)
-            if (!!videoOptions.start) {
-              this.currentTime(videoOptions.start)
-            }
-            emitPlayerState('loadeddata', true)
-          })
-
-          this.on('canplay', function() {
-            emitPlayerState('canplay', true)
-          })
-
-          this.on('canplaythrough', function() {
-            emitPlayerState('canplaythrough', true)
-          })
-
-          this.on('play', function() {
-            emitPlayerState('play', true)
-          })
-
-          this.on('pause', function() {
-            emitPlayerState('pause', true)
-          })
-
-          this.on('waiting', function() {
-            emitPlayerState('waiting', true)
-          })
-
-          this.on('playing', function() {
-            emitPlayerState('playing', true)
-          })
-
-          this.on('ended', function() {
-            emitPlayerState('ended', true)
-          })
+          // events
+          ['loadeddata', 
+           'canplay', 
+           'canplaythrough', 
+           'play', 
+           'pause', 
+           'waiting', 
+           'playing', 
+           'ended'].forEach(event => {
+            this.on(event, function() {
+              emitPlayerState(event, true)
+            })
+          });
 
           this.on('timeupdate', function() {
             emitPlayerState('timeupdate', this.currentTime())
           })
         })
       },
-      dispose() {
+      dispose: function() {
         if (this.player && videojs) {
           this.player.pause && this.player.pause()
           videojs(this.$el.children[0]).dispose()
           if (!this.$el.children.length) {
             var video = document.createElement('video')
-            video.className = 'video-js vjs-custom-skin'
+            video.className = 'video-js'
             this.$el.appendChild(video)
           }
           this.player = null
@@ -165,7 +153,7 @@
     watch: {
       options: {
         deep: true,
-        handler(options, oldOptions) {
+        handler: function (options, oldOptions) {
           this.dispose()
           if (options && options.sources && options.sources.length) {
             this.initialize()
@@ -175,5 +163,3 @@
     }
   }
 </script>
-
-<style src="./player.css"></style>

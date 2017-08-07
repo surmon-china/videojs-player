@@ -13,7 +13,8 @@
     <md-card-media>
       <div class="item">
         <div class="player">
-          <video-player :options="playerOptions"
+          <video-player class="vjs-custom-skin" 
+                        :options="playerOptions" 
                         @ready="playerReadied">
           </video-player>
         </div>
@@ -49,7 +50,7 @@
       playerReadied(player) {
         var hls = player.tech({ IWillNotUseThisInPlugins: true }).hls
         player.tech_.hls.xhr.beforeRequest = function(options) {
-          console.log(options)
+          // console.log(options)
           return options
         }
       }

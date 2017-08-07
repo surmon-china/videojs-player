@@ -2,7 +2,7 @@
   <md-card>
     <md-card-actions>
       <div class="md-subhead">
-        <span>playbackRate switch & source switch / 播放速度切换 & 播放源切换</span>
+        <span>audio / 音轨</span>
       </div>
       <md-button class="md-icon-button"
                  target="_blank"
@@ -13,9 +13,9 @@
     <md-card-media>
       <div class="item">
         <div class="player">
-          <video-player :options="playerOptions"
-                        @ready="playerReadied($event)">
-          </video-player>
+          <video-player class="vjs-custom-skin"
+                        :options="playerOptions" 
+                        @ready="playerReadied($event)"></video-player>
         </div>
       </div>
     </md-card-media>
@@ -23,50 +23,47 @@
 </template>
 
 <script>
-  // resolution-switcher plugin
-  require('videojs-resolution-switcher')
-  require('videojs-resolution-switcher/lib/videojs-resolution-switcher.css')
+  // videojs
+  const videojs = require('video.js').default
   export default {
     data() {
       return {
-        playerSources: [{
-          type: "video/mp4",
-          src: "http://7xkwa7.media1.z0.glb.clouddn.com/sample_video_H",
-          label: "1080P",
-          res: 1
-        },{
-          type: "video/mp4",
-          src: "http://221.11.100.42/7xkwa7.media1.z0.glb.clouddn.com/sample_video_M?wsiphost=local",
-          label: "720P",
-          res: 2
-        },{
-          type: "video/mp4",
-          src: "http://7xkwa7.media1.z0.glb.clouddn.com/sample_video_L",
-          label: "360P",
-          res: 3
-        }],
         playerOptions: {
-          plugins: {
-            videoJsResolutionSwitcher: {
-              ui: true,
-              default: 3,
-              dynamicLabel: true
-            }
-          },
           playbackRates: [0.7, 1, 1.3, 1.5, 1.7],
-          poster: "/static/images/author-3.jpg",
+          sources: [{
+            type: "video/mp4",
+            src: "http://7xkwa7.media1.z0.glb.clouddn.com/sample_video_L"
+          }],
+          poster: "./static/images/author-3.jpg",
           height: 360
         }
       }
     },
     methods: {
       playerReadied(player) {
-        if (player.updateSrc) {
-          player.updateSrc(this.playerSources)
-          player.on('resolutionchange', function(){
-            console.log('switch the source', player.src())
-          })
-        }
+        var track = new videojs.AudioTrack({
+          id: 'my-spanish-audio-track',
+          kind: 'translation',
+          label: 'Spanish',
+          language: 'es'
+        })
+        player.audioTracks().addTrack(track)
+        // Get the current player's AudioTrackList object.
+        var audioTrackList = player.audioTracks()
+
+        // Listen to the "change" event.
+        audioTrackList.addEventListener('change', function() {
+
+          // Log the currently enabled AudioTrack label.
+          for (var i = 0; i < audioTrackList.length; i++) {
+            var track = audioTrackList[i]
+
+            if (track.enabled) {
+              videojs.log(track.label)
+              return
+            }
+          }
+        })
       }
     }
   }

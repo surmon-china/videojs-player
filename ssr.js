@@ -7,7 +7,7 @@ var videoPlayer = {
       bind: function(el, binding, vnode) {
         if (!el.children.length) {
           var video = document.createElement('video')
-          video.className = 'video-js vjs-custom-skin'
+          video.className = 'video-js'
           el.appendChild(video)
         }
       },
@@ -142,7 +142,7 @@ var videoPlayer = {
           videojs(el.children[0]).dispose()
           if (!el.children.length) {
             var video = document.createElement('video')
-            video.className = 'video-js vjs-custom-skin'
+            video.className = 'video-js'
             el.appendChild(video)
           }
           _this[instanceName] = null
