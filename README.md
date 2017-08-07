@@ -14,7 +14,7 @@
 # Update
 Updated to video.js 6+.
 
-todo: example page && ssr && cdn script.
+todo: ssr & cdn script.
 
 # Example
 [Demo Page](https://surmon-china.github.io/vue-video-player)
