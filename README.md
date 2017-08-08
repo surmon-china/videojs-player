@@ -14,8 +14,6 @@
 # Update
 Updated to video.js 6+.
 
-todo: ssr & cdn script.
-
 # Example
 [Demo Page](https://surmon-china.github.io/vue-video-player)
 
@@ -62,6 +60,11 @@ videojs.plugin('myPlugin', myPluginFunction)
 videojs.addLanguage('ml', myLanguageObject)
 videojs.registerPlugin('examplePlugin', examplePlugin)
 // videojs.[methods]...
+
+// or require videojs (plugins || langs || ...)
+require('video.js/dist/lang/ba')
+require('videos-some-plugins')
+require('videos...')
 
 // mount with component(can't work in Nuxt.js/SSR)
 import { videoPlayer } from 'vue-video-player'
@@ -114,25 +117,20 @@ export default {
   <video-player  class="video-player-box"
                  ref="videoPlayer"
                  :options="playerOptions"
-                 :start="0"
                  :playsinline="true"
-                 customEventName="customstateevent"
+                 customEventName="customstatechangedeventname"
 
-                 title="you can listen some event if you need"
                  @play="onPlayerPlay($event)"
                  @pause="onPlayerPause($event)"
                  @ended="onPlayerEnded($event)"
-                 @loadeddata="onPlayerLoadeddata($event)"
                  @waiting="onPlayerWaiting($event)"
                  @playing="onPlayerPlaying($event)"
+                 @loadeddata="onPlayerLoadeddata($event)"
                  @timeupdate="onPlayerTimeupdate($event)"
                  @canplay="onPlayerCanplay($event)"
                  @canplaythrough="onPlayerCanplaythrough($event)"
 
-                 title="or listen state change"
                  @statechanged="playerStateChanged($event)"
-
-                 title="The prepared event will be triggered after the videojs program instance completes, and its callback player object is the videojs callback function in this context"
                  @ready="playerReadied">
   </video-player>
 </template>
@@ -196,7 +194,6 @@ export default {
 
 # API
 - component api:
-  * start(number, default: 0): The time at which the player starts playing
   * playsinline(boolean, default: false): set player not full-screen in mobile device
   * customEventName(string, default: 'statechanged'): custom the state change event name
 

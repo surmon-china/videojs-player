@@ -6,6 +6,7 @@
  */
 
 window.videojs = require('video.js')
+videojs = videojs.default || videojs
 var playerComponent = require('./src/player.vue')
 playerComponent = playerComponent.default || playerComponent
 

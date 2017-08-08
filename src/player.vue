@@ -5,7 +5,6 @@
 </template>
 
 <script>
-  var languages = require('./languages.js')
   window.videojs = require('video.js')
   videojs = videojs.default || videojs
   export default {
@@ -82,10 +81,6 @@
           return false
         }
         */
-
-        // add language
-        var language = videoOptions.language
-        videojs.addLanguage(language, languages[language])
 
         // ios fullscreen
         var playsinline = this.playsinline
