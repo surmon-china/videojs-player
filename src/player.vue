@@ -108,10 +108,12 @@
         if (videoOptions.plugins) {
           delete videoOptions.plugins.__ob__
         }
+        
         this.player = videojs(this.$el.children[0], videoOptions, function() {
 
           // player readied
-          self.$emit('ready', self.player);
+          var _this = this
+          self.$emit('ready', self.player)
 
           // events
           ['loadeddata', 
@@ -121,11 +123,11 @@
            'pause', 
            'waiting', 
            'playing', 
-           'ended'].forEach(event => {
-            this.on(event, function() {
+           'ended'].forEach(function(event) {
+            _this.on(event, function() {
               emitPlayerState(event, true)
             })
-          });
+          })
 
           this.on('timeupdate', function() {
             emitPlayerState('timeupdate', this.currentTime())

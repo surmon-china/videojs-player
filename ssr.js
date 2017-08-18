@@ -93,20 +93,25 @@ var videoPlayer = {
           player = _this[instanceName] = videojs(el.children[0], options, function() {
 
             // player ready
-            emitPlayerState('ready');
+            var self = this
+            emitPlayerState('ready')
 
-            ['loadeddata', 
-             'canplay', 
-             'canplaythrough', 
-             'play', 
-             'pause', 
-             'waiting', 
-             'playing', 
-             'ended'].forEach(event => {
-              this.on(event, function() {
-                emitPlayerState(event, true)
-              })
-            });
+            // events
+            var events = ['loadeddata', 
+                          'canplay', 
+                          'canplaythrough', 
+                          'play', 
+                          'pause', 
+                          'waiting', 
+                          'playing', 
+                          'ended']
+            for (var i = 0; i < events.length; i++) {
+              (function(event) {
+                self.on(event, function() {
+                  emitPlayerState(event, true)
+                })
+              })(events[i])
+            }
 
             this.on('timeupdate', function() {
               emitPlayerState('timeupdate', this.currentTime())
