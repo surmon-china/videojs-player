@@ -116,14 +116,15 @@
           self.$emit('ready', self.player)
 
           // events
-          ['loadeddata', 
+          var events = ['loadeddata', 
            'canplay', 
            'canplaythrough', 
            'play', 
            'pause', 
            'waiting', 
            'playing', 
-           'ended'].forEach(function(event) {
+           'ended']
+           events.forEach(function(event) {
             _this.on(event, function() {
               emitPlayerState(event, true)
             })
