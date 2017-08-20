@@ -116,18 +116,21 @@
           self.$emit('ready', self.player)
 
           // events
-          ['loadeddata', 
-           'canplay', 
-           'canplaythrough', 
-           'play', 
-           'pause', 
-           'waiting', 
-           'playing', 
-           'ended'].forEach(function(event) {
-            _this.on(event, function() {
-              emitPlayerState(event, true)
-            })
-          })
+          var events = ['loadeddata', 
+                        'canplay', 
+                        'canplaythrough', 
+                        'play', 
+                        'pause', 
+                        'waiting', 
+                        'playing', 
+                        'ended']
+            for (var i = 0; i < events.length; i++) {
+              (function(event) {
+                _this.on(event, function() {
+                  emitPlayerState(event, true)
+                })
+              })(events[i])
+            }
 
           this.on('timeupdate', function() {
             emitPlayerState('timeupdate', this.currentTime())
