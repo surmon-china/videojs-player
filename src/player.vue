@@ -123,7 +123,8 @@
                         'pause', 
                         'waiting', 
                         'playing', 
-                        'ended']
+                        'ended',
+                        'error']
           for (var i = 0; i < events.length; i++) {
             (function(event) {
               _this.on(event, function() {
