@@ -104,7 +104,8 @@ var videoPlayer = {
                           'pause', 
                           'waiting', 
                           'playing', 
-                          'ended']
+                          'ended',
+                          'error']
             for (var i = 0; i < events.length; i++) {
               (function(event) {
                 self.on(event, function() {
