@@ -126,7 +126,9 @@ var videoPlayer = {
         var instanceName = customInstanceName || 'player'
         var player = _this[instanceName]
         if (player && videojs) {
-          player.pause && player.pause()
+          if (player.techName_ !== 'Flash') {
+            player.pause && player.pause()
+          }
           videojs(el.children[0]).dispose()
           if (!el.children.length) {
             var video = document.createElement('video')
