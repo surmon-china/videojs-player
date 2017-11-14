@@ -140,7 +140,7 @@
       },
       dispose: function() {
         if (this.player && videojs) {
-          if(!(this.player.techName_ === 'Flash')) {
+          if(this.player.techName_ !== 'Flash') {
             this.player.pause && this.player.pause()
           }
           videojs(this.$el.children[0]).dispose()
