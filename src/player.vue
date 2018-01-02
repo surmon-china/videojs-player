@@ -87,6 +87,7 @@
         if (playsinline) {
           this.$el.children[0].setAttribute('playsinline', playsinline)
           this.$el.children[0].setAttribute('webkit-playsinline', playsinline)
+          this.$el.children[0].setAttribute('x5-playsinline', playsinline)
         }
 
         // emit event
