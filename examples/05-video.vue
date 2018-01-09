@@ -2,7 +2,7 @@
   <md-card>
     <md-card-actions>
       <div class="md-subhead">
-        <span>rtmp / 直播</span>
+        <span>rtmp flash / 流媒体</span>
       </div>
       <md-button class="md-icon-button"
                  target="_blank"
@@ -22,7 +22,7 @@
 </template>
 
 <script>
-  require('videojs-flash')
+  import 'videojs-flash'
   export default {
     data() {
       return {
@@ -33,7 +33,8 @@
           }],
           techOrder: ['flash'],
           autoplay: true,
-          controls: true
+          controls: true,
+          poster: "https://surmon-china.github.io/vue-quill-editor/static/images/surmon-9.jpg"
         }
       }
     }

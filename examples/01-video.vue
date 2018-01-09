@@ -36,6 +36,9 @@
 </template>
 
 <script>
+  // custom skin css
+  import '../src/custom-theme.css'
+  
   export default {
     data() {
       return {
@@ -48,14 +51,14 @@
             type: "video/mp4",
             src: "https://cdn.theguardian.tv/webM/2015/07/20/150716YesMen_synd_768k_vp8.webm"
           }],
-          poster: "/static/images/author.jpg",
+          poster: "https://surmon-china.github.io/vue-quill-editor/static/images/surmon-1.jpg",
         }
       }
     },
     mounted() {
       // console.log('this is current player instance object', this.player)
       setTimeout(() => {
-        // console.log('dynamic change options', this.player)
+        console.log('dynamic change options', this.player)
         this.player.muted(false)
       }, 2000)
     },

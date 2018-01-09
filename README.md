@@ -1,6 +1,9 @@
+[![GitHub stars](https://img.shields.io/github/stars/surmon-china/vue-video-player.svg?style=flat-square)](https://github.com/surmon-china/vue-video-player/stargazers)
+[![Build Status](https://travis-ci.org/surmon-china/vue-video-player.svg?branch=master)](https://travis-ci.org/surmon-china/vue-video-player)
 [![GitHub issues](https://img.shields.io/github/issues/surmon-china/vue-video-player.svg?style=flat-square)](https://github.com/surmon-china/vue-video-player/issues)
 [![GitHub forks](https://img.shields.io/github/forks/surmon-china/vue-video-player.svg?style=flat-square)](https://github.com/surmon-china/vue-video-player/network)
-[![GitHub stars](https://img.shields.io/github/stars/surmon-china/vue-video-player.svg?style=flat-square)](https://github.com/surmon-china/vue-video-player/stargazers)
+[![GitHub last commit](https://img.shields.io/github/last-commit/google/skia.svg?style=flat-square)](https://github.com/surmon-china/vue-video-player)
+[![license](https://img.shields.io/github/license/mashape/apistatus.svg?style=flat-square)](https://github.com/surmon-china/vue-video-player)
 [![Twitter](https://img.shields.io/twitter/url/https/github.com/surmon-china/vue-video-player.svg?style=flat-square)](https://twitter.com/intent/tweet?url=https://github.com/surmon-china/vue-video-player)
 
 [![NPM](https://nodei.co/npm/vue-video-player.png?downloads=true&downloadRank=true&stars=true)](https://nodei.co/npm/vue-video-player/)
@@ -8,14 +11,17 @@
 
 
 # Vue-Video-Player
-[Video.js](https://github.com/videojs/video.js) player component for Vue.
 
+[video.js](https://github.com/videojs/video.js) player component for Vue.
 
-# Update
-Updated to video.js 6+.
+适用于 Vue 的 [video.js](https://github.com/videojs/video.js) 播放器组件。
+
 
 # Example
+
 [Demo Page](https://surmon-china.github.io/vue-video-player)
+
+[CDN Example](https://surmon-china.github.io/vue-video-player)
 
 
 # Use Setup
@@ -37,12 +43,6 @@ require('vue-video-player/src/custom-theme.css')
 // import
 import Vue from 'vue'
 import VueVideoPlayer from 'vue-video-player'
-
-
-// or require
-var Vue = require('vue')
-var VueVideoPlayer = require('vue-video-player')
-
 
 // mount with global
 Vue.use(VueVideoPlayer)
@@ -227,4 +227,250 @@ Licensed under either of
 at your option.
 
 # Author Blog
+[Surmon](https://surmon.me)
+
+
+
+
+
+
+
+
+
+
+
+# Example
+
+[Demo Page](https://surmon-china.github.io/vue-video-player)
+
+[CDN Example](https://jsfiddle.net/kqaew65x/)
+
+[mobile fullpage example code](https://github.com/surmon-china/vue-video-player/blob/master/examples/44-mobile-fullpage-example.vue)
+
+[nuxt.js/ssr example code](https://github.com/surmon-china/vue-video-player/blob/master/examples/nuxt-ssr-example)
+
+
+# Install
+
+#### CDN
+
+``` html
+<link rel="stylesheet" href="path/to/video.js/dist/video-js.css"/>
+<script type="text/javascript" src="path/to/video-js.js"></script>
+<script type="text/javascript" src="path/to/vue.min.js"></script>
+<script type="text/javascript" src="path/to/dist/vue-video-player.js"></script>
+<script type="text/javascript">
+  Vue.use(window.VueVideoPlayer)
+</script>
+```
+
+#### NPM
+
+``` bash
+npm install vue-video-player --save
+```
+
+### Mount
+
+#### mount with global
+
+``` javascript
+import Vue from 'vue'
+import VueVideoPlayer from 'vue-video-player'
+
+// require styles
+import 'video.js/dist/video-js.css'
+
+Vue.use(VueVideoPlayer, /* { default global options } */)
+```
+
+#### mount with component
+
+```javascript
+// require styles
+import 'video.js/dist/video-js.css'
+
+import { swiper, swiperSlide } from 'vue-video-player'
+
+export default {
+  components: {
+    swiper,
+    swiperSlide
+  }
+}
+```
+
+#### mount with ssr
+
+```javascript
+// If used in nuxt.js/ssr, you should keep it only in browser build environment
+if (process.browser) {
+  const VueVideoPlayer = require('vue-video-player/dist/ssr')
+  Vue.use(VueVideoPlayer)
+}
+```
+
+#### custom swiper plugin
+
+```javascript
+import Swiper from 'swiper'
+Swiper.use({
+  name: 'pluginName',
+  params: {
+    pluginSwitch: false,
+  },
+  on: {
+    init() {
+      if (!this.params.pluginSwitch) return
+      console.log('init')
+    },
+    // swiper callback...
+  }
+})
+```
+
+
+### Difference（使用方法的异同）
+
+**SSR and the only difference in the use of the SPA:**
+- SPA worked by the `component`, find swiper instance by `ref attribute`.
+- SSR worked by the `directive`, find swiper instance by `directive arg`.
+- Other configurations, events are the same.
+
+
+### SSR
+
+```vue
+<!-- You can custom the "mySwiper" name used to find the swiper instance in current component -->
+<template>
+  <div v-swiper:mySwiper="swiperOption">
+    <div class="swiper-wrapper">
+      <div class="swiper-slide" v-for="banner in banners">
+        <img :src="banner">
+      </div>
+    </div>
+    <div class="swiper-pagination"></div>
+  </div>
+</template>
+
+<script>
+  export default {
+    data () {
+      return {
+        banners: [ '/1.jpg', '/2.jpg', '/3.jpg' ],
+        swiperOption: {
+          pagination: {
+            el: '.swiper-pagination'
+          },
+          // some swiper options...
+        }
+      }
+    },
+    mounted() {
+      setTimeout(() => {
+        this.banners.push('/4.jpg')
+        console.log('banners update')
+      }, 3000)
+      console.log(
+        'This is current swiper instance object', this.mySwiper, 
+        'It will slideTo banners 3')
+      this.mySwiper.slideTo(3, 1000, false)
+    }
+  }
+</script>
+```
+
+
+### SPA
+
+```vue
+<!-- The ref attr used to find the swiper instance -->
+<template>
+  <swiper :options="swiperOption" ref="mySwiper">
+    <!-- slides -->
+    <swiper-slide>I'm Slide 1</swiper-slide>
+    <swiper-slide>I'm Slide 2</swiper-slide>
+    <swiper-slide>I'm Slide 3</swiper-slide>
+    <swiper-slide>I'm Slide 4</swiper-slide>
+    <swiper-slide>I'm Slide 5</swiper-slide>
+    <swiper-slide>I'm Slide 6</swiper-slide>
+    <swiper-slide>I'm Slide 7</swiper-slide>
+    <!-- Optional controls -->
+    <div class="swiper-pagination"  slot="pagination"></div>
+    <div class="swiper-button-prev" slot="button-prev"></div>
+    <div class="swiper-button-next" slot="button-next"></div>
+    <div class="swiper-scrollbar"   slot="scrollbar"></div>
+  </swiper>
+</template>
+
+<script>
+  export default {
+    name: 'carrousel',
+    data() {
+      return {
+        swiperOption: {
+          // some swiper options/callbacks
+          // 所有的参数同 swiper 官方 api 参数
+          // ...
+        }
+      }
+    },
+    computed: {
+      swiper() {
+        return this.$refs.mySwiper.swiper
+      }
+    },
+    mounted() {
+      // current swiper instance
+      // 然后你就可以使用当前上下文内的swiper对象去做你想做的事了
+      console.log('this is current swiper instance object', this.swiper)
+      this.swiper.slideTo(3, 1000, false)
+    }
+  }
+</script>
+```
+
+### Async data example
+
+```vue
+<template>
+  <swiper :options="swiperOption">
+    <swiper-slide v-for="slide in swiperSlides">I'm Slide {{ slide }}</swiper-slide>
+    <div class="swiper-pagination" slot="pagination"></div>
+  </swiper>
+</template>
+
+<script>
+  export default {
+    name: 'carrousel',
+    data() {
+      return {
+        swiperOption: {
+          pagination: {
+            el: '.swiper-pagination'
+          }
+        },
+        swiperSlides: [1, 2, 3, 4, 5]
+      }
+    },
+    mounted() {
+      setInterval(() => {
+        console.log('simulate async data')
+        if (this.swiperSlides.length < 10) {
+          this.swiperSlides.push(this.swiperSlides.length + 1)
+        }
+      }, 3000)
+    }
+  }
+</script>
+```
+
+
+# API
+Swiper's API and configuration can be used.（Swiper官网中的API及配置均可使用）
+- [CN Swiper4 documents](http://www.swiper.com.cn/api/index2.html)
+- [EN Swiper4 documents](http://idangero.us/swiper/api/)
+
+
+# Author
 [Surmon](https://surmon.me)
