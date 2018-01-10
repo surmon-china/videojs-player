@@ -228,6 +228,10 @@ videojs.addLanguage('es', {
 ```
 
 
+# Issues
+
+[videojs-contrib-hls - e is not defined](https://github.com/surmon-china/vue-video-player/issues/90)
+
 
 # API
 - component api:
