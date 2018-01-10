@@ -21,6 +21,8 @@
 
 [Demo Page](https://surmon-china.github.io/vue-video-player)
 
+[CDN Example](https://jsfiddle.net/u69gnx90/)
+
 [nuxt.js/ssr example code](https://github.com/surmon-china/vue-video-player/blob/master/examples/nuxt-ssr-example)
 
 [More Example Code](https://github.com/surmon-china/vue-video-player/tree/master/examples)
@@ -32,7 +34,7 @@
 
 ``` html
 <link rel="stylesheet" href="path/to/video.js/dist/video-js.css"/>
-<script type="text/javascript" src="path/to/video-js.js"></script>
+<script type="text/javascript" src="path/to/video.min.js"></script>
 <script type="text/javascript" src="path/to/vue.min.js"></script>
 <script type="text/javascript" src="path/to/dist/vue-video-player.js"></script>
 <script type="text/javascript">
@@ -229,10 +231,10 @@ videojs.addLanguage('es', {
 
 # API
 - component api:
-  * `events`(array, default: []): custom videojs event to component
-  * `playsinline`(boolean, default: false): set player not full-screen in mobile device
-  * `crossOrigin`(string, default: ''): set crossOrigin to video
-  * `customEventName`(string, default: 'statechanged'): custom the state change event name
+  * `events`: `[array, default: [] ]`: custom videojs event to component
+  * `playsinline`: `[boolean, default: false ]`: set player not full-screen in mobile device
+  * `crossOrigin`: `[string, default: '' ]`: set crossOrigin to video
+  * `customEventName`: `[string, default: 'statechanged' ]`: custom the state change event name
 
 - video.js api
   * [video.js options](http://docs.videojs.com/tutorial-options.html)
