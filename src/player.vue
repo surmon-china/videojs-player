@@ -34,6 +34,19 @@
     })
   }
 
+  // as of videojs 6.6.0
+  const DEFAULT_EVENTS = [
+    'loadeddata',
+    'canplay',
+    'canplaythrough',
+    'play',
+    'pause',
+    'waiting',
+    'playing',
+    'ended',
+    'error'
+  ]
+
   // export
   export default {
     name: 'video-player',
@@ -66,7 +79,7 @@
         type: Object,
         default: () => ({
           // autoplay: false,
-          // controls: true,
+          controls: true,
           // preload: 'auto',
           // fluid: false,
           // muted: false,
@@ -122,8 +135,8 @@
 
         // cross origin
         if (this.crossOrigin !== '') {
-          this.$el.children[0].crossOrigin = this.crossOrigin
-          this.$el.children[0].setAttribute('crossOrigin', this.crossOrigin)
+          this.$refs.video.crossOrigin = this.crossOrigin
+          this.$refs.video.setAttribute('crossOrigin', this.crossOrigin)
         }
 
         // emit event
@@ -149,16 +162,7 @@
         this.player = videojs(this.$refs.video, videoOptions, function() {
 
           // events
-          const events = [
-            'loadeddata',
-            'canplay', 
-            'canplaythrough', 
-            'play', 
-            'pause', 
-            'waiting', 
-            'playing', 
-            'ended',
-            'error'].concat(this.events).concat(this.globalEvents)
+          const events = DEFAULT_EVENTS.concat(this.events).concat(this.globalEvents)
 
           // watch events
           const onEdEvents = {}
@@ -183,7 +187,7 @@
         })
       },
       dispose() {
-        if (this.player && videojs) {
+        if (this.player && this.player.dispose) {
           if (this.player.techName_ !== 'Flash') {
             this.player.pause && this.player.pause()
           }

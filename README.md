@@ -116,8 +116,8 @@ videojs.addLanguage('es', {
 ### Difference（使用方法的异同）
 
 **SSR and the only difference in the use of the SPA:**
-- SPA worked by the `component`, find swiper instance by `ref attribute`.
-- SSR worked by the `directive`, find swiper instance by `directive arg`.
+- SPA worked by the `component`, find videojs instance by `ref attribute`.
+- SSR worked by the `directive`, find videojs instance by `directive arg`.
 - Other configurations, events are the same.
 
 
@@ -229,8 +229,10 @@ videojs.addLanguage('es', {
 
 # API
 - component api:
-  * playsinline(boolean, default: false): set player not full-screen in mobile device
-  * customEventName(string, default: 'statechanged'): custom the state change event name
+  * `events`(array, default: []): custom videojs event to component
+  * `playsinline`(boolean, default: false): set player not full-screen in mobile device
+  * `crossOrigin`(string, default: ''): set crossOrigin to video
+  * `customEventName`(string, default: 'statechanged'): custom the state change event name
 
 - video.js api
   * [video.js options](http://docs.videojs.com/tutorial-options.html)

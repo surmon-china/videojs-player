@@ -110,11 +110,8 @@
       // player is ready
       playerReadied(player) {
         // seek to 10s
-        console.log('example player 1 readied', player);
+        console.log('example player 1 readied', player)
         player.currentTime(10)
-        setTimeout(() => {
-          this.$refs.videoPlayer.dispose();
-        }, 5000)
         // console.log('example 01: the player is readied', player)
       }
     }
