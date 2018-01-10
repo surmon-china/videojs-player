@@ -121,7 +121,7 @@ videojs.addLanguage('es', {
 - Other configurations, events are the same.
 
 
-### Use in SPA
+### SPA
 
 ``` vue
 <template>
