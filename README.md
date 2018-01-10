@@ -231,10 +231,10 @@ videojs.addLanguage('es', {
 
 # API
 - component api:
-  * `events`: `[array, default: [] ]`: custom videojs event to component
-  * `playsinline`: `[boolean, default: false ]`: set player not full-screen in mobile device
-  * `crossOrigin`: `[string, default: '' ]`: set crossOrigin to video
-  * `customEventName`: `[string, default: 'statechanged' ]`: custom the state change event name
+  * `events` : `[ Array, default: [] ]` : custom videojs event to component
+  * `playsinline` : `[ Boolean, default: false ]` : set player not full-screen in mobile device
+  * `crossOrigin` : `[ String, default: '' ]` : set crossOrigin to video
+  * `customEventName` : `[ String, default: 'statechanged' ]` : custom the state change event name
 
 - video.js api
   * [video.js options](http://docs.videojs.com/tutorial-options.html)
