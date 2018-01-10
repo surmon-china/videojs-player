@@ -44,12 +44,17 @@
       return {
         // videojs options
         playerOptions: {
+          height: '360',
+          autoplay: true,
           muted: true,
           language: 'en',
           playbackRates: [0.7, 1.0, 1.5, 2.0],
           sources: [{
             type: "video/mp4",
-            src: "https://cdn.theguardian.tv/webM/2015/07/20/150716YesMen_synd_768k_vp8.webm"
+            // mp4
+            src: "http://vjs.zencdn.net/v/oceans.mp4",
+            // webm
+            // src: "https://cdn.theguardian.tv/webM/2015/07/20/150716YesMen_synd_768k_vp8.webm"
           }],
           poster: "https://surmon-china.github.io/vue-quill-editor/static/images/surmon-1.jpg",
         }
@@ -105,7 +110,11 @@
       // player is ready
       playerReadied(player) {
         // seek to 10s
+        console.log('example player 1 readied', player);
         player.currentTime(10)
+        setTimeout(() => {
+          this.$refs.videoPlayer.dispose();
+        }, 5000)
         // console.log('example 01: the player is readied', player)
       }
     }

@@ -39,10 +39,15 @@
     data() {
       return {
         playerOptions: {
+          height: '360',
           autoplay: false,
           sources: [{
-            type: "video/mp4",
-            src: "http://vjs.zencdn.net/v/oceans.mp4"
+            // mp4
+            // type: 'video/mp4',
+            // src: 'http://vjs.zencdn.net/v/oceans.mp4',
+            // flv
+            type: 'video/x-flv',
+            src: 'http://fms.cntv.lxdns.com/live/flv/channel96.flv'
           }],
           language: 'zh-CN',
           techOrder: ['flash'],

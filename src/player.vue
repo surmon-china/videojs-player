@@ -1,6 +1,6 @@
 <template>
-  <div class="video-player">
-    <video class="video-js"></video>
+  <div class="video-player" v-if="reseted">
+    <video class="video-js" ref="video"></video>
   </div>
 </template>
 
@@ -65,14 +65,11 @@
       globalOptions: {
         type: Object,
         default: () => ({
-          autoplay: false,
-          controls: true,
-          preload: 'auto',
-          fluid: false,
-          muted: false,
-          width: '100%',
-          height: '360',
-          language: 'en',
+          // autoplay: false,
+          // controls: true,
+          // preload: 'auto',
+          // fluid: false,
+          // muted: false,
           controlBar: {
             remainingTimeDisplay: false,
             playToggle: {},
@@ -84,7 +81,7 @@
             }
           },
           techOrder: ['html5'],
-          plugins:{}
+          plugins: {}
         })
       },
       globalEvents: {
@@ -94,7 +91,8 @@
     },
     data() {
       return {
-        player: null
+        player: null,
+        reseted: true
       }
     },
     mounted() {
@@ -115,11 +113,14 @@
 
         // ios fullscreen
         if (this.playsinline) {
-          this.$el.children[0].setAttribute('playsinline', this.playsinline)
-          this.$el.children[0].setAttribute('webkit-playsinline', this.playsinline)
+          this.$refs.video.setAttribute('playsinline', this.playsinline)
+          this.$refs.video.setAttribute('webkit-playsinline', this.playsinline)
+          this.$refs.video.setAttribute('x5-playsinline', this.playsinline)
+          this.$refs.video.setAttribute('x5-video-player-type', 'h5')
+          this.$refs.video.setAttribute('x5-video-player-fullscreen', false)
         }
 
-        // ios fullscreen
+        // cross origin
         if (this.crossOrigin !== '') {
           this.$el.children[0].crossOrigin = this.crossOrigin
           this.$el.children[0].setAttribute('crossOrigin', this.crossOrigin)
@@ -141,11 +142,11 @@
         }
 
         // videoOptions
-        console.log('videoOptions', videoOptions)
+        // console.log('videoOptions', videoOptions)
         
         // player
         const self = this
-        this.player = videojs(this.$el.children[0], videoOptions, function() {
+        this.player = videojs(this.$refs.video, videoOptions, function() {
 
           // events
           const events = [
@@ -186,13 +187,21 @@
           if (this.player.techName_ !== 'Flash') {
             this.player.pause && this.player.pause()
           }
-          videojs(this.$el.children[0]).dispose()
+          this.player.dispose()
+          this.player = null
+          this.$nextTick(() => {
+            this.reseted = false
+            this.$nextTick(() => {
+              this.reseted = true
+            })
+          })
+          /*
           if (!this.$el.children.length) {
             const video = document.createElement('video')
             video.className = 'video-js'
             this.$el.appendChild(video)
           }
-          this.player = null
+          */
         }
       }
     },
