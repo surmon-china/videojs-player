@@ -1,6 +1,10 @@
 
 ## CHANGELOG
 
+### v5.0.1
+
+support dynamic change options
+
 ### v5.0.0
 
 #### use

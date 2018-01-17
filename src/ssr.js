@@ -74,7 +74,7 @@ const videoPlayerDirective = globalOptions => {
     }
 
     // cross origin
-    if (!!attrs.crossOrigin) {
+    if (attrs.crossOrigin) {
       el.children[0].crossOrigin = attrs.crossOrigin
       el.children[0].setAttribute('crossOrigin', attrs.crossOrigin)
     }

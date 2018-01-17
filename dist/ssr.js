@@ -63,7 +63,7 @@ var videoPlayerDirective = function videoPlayerDirective(globalOptions) {
       el.children[0].setAttribute('x5-video-player-fullscreen', false);
     }
 
-    if (!!attrs.crossOrigin) {
+    if (attrs.crossOrigin) {
       el.children[0].crossOrigin = attrs.crossOrigin;
       el.children[0].setAttribute('crossOrigin', attrs.crossOrigin);
     }

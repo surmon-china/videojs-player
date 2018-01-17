@@ -64,8 +64,23 @@
       // console.log('this is current player instance object', this.player)
       setTimeout(() => {
         console.log('dynamic change options', this.player)
+
+        // change src
+        // this.playerOptions.sources[0].src = 'https://cdn.theguardian.tv/webM/2015/07/20/150716YesMen_synd_768k_vp8.webm';
+
+        // change item
+        // this.$set(this.playerOptions.sources, 0, {
+        //   type: "video/mp4",
+        //   src: 'https://cdn.theguardian.tv/webM/2015/07/20/150716YesMen_synd_768k_vp8.webm',
+        // })
+
+        // change array
+        // this.playerOptions.sources = [{
+        //   type: "video/mp4",
+        //   src: 'https://cdn.theguardian.tv/webM/2015/07/20/150716YesMen_synd_768k_vp8.webm',
+        // }]
         this.player.muted(false)
-      }, 2000)
+      }, 5000)
     },
     computed: {
       player() {

@@ -186,7 +186,7 @@
           self.$emit('ready', this)
         })
       },
-      dispose() {
+      dispose(callback) {
         if (this.player && this.player.dispose) {
           if (this.player.techName_ !== 'Flash') {
             this.player.pause && this.player.pause()
@@ -197,6 +197,9 @@
             this.reseted = false
             this.$nextTick(() => {
               this.reseted = true
+              this.$nextTick(() => {
+                callback && callback();
+              })
             })
           })
           /*
@@ -213,10 +216,11 @@
       options: {
         deep: true,
         handler(options, oldOptions) {
-          this.dispose()
-          if (options && options.sources && options.sources.length) {
-            this.initialize()
-          }
+          this.dispose(() => {
+            if (options && options.sources && options.sources.length) {
+              this.initialize()
+            }
+          })
         }
       }
     }
