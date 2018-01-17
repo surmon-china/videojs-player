@@ -198,7 +198,7 @@
             this.$nextTick(() => {
               this.reseted = true
               this.$nextTick(() => {
-                callback && callback();
+                callback && callback()
               })
             })
           })
