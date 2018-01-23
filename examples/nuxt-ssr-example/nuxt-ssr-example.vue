@@ -1,6 +1,7 @@
 <template>
   <section class="container">
-    <div class="video-player-box" 
+    <div class="video-player-box"
+         :playsinline="playsinline"
          @play="onPlayerPlay($event)"
          @pause="onPlayerPause($event)"
          @ended="onPlayerEnded($event)"
@@ -21,12 +22,11 @@
   export default {
     data () {
       return {
+        // component options
+        playsinline: true,
+        
+        // videojs options
         playerOptions: {
-          // component options
-          start: 0,
-          playsinline: false,
-
-          // videojs options
           muted: true,
           language: 'en',
           playbackRates: [0.7, 1.0, 1.5, 2.0],

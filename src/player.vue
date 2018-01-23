@@ -1,65 +1,88 @@
 <template>
-  <div class="video-player">
-    <video class="video-js"></video>
+  <div class="video-player" v-if="reseted">
+    <video class="video-js" ref="video"></video>
   </div>
 </template>
 
 <script>
-  window.videojs = require('video.js')
-  videojs = videojs.default || videojs
+  // lib
+  import _videojs from 'video.js'
+  const videojs = window.videojs || _videojs
+
+  // pollfill
+  if (typeof Object.assign != 'function') {
+    Object.defineProperty(Object, 'assign', {
+      value(target, varArgs) {
+        if (target == null) {
+          throw new TypeError('Cannot convert undefined or null to object')
+        }
+        const to = Object(target)
+        for (let index = 1; index < arguments.length; index++) {
+          const nextSource = arguments[index]
+          if (nextSource != null) {
+            for (const nextKey in nextSource) {
+              if (Object.prototype.hasOwnProperty.call(nextSource, nextKey)) {
+                to[nextKey] = nextSource[nextKey]
+              }
+            }
+          }
+        }
+        return to
+      },
+      writable: true,
+      configurable: true
+    })
+  }
+
+  // as of videojs 6.6.0
+  const DEFAULT_EVENTS = [
+    'loadeddata',
+    'canplay',
+    'canplaythrough',
+    'play',
+    'pause',
+    'waiting',
+    'playing',
+    'ended',
+    'error'
+  ]
+
+  // export
   export default {
     name: 'video-player',
     props: {
+      start: {
+        type: Number,
+        default: 0
+      },
+      crossOrigin: {
+        type: String,
+        default: ''
+      },
+      playsinline: {
+        type: Boolean,
+        default: false
+      },
+      customEventName: {
+        type: String,
+        default: 'statechanged'
+      },
       options: {
         type: Object,
         required: true
       },
-      start: {
-        type: Number,
-        default: function() {
-          return 0
-        }
+      events: {
+        type: Array,
+        default: () => []
       },
-      playsinline: {
-        type: Boolean,
-        default: function() {
-          return false
-        }
-      },
-      customEventName: {
-        type: String,
-        default: function() {
-          return 'statechanged'
-        }
-      }
-    },
-    mounted: function() {
-      if (!this.player) { 
-        this.initialize()
-      }
-    },
-    beforeDestroy: function() {
-      if (this.player) { 
-        this.dispose()
-      }
-    },
-    methods: {
-      initialize: function() {
-
-        // init
-        var self = this
-        this.player = null
-
-        // videojs options
-        var videoOptions = Object.assign({
-          autoplay: false,
+      globalOptions: {
+        type: Object,
+        default: () => ({
+          // autoplay: false,
           controls: true,
-          preload: 'auto',
-          fluid: false,
-          muted: false,
-          width: '100%',
-          height: '360',
-          language: 'en',
+          // preload: 'auto',
+          // fluid: false,
+          // muted: false,
           controlBar: {
             remainingTimeDisplay: false,
             playToggle: {},
@@ -71,97 +94,133 @@
             }
           },
           techOrder: ['html5'],
-          plugins:{}
-        }, this.options)
+          plugins: {}
+        })
+      },
+      globalEvents: {
+        type: Array,
+        default: () => []
+      }
+    },
+    data() {
+      return {
+        player: null,
+        reseted: true
+      }
+    },
+    mounted() {
+      if (!this.player) { 
+        this.initialize()
+      }
+    },
+    beforeDestroy() {
+      if (this.player) { 
+        this.dispose()
+      }
+    },
+    methods: {
+      initialize() {
 
-        // check sources
-        /*
-        if (!videoOptions.sources || !videoOptions.sources.length) {
-          console.warn('Missing required option: "sources".')
-          return false
-        }
-        */
+        // videojs options
+        const videoOptions = Object.assign({}, this.globalOptions, this.options)
 
         // ios fullscreen
-        var playsinline = this.playsinline
-        if (playsinline) {
-          this.$el.children[0].setAttribute('playsinline', playsinline)
-          this.$el.children[0].setAttribute('webkit-playsinline', playsinline)
-          this.$el.children[0].setAttribute('x5-playsinline', playsinline)
+        if (this.playsinline) {
+          this.$refs.video.setAttribute('playsinline', this.playsinline)
+          this.$refs.video.setAttribute('webkit-playsinline', this.playsinline)
+          this.$refs.video.setAttribute('x5-playsinline', this.playsinline)
+          this.$refs.video.setAttribute('x5-video-player-type', 'h5')
+          this.$refs.video.setAttribute('x5-video-player-fullscreen', false)
+        }
+
+        // cross origin
+        if (this.crossOrigin !== '') {
+          this.$refs.video.crossOrigin = this.crossOrigin
+          this.$refs.video.setAttribute('crossOrigin', this.crossOrigin)
         }
 
         // emit event
-        var emitPlayerState = function(event, value) {
+        const emitPlayerState = (event, value) => {
           if (event) {
-            self.$emit(event, self.player)
+            this.$emit(event, this.player)
           }
           if (value) {
-            var values = {}
-            values[event] = value
-            self.$emit(self.customEventName, values)
+            this.$emit(this.customEventName, { [event]: value })
           }
         }
-
-        // videoOptions
-        // console.log(videoOptions)
 
         // avoid error "VIDEOJS: ERROR: Unable to find plugin: __ob__"
         if (videoOptions.plugins) {
           delete videoOptions.plugins.__ob__
         }
-        
-        this.player = videojs(this.$el.children[0], videoOptions, function() {
 
-          // player readied
-          var _this = this
-          self.$emit('ready', self.player)
+        // videoOptions
+        // console.log('videoOptions', videoOptions)
+        
+        // player
+        const self = this
+        this.player = videojs(this.$refs.video, videoOptions, function() {
 
           // events
-          var events = ['loadeddata',
-                        'canplay', 
-                        'canplaythrough', 
-                        'play', 
-                        'pause', 
-                        'waiting', 
-                        'playing', 
-                        'ended',
-                        'error']
-          for (var i = 0; i < events.length; i++) {
-            (function(event) {
-              _this.on(event, function() {
-                emitPlayerState(event, true)
-              })
-            })(events[i])
+          const events = DEFAULT_EVENTS.concat(this.events).concat(this.globalEvents)
+
+          // watch events
+          const onEdEvents = {}
+          for (let i = 0; i < events.length; i++) {
+            if (typeof events[i] === 'string' && onEdEvents[events[i]] === undefined) {
+              (event => {
+                onEdEvents[event] = null
+                this.on(event, () => {
+                  emitPlayerState(event, true)
+                })
+              })(events[i])
+            }
           }
 
+          // watch timeupdate
           this.on('timeupdate', function() {
             emitPlayerState('timeupdate', this.currentTime())
           })
+
+          // player readied
+          self.$emit('ready', this)
         })
       },
-      dispose: function() {
-        if (this.player && videojs) {
+      dispose(callback) {
+        if (this.player && this.player.dispose) {
           if (this.player.techName_ !== 'Flash') {
             this.player.pause && this.player.pause()
           }
-          videojs(this.$el.children[0]).dispose()
+          this.player.dispose()
+          this.player = null
+          this.$nextTick(() => {
+            this.reseted = false
+            this.$nextTick(() => {
+              this.reseted = true
+              this.$nextTick(() => {
+                callback && callback()
+              })
+            })
+          })
+          /*
           if (!this.$el.children.length) {
-            var video = document.createElement('video')
+            const video = document.createElement('video')
             video.className = 'video-js'
             this.$el.appendChild(video)
           }
-          this.player = null
+          */
         }
       }
     },
     watch: {
       options: {
         deep: true,
-        handler: function (options, oldOptions) {
-          this.dispose()
-          if (options && options.sources && options.sources.length) {
-            this.initialize()
-          }
+        handler(options, oldOptions) {
+          this.dispose(() => {
+            if (options && options.sources && options.sources.length) {
+              this.initialize()
+            }
+          })
         }
       }
     }

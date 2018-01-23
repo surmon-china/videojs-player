@@ -24,13 +24,23 @@
 </template>
 
 <script>
-  // hls plugin
-  require('videojs-contrib-hls/dist/videojs-contrib-hls')
+  // custom skin css
+  import '../src/custom-theme.css'
+
+  // videojs
+  import videojs from 'video.js'
+  window.videojs = videojs
+
+  // hls plugin for videojs6
+  require('videojs-contrib-hls/dist/videojs-contrib-hls.js')
+
+  // export
   export default {
     data() {
       return {
         playerOptions: {
           // videojs and plugin options
+          height: '360',
           sources: [{
             withCredentials: false,
             type: "application/x-mpegURL",
@@ -42,7 +52,7 @@
           },
           flash: { hls: { withCredentials: false }},
           html5: { hls: { withCredentials: false }},
-          poster: "/static/images/author-5.jpg"
+          poster: "https://surmon-china.github.io/vue-quill-editor/static/images/surmon-5.jpg"
         }
       }
     },

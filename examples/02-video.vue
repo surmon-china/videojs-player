@@ -27,21 +27,31 @@
 </template>
 
 <script>
+  // custom skin css
+  import '../src/custom-theme.css'
+
   // videojs hotkeys plugin
-  require('videojs-flash')
-  require('videojs-hotkeys')
+  import 'videojs-flash'
+  import 'videojs-hotkeys'
+
+  // export
   export default {
     data() {
       return {
         playerOptions: {
+          height: '360',
           autoplay: false,
           sources: [{
-            type: "video/mp4",
-            src: "http://vjs.zencdn.net/v/oceans.mp4"
+            // mp4
+            // type: 'video/mp4',
+            // src: 'http://vjs.zencdn.net/v/oceans.mp4',
+            // flv
+            type: 'video/x-flv',
+            src: 'http://fms.cntv.lxdns.com/live/flv/channel96.flv'
           }],
           language: 'zh-CN',
           techOrder: ['flash'],
-          poster: "/vue-video-player/static/images/author-2.jpg"
+          poster: "https://surmon-china.github.io/vue-quill-editor/static/images/surmon-6.jpg"
         }
       }
     },
@@ -52,7 +62,7 @@
     },
     methods: {
       playerStateChanged(playerCurrentState) {
-        // console.log('example 2: state changed', playerCurrentState)
+        console.log('example 2: state changed', playerCurrentState)
       },
       playerIsReady(player) {
         console.log('example 2 ready!', player)

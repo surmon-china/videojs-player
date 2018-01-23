@@ -1,6 +1,9 @@
+[![GitHub stars](https://img.shields.io/github/stars/surmon-china/vue-video-player.svg?style=flat-square)](https://github.com/surmon-china/vue-video-player/stargazers)
+[![Build Status](https://travis-ci.org/surmon-china/vue-video-player.svg?branch=master)](https://travis-ci.org/surmon-china/vue-video-player)
 [![GitHub issues](https://img.shields.io/github/issues/surmon-china/vue-video-player.svg?style=flat-square)](https://github.com/surmon-china/vue-video-player/issues)
 [![GitHub forks](https://img.shields.io/github/forks/surmon-china/vue-video-player.svg?style=flat-square)](https://github.com/surmon-china/vue-video-player/network)
-[![GitHub stars](https://img.shields.io/github/stars/surmon-china/vue-video-player.svg?style=flat-square)](https://github.com/surmon-china/vue-video-player/stargazers)
+[![GitHub last commit](https://img.shields.io/github/last-commit/google/skia.svg?style=flat-square)](https://github.com/surmon-china/vue-video-player)
+[![license](https://img.shields.io/github/license/mashape/apistatus.svg?style=flat-square)](https://github.com/surmon-china/vue-video-player)
 [![Twitter](https://img.shields.io/twitter/url/https/github.com/surmon-china/vue-video-player.svg?style=flat-square)](https://twitter.com/intent/tweet?url=https://github.com/surmon-china/vue-video-player)
 
 [![NPM](https://nodei.co/npm/vue-video-player.png?downloads=true&downloadRank=true&stars=true)](https://nodei.co/npm/vue-video-player/)
@@ -8,65 +11,67 @@
 
 
 # Vue-Video-Player
-[Video.js](https://github.com/videojs/video.js) player component for Vue.
 
+[video.js](https://github.com/videojs/video.js) player component for Vue.
 
-# Update
-Updated to video.js 6+.
+适用于 Vue 的 [video.js](https://github.com/videojs/video.js) 播放器组件。
+
 
 # Example
+
 [Demo Page](https://surmon-china.github.io/vue-video-player)
 
+[CDN Example](https://jsfiddle.net/u69gnx90/)
 
-# Use Setup
+[nuxt.js/ssr example code](https://github.com/surmon-china/vue-video-player/blob/master/examples/nuxt-ssr-example)
 
-### Install vue-video-player
+[More Example Code](https://github.com/surmon-china/vue-video-player/tree/master/examples)
+
+
+# Install
+
+#### CDN
+
+``` html
+<link rel="stylesheet" href="path/to/video.js/dist/video-js.css"/>
+<script type="text/javascript" src="path/to/video.min.js"></script>
+<script type="text/javascript" src="path/to/vue.min.js"></script>
+<script type="text/javascript" src="path/to/dist/vue-video-player.js"></script>
+<script type="text/javascript">
+  Vue.use(window.VueVideoPlayer)
+</script>
+```
+
+#### NPM
 
 ``` bash
 npm install vue-video-player --save
 ```
 
-### Vue mount
+### Mount
+
+#### mount with global
 
 ``` javascript
-// require videojs style [and custom videojs theme]
-require('video.js/dist/video-js.css')
-require('vue-video-player/src/custom-theme.css')
-
-
-// import
 import Vue from 'vue'
 import VueVideoPlayer from 'vue-video-player'
 
+// require videojs style
+import 'video.js/dist/video-js.css'
+// import 'vue-video-player/src/custom-theme.css'
 
-// or require
-var Vue = require('vue')
-var VueVideoPlayer = require('vue-video-player')
+Vue.use(VueVideoPlayer, /* {
+  options: global default options,
+  events: global videojs events
+} */)
+```
 
+#### mount with component
 
-// mount with global
-Vue.use(VueVideoPlayer)
+```javascript
+// require styles
+import 'video.js/dist/video-js.css'
 
-
-// If used in Nuxt.js/SSR, you should keep it only in browser build environment
-if (process.browser) {
-  const VueVideoPlayer = require('vue-video-player/ssr')
-  Vue.use(VueVideoPlayer)
-}
-
-// If you need to use more videojs extensions, you can introduce the corresponding videojs plug-in package before the vue program is instantiated, such as:
-const { videojs } = VueVideoPlayer
-videojs.plugin('myPlugin', myPluginFunction)
-videojs.addLanguage('ml', myLanguageObject)
-videojs.registerPlugin('examplePlugin', examplePlugin)
-// videojs.[methods]...
-
-// or require videojs (plugins || langs || ...)
-require('video.js/dist/lang/ba')
-require('videos-some-plugins')
-require('videos...')
-
-// mount with component(can't work in Nuxt.js/SSR)
 import { videoPlayer } from 'vue-video-player'
 
 export default {
@@ -76,41 +81,49 @@ export default {
 }
 ```
 
+#### mount with ssr
 
-### Use the difference（使用方法的区别）
+```javascript
+// If used in nuxt.js/ssr, you should keep it only in browser build environment
+if (process.browser) {
+  const VueVideoPlayer = require('vue-video-player/dist/ssr')
+  Vue.use(VueVideoPlayer)
+}
+```
 
-*SSR and the only difference in the use of the SPA:*
-- SPA worked by  `component`, find videojs instance by `ref attribute`.
-- SSR worked by  `directive`, find videojs instance by `directive arg`.
-- Other configurations, events are the same.
+#### videojs extend
 
-### Use in SSR
+```javascript
+import videojs from 'video.js'
 
-``` vue
-<!-- You can custom the "myVideoPlayer" name used to find the videojs instance in current component -->
-<template>
-  <div class="video-player-box" 
-       @play="onPlayerPlay($event)"
-       @pause="onPlayerPause($event)"
-       @ready="playerReadied"
-       @statechanged="playerStateChanged($event)"
-       v-video-player:myVideoPlayer="playerOptions">
-  </div>
-</template>
+// videojs plugin
+const Plugin = videojs.getPlugin('plugin')
+class ExamplePlugin extends Plugin {
+  // something...
+}
+videojs.registerPlugin('examplePlugin', ExamplePlugin)
 
-<script>
-  export default {
-    mounted() {
-      console.log('this is current videojs instance object', this.myVideoPlayer)
-    }
-    // Omit the same parts as in the following component sample code
-    // ...
-  }
-</script>
+// videojs language
+videojs.addLanguage('es', {
+  Pause: 'Pausa',
+  // something...
+})
+
+// more videojs api...
+
+// vue component...
 ```
 
 
-### Use in SPA
+### Difference（使用方法的异同）
+
+**SSR and the only difference in the use of the SPA:**
+- SPA worked by the `component`, find videojs instance by `ref attribute`.
+- SSR worked by the `directive`, find videojs instance by `directive arg`.
+- Other configurations, events are the same.
+
+
+### SPA
 
 ``` vue
 <template>
@@ -137,7 +150,7 @@ export default {
 
 <script>
   // Similarly, you can also introduce the plugin resource pack you want to use within the component
-  // require('some-videojs-plugin')
+  // import 'some-videojs-plugin'
   export default {
     data() {
       return {
@@ -189,24 +202,50 @@ export default {
 ```
 
 
-[More Example Code](https://github.com/surmon-china/vue-video-player/tree/master/examples)
+### SSR
+
+``` vue
+<!-- You can custom the "myVideoPlayer" name used to find the videojs instance in current component -->
+<template>
+  <div class="video-player-box" 
+       @play="onPlayerPlay($event)"
+       @pause="onPlayerPause($event)"
+       @ready="playerReadied"
+       @statechanged="playerStateChanged($event)"
+       v-video-player:myVideoPlayer="playerOptions">
+  </div>
+</template>
+
+<script>
+  export default {
+    mounted() {
+      console.log('this is current videojs instance object', this.myVideoPlayer)
+    }
+    // Omit the same parts as in the following component sample code
+    // ...
+  }
+</script>
+```
+
+
+# Issues
+
+[videojs-contrib-hls - e is not defined](https://github.com/surmon-china/vue-video-player/issues/90)
 
 
 # API
 - component api:
-  * playsinline(boolean, default: false): set player not full-screen in mobile device
-  * customEventName(string, default: 'statechanged'): custom the state change event name
+  * `events` : `[ Array, default: [] ]` : custom videojs event to component
+  * `playsinline` : `[ Boolean, default: false ]` : set player not full-screen in mobile device
+  * `crossOrigin` : `[ String, default: '' ]` : set crossOrigin to video
+  * `customEventName` : `[ String, default: 'statechanged' ]` : custom the state change event name
 
 - video.js api
-  * [video.js api](http://docs.videojs.com/docs/api/player.html#Methodsmuted)
-  * [video.js docs](http://docs.videojs.com/#)
+  * [video.js options](http://docs.videojs.com/tutorial-options.html)
+  * [video.js docs](http://docs.videojs.com/)
 
 
-# Credits
-- [video.js](https://github.com/videojs/video.js)
-
-
-# Videojs plugins
+# videojs plugins
 
 - [videojs-resolution-switcher](https://github.com/kmoskwiak/videojs-resolution-switcher)
 - [videojs-contrib-hls](https://github.com/videojs/videojs-contrib-hls)
@@ -217,14 +256,6 @@ export default {
 - [videojs-contrib-ads](https://github.com/videojs/videojs-contrib-ads)
 - [more plugins...](https://github.com/search?o=desc&q=videojs+plugin&s=stars&type=Repositories&utf8=%E2%9C%93)
 
-# License
 
-Licensed under either of
-
- * MIT license ([LICENSE-MIT](LICENSE-MIT) or http://opensource.org/licenses/MIT)
- * GNU General Public License, version 3 ([LICENSE-GPL](LICENSE-GPL) or https://opensource.org/licenses/GPL-3.0)
-
-at your option.
-
-# Author Blog
+# Author
 [Surmon](https://surmon.me)
