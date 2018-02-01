@@ -1,6 +1,10 @@
 
 ## CHANGELOG
 
+### v5.0.2
+
+fix #142 custom event
+
 ### v5.0.1
 
 support dynamic change options

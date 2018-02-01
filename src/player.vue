@@ -162,7 +162,7 @@
         this.player = videojs(this.$refs.video, videoOptions, function() {
 
           // events
-          const events = DEFAULT_EVENTS.concat(this.events).concat(this.globalEvents)
+          const events = DEFAULT_EVENTS.concat(self.events).concat(self.globalEvents)
 
           // watch events
           const onEdEvents = {}

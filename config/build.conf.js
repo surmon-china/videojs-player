@@ -10,7 +10,12 @@ module.exports = merge(baseConfig, {
     'vue-video-player': './src/index.js'
   },
   externals: {
-    'video.js': 'video.js',
+    'video.js': {
+        root: 'videojs',
+        commonjs: 'video.js',
+        commonjs2: 'video.js',
+        amd: 'videojs'
+    },
     'object-assign': 'object-assign'
   },
   output: {
@@ -26,9 +31,6 @@ module.exports = merge(baseConfig, {
     modules: [
       resolve('src'),
       resolve('node_modules')
-    ],
-    alias: {
-      // 'swiper': 'swiper/dist/js/swiper.js'
-    }
+    ]
   }
 })
