@@ -127,7 +127,6 @@
         // ios fullscreen
         if (this.playsinline) {
           this.$refs.video.setAttribute('playsinline', this.playsinline)
-          this.$refs.video.setAttribute('webkit-playsinline', this.playsinline)
           this.$refs.video.setAttribute('x5-playsinline', this.playsinline)
         }
 
