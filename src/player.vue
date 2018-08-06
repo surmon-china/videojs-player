@@ -134,9 +134,9 @@ export default {
       if (this.playsinline) {
         if (this.isAudio) {
           this.$refs.audio.setAttribute('playsinline', this.playsinline)
-          this.$refs.video.setAttribute('x5-playsinline', this.playsinline)
+          this.$refs.audio.setAttribute('x5-playsinline', this.playsinline)
         } else {
-          this.$refs.audio.setAttribute('playsinline', this.playsinline)
+          this.$refs.video.setAttribute('playsinline', this.playsinline)
           this.$refs.video.setAttribute('x5-playsinline', this.playsinline)
         }
       }
