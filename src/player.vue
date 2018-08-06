@@ -1,6 +1,8 @@
 <template>
   <div class="video-player" v-if="reseted">
+    <!--音频播放-->
     <audio v-if="isAudio" class="video-js" ref="audio"></audio>
+    <!-- 视频播放 -->
     <video v-if="!isAudio" class="video-js" ref="video"></video>
   </div>
 </template>
@@ -125,7 +127,6 @@ export default {
   },
   methods: {
     initialize () {
-
       // videojs options
       const videoOptions = Object.assign({}, this.globalOptions, this.options)
 
