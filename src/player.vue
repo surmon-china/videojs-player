@@ -1,7 +1,7 @@
 <template>
   <div class="video-player" v-if="reseted">
-    <audio v-show="isAudio" class="video-js" ref="video"></audio>
-    <video v-show="!isAudio" class="video-js" ref="video"></video>
+    <audio v-if="isAudio" class="video-js" ref="video"></audio>
+    <video v-else class="video-js" ref="video"></video>
   </div>
 </template>
 
