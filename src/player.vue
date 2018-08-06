@@ -1,6 +1,6 @@
 <template>
   <div class="video-player" v-if="reseted">
-    <audio v-if="isAudio" class="video-js" ref="video"></audio>
+    <audio v-if="isAudio" class="video-js" ref="audio"></audio>
     <video v-if="!isAudio" class="video-js" ref="video"></video>
   </div>
 </template>
@@ -131,14 +131,24 @@ export default {
 
       // ios fullscreen
       if (this.playsinline) {
-        this.$refs.video.setAttribute('playsinline', this.playsinline)
-        this.$refs.video.setAttribute('x5-playsinline', this.playsinline)
+        if (this.isAudio) {
+          this.$refs.audio.setAttribute('playsinline', this.playsinline)
+          this.$refs.video.setAttribute('x5-playsinline', this.playsinline)
+        } else {
+          this.$refs.audio.setAttribute('playsinline', this.playsinline)
+          this.$refs.video.setAttribute('x5-playsinline', this.playsinline)
+        }
       }
 
       // cross origin
       if (this.crossOrigin !== '') {
-        this.$refs.video.crossOrigin = this.crossOrigin
-        this.$refs.video.setAttribute('crossOrigin', this.crossOrigin)
+        if (this.isAudio) {
+          this.$refs.audio.crossOrigin = this.crossOrigin
+          this.$refs.audio.setAttribute('crossOrigin', this.crossOrigin)
+        } else {
+          this.$refs.video.setAttribute('crossOrigin', this.crossOrigin)
+          this.$refs.video.crossOrigin = this.crossOrigin
+        }
       }
 
       // emit event
@@ -161,32 +171,61 @@ export default {
 
       // player
       const self = this
-      this.player = videojs(this.$refs.video, videoOptions, function () {
+      if (this.isAudio) {
+        this.player = videojs(this.$refs.audio, videoOptions, function () {
 
-        // events
-        const events = DEFAULT_EVENTS.concat(self.events).concat(self.globalEvents)
+          // events
+          const events = DEFAULT_EVENTS.concat(self.events).concat(self.globalEvents)
 
-        // watch events
-        const onEdEvents = {}
-        for (let i = 0; i < events.length; i++) {
-          if (typeof events[i] === 'string' && onEdEvents[events[i]] === undefined) {
-            (event => {
-              onEdEvents[event] = null
-              this.on(event, () => {
-                emitPlayerState(event, true)
-              })
-            })(events[i])
+          // watch events
+          const onEdEvents = {}
+          for (let i = 0; i < events.length; i++) {
+            if (typeof events[i] === 'string' && onEdEvents[events[i]] === undefined) {
+              (event => {
+                onEdEvents[event] = null
+                this.on(event, () => {
+                  emitPlayerState(event, true)
+                })
+              })(events[i])
+            }
           }
-        }
 
-        // watch timeupdate
-        this.on('timeupdate', function () {
-          emitPlayerState('timeupdate', this.currentTime())
+          // watch timeupdate
+          this.on('timeupdate', function () {
+            emitPlayerState('timeupdate', this.currentTime())
+          })
+
+          // player readied
+          self.$emit('ready', this)
         })
-
-        // player readied
-        self.$emit('ready', this)
-      })
+      } else{
+        this.player = videojs(this.$refs.video, videoOptions, function () {
+  
+          // events
+          const events = DEFAULT_EVENTS.concat(self.events).concat(self.globalEvents)
+  
+          // watch events
+          const onEdEvents = {}
+          for (let i = 0; i < events.length; i++) {
+            if (typeof events[i] === 'string' && onEdEvents[events[i]] === undefined) {
+              (event => {
+                onEdEvents[event] = null
+                this.on(event, () => {
+                  emitPlayerState(event, true)
+                })
+              })(events[i])
+            }
+          }
+  
+          // watch timeupdate
+          this.on('timeupdate', function () {
+            emitPlayerState('timeupdate', this.currentTime())
+          })
+  
+          // player readied
+          self.$emit('ready', this)
+        })
+      }
     },
     dispose (callback) {
       if (this.player && this.player.dispose) {
