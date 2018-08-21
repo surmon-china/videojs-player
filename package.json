@@ -1,7 +1,7 @@
 {
   "name": "vue-video-player-vjs7",
   "description": "video.js component for Vue",
-  "version": "5.0.3",
+  "version": "5.0.6",
   "license": "MIT",
   "private": false,
   "author": {
@@ -47,6 +47,7 @@
     "publish": "git push && git push --tags && npm publish"
   },
   "dependencies": {
+    "@videojs/http-streaming": "^1.2.4",
     "object-assign": "^4.1.1",
     "video.js": "^7.1.0",
     "videojs-flash": "^2.1.0",
