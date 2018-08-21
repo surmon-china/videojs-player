@@ -10,9 +10,9 @@
     "url": "https://surmon.me"
   },
   "bugs": {
-    "url": "https://github.com/surmon-china/vue-video-player/issues"
+    "url": "https://github.com/luck3n/vue-video-player/issues"
   },
-  "homepage": "https://github.com/surmon-china/vue-video-player#readme",
+  "homepage": "https://github.com/luck3n/vue-video-player#readme",
   "main": "dist/vue-video-player.js",
   "unpkg": "dist/vue-video-player.js",
   "jsnext:main": "dist/vue-video-player.js",
@@ -27,7 +27,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/surmon-china/vue-video-player.git"
+    "url": "https://github.com/luck3n/vue-video-player.git"
   },
   "keywords": [
     "vue-video-player",
