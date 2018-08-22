@@ -7,6 +7,8 @@
 <script>
   // lib
   import _videojs from 'video.js'
+  import '@videojs/http-streaming/dist/videojs-http-streaming.min.js';
+
   const videojs = window.videojs || _videojs
 
   // pollfill
@@ -109,12 +111,12 @@
       }
     },
     mounted() {
-      if (!this.player) { 
+      if (!this.player) {
         this.initialize()
       }
     },
     beforeDestroy() {
-      if (this.player) { 
+      if (this.player) {
         this.dispose()
       }
     },
@@ -156,7 +158,7 @@
 
         // videoOptions
         // console.log('videoOptions', videoOptions)
-        
+
         // player
         const self = this
         this.player = videojs(this.$refs.video, videoOptions, function() {

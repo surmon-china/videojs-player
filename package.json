@@ -1,7 +1,7 @@
 {
-  "name": "vue-video-player",
+  "name": "vue-video-player-vjs7",
   "description": "video.js component for Vue",
-  "version": "5.0.2",
+  "version": "5.0.6",
   "license": "MIT",
   "private": false,
   "author": {
@@ -10,9 +10,9 @@
     "url": "https://surmon.me"
   },
   "bugs": {
-    "url": "https://github.com/surmon-china/vue-video-player/issues"
+    "url": "https://github.com/luck3n/vue-video-player/issues"
   },
-  "homepage": "https://github.com/surmon-china/vue-video-player#readme",
+  "homepage": "https://github.com/luck3n/vue-video-player#readme",
   "main": "dist/vue-video-player.js",
   "unpkg": "dist/vue-video-player.js",
   "jsnext:main": "dist/vue-video-player.js",
@@ -27,7 +27,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/surmon-china/vue-video-player.git"
+    "url": "https://github.com/luck3n/vue-video-player.git"
   },
   "keywords": [
     "vue-video-player",
@@ -47,9 +47,9 @@
     "publish": "git push && git push --tags && npm publish"
   },
   "dependencies": {
+    "@videojs/http-streaming": "^1.2.4",
     "object-assign": "^4.1.1",
-    "video.js": "^6.6.0",
-    "videojs-contrib-hls": "^5.12.2",
+    "video.js": "^7.1.0",
     "videojs-flash": "^2.1.0",
     "videojs-hotkeys": "^0.2.20"
   },
