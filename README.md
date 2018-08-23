@@ -228,11 +228,6 @@ videojs.addLanguage('es', {
 ```
 
 
-# Issues
-
-[videojs-contrib-hls - e is not defined](https://github.com/surmon-china/vue-video-player/issues/90)
-
-
 # API
 - component api:
   * `events` : `[ Array, default: [] ]` : custom videojs event to component
@@ -248,7 +243,6 @@ videojs.addLanguage('es', {
 # videojs plugins
 
 - [videojs-resolution-switcher](https://github.com/kmoskwiak/videojs-resolution-switcher)
-- [videojs-contrib-hls](https://github.com/videojs/videojs-contrib-hls)
 - [videojs-youtube](https://github.com/videojs/videojs-youtube)
 - [videojs-vimeo](https://github.com/videojs/videojs-vimeo)
 - [videojs-hotkeys](https://github.com/ctd1500/videojs-hotkeys)
