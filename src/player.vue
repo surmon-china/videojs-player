@@ -130,13 +130,24 @@
         // videojs options
         const videoOptions = Object.assign({}, this.globalOptions, this.options)
 
-        // ios fullscreen
+        //  userAgent
+        const userAgent = navigator.userAgent;
+        const isiOS = Boolean(userAgent.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/)); //  ios终端
+
+        // 
         if (this.playsinline) {
-          this.$refs.video.setAttribute('playsinline', this.playsinline)
-          this.$refs.video.setAttribute('webkit-playsinline', this.playsinline)
-          this.$refs.video.setAttribute('x5-playsinline', this.playsinline)
-          this.$refs.video.setAttribute('x5-video-player-type', 'h5')
-          this.$refs.video.setAttribute('x5-video-player-fullscreen', false)
+          if(isiOS) { // ios fullscreen
+            this.$refs.video.setAttribute('playsinline', this.playsinline)
+            this.$refs.video.setAttribute('webkit-playsinline', this.playsinline)
+            this.$refs.video.setAttribute('x5-playsinline', this.playsinline)
+            this.$refs.video.setAttribute('x5-video-player-type', 'h5')
+            this.$refs.video.setAttribute('x5-video-player-fullscreen', false)
+          }else{ 
+            this.$refs.video.setAttribute('playsinline', this.playsinline)
+            this.$refs.video.setAttribute('webkit-playsinline', this.playsinline)
+            this.$refs.video.setAttribute('x5-playsinline', this.playsinline)
+          }
+          
         }
 
         // cross origin
