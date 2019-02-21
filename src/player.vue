@@ -43,6 +43,8 @@
     'canplaythrough',
     'play',
     'pause',
+    'seeking',
+    'seeked',
     'waiting',
     'playing',
     'ended',
