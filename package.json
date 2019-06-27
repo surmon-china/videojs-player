@@ -1,7 +1,7 @@
 {
   "name": "@shravan_shandilya/vue-video-player",
   "description": "fork of surmon-china's video.js component for Vue",
-  "version": "8.0.0",
+  "version": "8.1.0-0",
   "license": "MIT",
   "private": false,
   "author": {
