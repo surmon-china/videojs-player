@@ -135,7 +135,7 @@
           this.$refs.video.setAttribute('playsinline', this.playsinline)
           this.$refs.video.setAttribute('webkit-playsinline', this.playsinline)
           this.$refs.video.setAttribute('x5-playsinline', this.playsinline)
-          this.$refs.video.setAttribute('x5-video-player-type', 'h5')
+          this.$refs.video.setAttribute('x5-video-player-type', 'h5-page')
           this.$refs.video.setAttribute('x5-video-player-fullscreen', false)
         }
 
