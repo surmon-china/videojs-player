@@ -9,6 +9,7 @@
 <script>
   // lib
   import _videojs from 'video.js'
+  import addRemovedHook from 'vue-removed-hook-mixin';
   const videojs = window.videojs || _videojs
 
   // pollfill
@@ -52,6 +53,7 @@
   // export
   export default {
     name: 'video-player',
+    mixins: [addRemovedHook],
     props: {
       start: {
         type: Number,
@@ -68,6 +70,10 @@
       customEventName: {
         type: String,
         default: 'statechanged'
+      },
+      shutDown: {
+        type: String,
+        default: 'beforeDestroy'
       },
       options: {
         type: Object,
@@ -120,7 +126,12 @@
       }
     },
     beforeDestroy() {
-      if (this.player) { 
+      if (this.player && this.shutDown === 'beforeDestroy') { 
+        this.dispose()
+      }
+    },
+    removed() {
+      if (this.player && this.shutDown === 'removed') { 
         this.dispose()
       }
     },
