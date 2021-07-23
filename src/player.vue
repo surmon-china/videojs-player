@@ -119,7 +119,7 @@
         this.initialize()
       }
     },
-    beforeDestroy() {
+    beforeUnmount() {
       if (this.player) { 
         this.dispose()
       }
@@ -176,7 +176,7 @@
             if (typeof events[i] === 'string' && onEdEvents[events[i]] === undefined) {
               (event => {
                 onEdEvents[event] = null
-                this.on(event, () => {
+                self.$watch(event, () => {
                   emitPlayerState(event, true)
                 })
               })(events[i])
@@ -184,12 +184,12 @@
           }
 
           // watch timeupdate
-          this.on('timeupdate', function() {
-            emitPlayerState('timeupdate', this.currentTime())
+          self.$watch('timeupdate', function() {
+            emitPlayerState('timeupdate', self.$refs.video.currentTime())
           })
 
           // player readied
-          self.$emit('ready', this)
+          self.$emit('ready', self.$refs.video)
         })
       },
       dispose(callback) {
@@ -232,3 +232,8 @@
     }
   }
 </script>
+<style scoped>
+.video-player {
+  width:fit-content;
+}
+</style>
