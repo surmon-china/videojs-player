@@ -1,0 +1,10 @@
+export type { VideoJsPlayer } from './type'
+export type { PropKey, Props } from './props'
+export type { EventKey, CamelCaseEventKey } from './events'
+export type { CreatePlayerStateOptions, PlayerState } from './state'
+export type { CreatePlayerOptions, PlayerResult } from './player'
+
+export { props } from './props'
+export { events, eventKeys, camelCaseEventKeys } from './events'
+export { createPlayer } from './player'
+export { createPlayerState } from './state'

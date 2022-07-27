@@ -14,9 +14,6 @@ npm-debug.log*
 # Optional REPL history
 .node_repl_history
 
-# Project
-.editorconfig
-
 # nyc test coverage
 .nyc_output
 
@@ -51,3 +48,5 @@ build/Release
 node_modules
 node_modules/
 jspm_packages
+
+dist

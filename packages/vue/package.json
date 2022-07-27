@@ -1,0 +1,51 @@
+{
+  "name": "@videojs-player/vue",
+  "description": "Video.js component for Vue",
+  "version": "0.1.0",
+  "private": false,
+  "license": "MIT",
+  "author": "Surmon",
+  "keywords": [
+    "vue-video-player",
+    "vue video player",
+    "video player",
+    "vue player",
+    "vue video"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/surmon-china/videojs-player.git",
+    "directory": "packages/vue"
+  },
+  "files": [
+    "dist"
+  ],
+  "main": "./dist/videojs-player.cjs.js",
+  "module": "./dist/videojs-player.esm.js",
+  "types": "./dist/videojs-player.esm.d.ts",
+  "exports": {
+    ".": {
+      "require": "./dist/videojs-player.cjs.js",
+      "import": "./dist/videojs-player.esm.js",
+      "types": "./dist/videojs-player.esm.d.ts"
+    },
+    "./dist/*": "./dist/*",
+    "./package.json": "./package.json"
+  },
+  "scripts": {
+    "dev": "vite",
+    "build": "libundler"
+  },
+  "dependencies": {
+    "@types/video.js": "7.x"
+  },
+  "peerDependencies": {
+    "video.js": "7.x",
+    "vue": "3.x"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-vue": "^3.0.0",
+    "@vue/test-utils": "^2.0.0",
+    "vue": "^3.2.31"
+  }
+}

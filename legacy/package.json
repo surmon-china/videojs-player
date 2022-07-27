@@ -1,0 +1,38 @@
+{
+  "name": "vue-video-player",
+  "description": "Video.js component for Vue",
+  "version": "6.0.0",
+  "license": "MIT",
+  "private": false,
+  "author": "Surmon",
+  "keywords": [
+    "vue-video-player",
+    "vue video player",
+    "video player",
+    "vue player",
+    "vue video"
+  ],
+  "homepage": "https://github.com/surmon-china/videojs-player",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/surmon-china/videojs-player.git",
+    "directory": "legacy"
+  },
+  "files": [
+    "index.d.ts",
+    "index.js"
+  ],
+  "type": "module",
+  "types": "index.d.ts",
+  "module": "index.js",
+  "browser": "index.js",
+  "main": "index.js",
+  "peerDependencies": {
+    "@types/video.js": "7.x",
+    "video.js": "7.x",
+    "vue": "3.x"
+  },
+  "dependencies": {
+    "@videojs-player/vue": "1.x"
+  }
+}
