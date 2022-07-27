@@ -28,7 +28,6 @@
   "browser": "index.js",
   "main": "index.js",
   "peerDependencies": {
-    "@types/video.js": "7.x",
     "video.js": "7.x",
     "vue": "3.x"
   },
