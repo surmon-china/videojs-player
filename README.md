@@ -174,7 +174,7 @@ export const Component: React.FC = () => {
           <button class="item" onClick={() => player.muted(!state.muted)}>
             {{ state.muted ? 'unmuted' : 'mute' }}
           </button>
-          <!-- your custom controls element... -->
+          {/* your custom controls element... */}
         </div>
       )}
     </VideoPlayer>
@@ -294,43 +294,43 @@ For events emitted by Video.js, the parameters are fixed `Event` types, and for 
 
 The component maintains fully responsive state objects internally so that you can read the player state out of the box outside of the player.
 
-| key             | description | type                        |
-| :-------------- | :---------- | :-------------------------- |
-| src             | -           | `String`                    |
-| currentSrc      | -           | `String`                    |
-| currentSource   | -           | `videojs.Tech.SourceObject` |
-| width           | -           | `Number`                    |
-| height          | -           | `Number`                    |
-| currentWidth    | -           | `Number`                    |
-| currentHeight   | -           | `Number`                    |
-| videoWidth      | -           | `Number`                    |
-| videoHeight     | -           | `Number`                    |
-| controls        | -           | `Boolean`                   |
-| volume          | -           | `Number`                    |
-| muted           | -           | `Boolean`                   |
-| poster          | -           | `String`                    |
-| playing         | -           | `Boolean`                   |
-| waiting         | -           | `Boolean`                   |
-| seeking         | -           | `Boolean`                   |
-| paused          | -           | `Boolean`                   |
-| ended           | -           | `Boolean`                   |
-| currentTime     | -           | `Number`                    |
-| duration        | -           | `Number`                    |
-| playbackRate    | -           | `Number`                    |
-| playbackRates   | -           | `Array<Number>`             |
-| fullscreen      | -           | `Boolean`                   |
-| language        | -           | `String`                    |
-| userActive      | -           | `Boolean`                   |
-| readyState      | -           | `videojs.ReadyState`        |
-| networkState    | -           | `videojs.NetworkState`      |
-| error           | -           | `MediaError \| Null`        |
-| buffered        | -           | `videojs.TimeRange`         |
-| bufferedPercent | -           | `Number`                    |
-| played          | -           | `TimeRanges`                |
-| seekable        | -           | `TimeRanges`                |
-| audioTracks     | -           | `videojs.AudioTrackList`    |
-| videoTracks     | -           | `videojs.VidioTrackList`    |
-| textTracks      | -           | `TextTrackList`             |
+| key             | description                                | type                        |
+| :-------------- | :----------------------------------------- | :-------------------------- |
+| src             | The URL of the currently playing video.    | `String`                    |
+| currentSrc      | ditto                                      | `String`                    |
+| currentSource   | The currently playing video source Object. | `videojs.Tech.SourceObject` |
+| width           | Player's width.                            | `Number`                    |
+| height          | Player's height.                           | `Number`                    |
+| currentWidth    | ditto                                      | `Number`                    |
+| currentHeight   | ditto                                      | `Number`                    |
+| videoWidth      | Video element's width.                     | `Number`                    |
+| videoHeight     | Video element's height.                    | `Number`                    |
+| controls        | -                                          | `Boolean`                   |
+| volume          | -                                          | `Number`                    |
+| muted           | -                                          | `Boolean`                   |
+| poster          | -                                          | `String`                    |
+| playing         | -                                          | `Boolean`                   |
+| waiting         | -                                          | `Boolean`                   |
+| seeking         | -                                          | `Boolean`                   |
+| paused          | -                                          | `Boolean`                   |
+| ended           | -                                          | `Boolean`                   |
+| currentTime     | -                                          | `Number`                    |
+| duration        | -                                          | `Number`                    |
+| playbackRate    | -                                          | `Number`                    |
+| playbackRates   | -                                          | `Array<Number>`             |
+| fullscreen      | -                                          | `Boolean`                   |
+| language        | -                                          | `String`                    |
+| userActive      | -                                          | `Boolean`                   |
+| readyState      | -                                          | `videojs.ReadyState`        |
+| networkState    | -                                          | `videojs.NetworkState`      |
+| error           | -                                          | `MediaError \| Null`        |
+| buffered        | -                                          | `videojs.TimeRange`         |
+| bufferedPercent | -                                          | `Number`                    |
+| played          | -                                          | `TimeRanges`                |
+| seekable        | -                                          | `TimeRanges`                |
+| audioTracks     | -                                          | `videojs.AudioTrackList`    |
+| videoTracks     | -                                          | `videojs.VidioTrackList`    |
+| textTracks      | -                                          | `TextTrackList`             |
 
 ### Video.js extension
 
