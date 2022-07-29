@@ -25,8 +25,7 @@ export const createPlayer = ({ props, element, onEvent }: CreatePlayerOptions) =
     }
   })
 
-  // merge fallback options
-  // exclude component options
+  // merge fallback options & exclude component options
   const { volume, playbackRate, ...initOptions } = {
     ...propOptions,
     ...fallbackOptions
@@ -40,21 +39,64 @@ export const createPlayer = ({ props, element, onEvent }: CreatePlayerOptions) =
         onEvent(eventKey, events)
       })
     })
+
+    // init src
+    if (initOptions.src && !initOptions.sources) {
+      this.src(initOptions.src)
+    }
+
+    // init volume
+    if (volume && Number.isFinite(volume)) {
+      this.volume(volume)
+    }
+
+    // init playbackRate
+    // https://github.com/videojs/video.js/issues/5128
+    // https://github.com/videojs/video.js/issues/2516
+    // https://github.com/videojs/videojs-playlist/issues/158
+    // https://github.com/bytedance/xgplayer/blob/master/packages/xgplayer/src/skin/controls/playbackRate.js#L30
+    if (playbackRate && Number.isFinite(playbackRate)) {
+      // TODO: test!
+      this.playbackRate(playbackRate)
+      this.defaultPlaybackRate(playbackRate)
+      // this.on('loadstart', (events) => {
+      //   console.log('---loadstart', this.defaultPlaybackRate())
+      // })
+      // this.on('loadedmetadata', (events) => {
+      //   console.log('---loadedmetadata', this.defaultPlaybackRate())
+      // })
+      // this.on('loadeddata', (events) => {
+      //   console.log('---loadeddata', this.defaultPlaybackRate())
+      // })
+      // this.on('progress', (events) => {
+      //   console.log('---progress', this.defaultPlaybackRate())
+      // })
+      // this.on('canplay', (events) => {
+      //   console.log('---canplay', this.defaultPlaybackRate())
+      // })
+      // this.on('canplaythrough', (events) => {
+      //   // this.playbackRate(playbackRate)
+      //   console.log('---canplaythrough', this.defaultPlaybackRate())
+      // })
+      // this.on('playing', (events) => {
+      //   console.log('---playing', this.defaultPlaybackRate())
+      // })
+      // this.on('play', (events) => {
+      //   console.log('---play', this.defaultPlaybackRate())
+      // })
+    }
   }) as VideoJsPlayer
 
-  // init src
-  if (initOptions.src) {
-    player.src(initOptions.src)
-  }
-
-  // init volume
-  if (volume && Number.isFinite(volume)) {
-    player.volume(volume)
-  }
-
-  // init playbackRate
-  if (playbackRate && Number.isFinite(playbackRate)) {
-    player.playbackRate(playbackRate)
+  // set new classnames
+  const updateClassNames = (oldClassName: string | void, newClassName: string | void) => {
+    const oNames = oldClassName?.split(' ')
+    if (oNames?.length) {
+      oNames.map((name) => player.removeClass(name))
+    }
+    const nNames = newClassName?.split(' ')
+    if (nNames?.length) {
+      nNames.map((name) => player.addClass(name))
+    }
   }
 
   // set new options to Video.js
@@ -71,6 +113,7 @@ export const createPlayer = ({ props, element, onEvent }: CreatePlayerOptions) =
   return {
     player,
     dispose: player.dispose,
+    updateClassNames,
     updateOptions,
     updatePropOption
   }

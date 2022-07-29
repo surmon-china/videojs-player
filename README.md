@@ -35,7 +35,7 @@ If you are looking for an legacy version of the component for Vue2, use the [vue
 - [Usage of React](#usage-react)
 - [Component Props](#component-props)
 - [Component Events](#component-events)
-- [Component State](#component-state)
+- [Player State](#player-state)
 
 ### Video.js Documentation
 
@@ -216,6 +216,7 @@ All parameters are optional and Video.js determines the default value of each pr
 | aspectRatio                                 | [`options.aspectRatio`](https://videojs.com/guides/options/#aspectratio)                                         | `Boolean`            | ✅         |
 | liveui                                      | [`options.liveui`](https://videojs.com/guides/options/#liveui)                                                   | `Boolean`            |            |
 | liveTracker                                 | [`options.liveTracker`](https://videojs.com/guides/options/#livetrackertrackingthreshold)                        | `Object`             |            |
+| disablePictureInPicture                     | [`options.disablePictureInPicture`](https://docs.videojs.com/html5#disablePictureInPicture)                      | `Boolean`            | ✅         |
 | notSupportedMessage                         | [`options.notSupportedMessage`](https://videojs.com/guides/options/#notsupportedmessage)                         | `String`             | ✅         |
 | normalizeAutoplay                           | [`options.normalizeAutoplay`](https://videojs.com/guides/options/#normalizeautoplay)                             | `Boolean`            | ✅         |
 | audioPosterMode                             | [`options.audioPosterMode`](https://videojs.com/guides/options/#audiopostermode)                                 | `Boolean`            | ✅         |
@@ -290,7 +291,7 @@ For events emitted by Video.js, the parameters are fixed `Event` types, and for 
 | mounted               | When player component mounted. <br> `({ video: HTMLVideoElement, player: VideoJsPlayer, state: VideoPlayerState })` | `@mounted`               | `onMounted`               |
 | stateChange           | When player state changed (React only). `(state: VideoPlayerState)`                                                 | -                        | `onStateChange`           |
 
-### Component state
+### Player State
 
 The component maintains fully responsive state objects internally so that you can read the player state out of the box outside of the player.
 

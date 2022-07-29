@@ -7,7 +7,7 @@ type InferPropType<T> = T extends PropType<infer V> ? V : T
 const prop = <T>(options: {
   type: PropType<T>
   default?: any
-  onChange?: (player: VideoJsPlayer, value: T) => any
+  onChange?: (player: VideoJsPlayer, newValue: T, oldValue?: T) => any
   onEvent?: (player: VideoJsPlayer, callback: (newValue: T) => void) => any
 }) => options
 
@@ -115,22 +115,11 @@ const videoJsProps = {
     onChange: (player, language) => player.language(language),
     onEvent: (player, cb) => player.on('languagechange', () => cb(player.language()))
   }),
-  aspectRatio: prop({
-    type: String,
-    onChange: (player, ratio) => player.aspectRatio(ratio)
-  }),
-
   // https://videojs.com/guides/options/#languages
   // https://videojs.com/guides/languages/
   // https://docs.videojs.com/module-videojs-videojs.html#.addLanguage
   languages: prop({
     type: Object as PropType<NonNullable<VideoJsPlayerOptions['languages']>>
-  }),
-
-  playbackRate: prop({
-    type: Number,
-    onChange: (player, rate) => player.playbackRate(rate),
-    onEvent: (player, cb) => player.on('ratechange', () => cb(player.playbackRate()))
   }),
   playbackRates: prop({
     type: Array as PropType<NonNullable<VideoJsPlayerOptions['playbackRates']>>,
@@ -164,6 +153,10 @@ const videoJsProps = {
     type: Boolean,
     onChange: (player, value) => player.fill(value)
   }),
+  aspectRatio: prop({
+    type: String,
+    onChange: (player, ratio) => player.aspectRatio(ratio)
+  }),
   // https://videojs.com/guides/options/#fullscreen
   fullscreen: prop({
     type: Object as PropType<{
@@ -180,6 +173,10 @@ const videoJsProps = {
       liveTolerance: number
       [key: string]: any
     }>
+  }),
+  disablePictureInPicture: prop({
+    type: Boolean,
+    onChange: (player, value) => player.disablePictureInPicture(value)
   }),
   notSupportedMessage: prop({ type: String }),
   normalizeAutoplay: prop({ type: Boolean }),
@@ -232,12 +229,17 @@ const videoJsTechProps = {
   })
 }
 
-// Framework Options
+// Framework component Options
 const componentProps = {
   volume: prop({
     type: Number,
     onChange: (player, volume) => player.volume(volume),
     onEvent: (player, cb) => player.on('volumechange', () => cb(player.volume()))
+  }),
+  playbackRate: prop({
+    type: Number,
+    onChange: (player, rate) => player.playbackRate(rate),
+    onEvent: (player, cb) => player.on('ratechange', () => cb(player.playbackRate()))
   }),
   // fallback for video.js options
   options: prop({

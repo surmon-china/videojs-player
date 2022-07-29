@@ -11,6 +11,8 @@ export interface VideoJsPlayer extends Player {
   breakpoints(value: object | boolean): object
   // https://docs.videojs.com/player#crossOrigin
   crossOrigin(value?: string): string
+  // https://docs.videojs.com/player#disablePictureInPicture
+  disablePictureInPicture(value?: boolean): boolean
 }
 
 // Video.js Deprecated APIs

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-  import { reactive, shallowRef, toRaw } from 'vue'
+  import { shallowRef, shallowReactive } from 'vue'
   import Table from './Table.vue'
   import { VideoPlayer, VideoPlayerProps, VideoPlayerState } from '../src'
   import { VideoJsPlayer } from 'video.js'
@@ -29,8 +29,9 @@
 
   const player = shallowRef<VideoJsPlayer>()
   const state = shallowRef<VideoPlayerState>()
-  const config: VideoPlayerProps = reactive({
-    src: sources[0].src!,
+  const config: VideoPlayerProps = shallowReactive({
+    // src: sources[0].src!,
+    sources: [{ src: 'http://vjs.zencdn.net/v/oceans.mp4' }],
     poster: sources[0].poster!,
     autoplay: autoplayOptions[0],
     width: 800,
@@ -194,8 +195,11 @@
         </div>
       </div>
       <video-player
-        class="item player"
-        :src="config.src"
+        id="VideoPlayer"
+        :class="['dev-player', 'custom-theme', { playing: state?.playing }]"
+        :data-playing-status="state?.playing"
+        :style="{ backgroundColor: state?.playing ? 'red' : 'blue' }"
+        :sources="config.sources"
         :autoplay="config.autoplay"
         :poster="config.poster"
         v-model:width="config.width"
@@ -214,7 +218,7 @@
         @mounted="handleMounted"
       >
         <template v-slot="{ player, state, video }">
-          <div class="player-box">
+          <div class="player-advance-controls">
             <span>video.volume: {{ video.volume }}</span>
             <button class="item" @click="state.playing ? player.pause() : player.play()">
               {{ state.playing ? 'Pause' : 'Play' }}
@@ -225,11 +229,6 @@
             <button class="item" @click="player.requestFullscreen()">
               enter fullscreen {{ state.fullscreen }}
             </button>
-            <p>
-              0
-              <meter :min="0" :max="state?.duration ?? 0" :value="state.currentTime" />
-              -{{ state.duration - state.currentTime }}
-            </p>
             <p>
               volume:{{ config.volume }}
               <input
@@ -255,7 +254,7 @@
   </div>
 </template>
 
-<style lang="scss">
+<style lang="scss" scoped>
   body {
     margin: 0;
   }
@@ -265,13 +264,15 @@
     display: flex;
     justify-content: center;
 
-    .player {
-      .player-box {
-        margin-top: 2rem;
+    .dev-player {
+      .player-advance-controls {
+        position: absolute;
+        top: 1rem;
 
         .item {
           margin-right: 1rem;
           margin-bottom: 1rem;
+          font-size: 30px;
         }
       }
     }

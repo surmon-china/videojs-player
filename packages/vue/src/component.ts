@@ -8,7 +8,7 @@ const MOUNTED_EVENT_NAME = 'mounted'
 
 export default defineComponent({
   name: 'VueVideoPlayer',
-  props: { ...normalizeProps(_props) },
+  props: { ...normalizeProps(_props), class: String },
   emits: [...normalizeEvents(eventKeys), MOUNTED_EVENT_NAME],
   // https://github.com/vuejs/rfcs/pull/192
   // https://github.com/vuejs/core/pull/2693
@@ -28,9 +28,10 @@ export default defineComponent({
 
     onMounted(() => {
       // create player
+      const { class: _, ...rawProps } = toRaw(props)
       const _player = createPlayer({
         element: videoElement.value!,
-        props: toRaw(props),
+        props: rawProps,
         onEvent: context.emit
       })
 
@@ -45,6 +46,15 @@ export default defineComponent({
         () => props.options,
         (newOptions) => _player.updateOptions(newOptions ?? {}),
         { deep: true }
+      )
+
+      // sync vue class name to Video.js container
+      watch(
+        () => props.class,
+        (newClassName, oldClassName) => {
+          _player.updateClassNames(oldClassName, newClassName)
+        },
+        { immediate: true }
       )
 
       // sync component props to Video.js config
@@ -90,9 +100,11 @@ export default defineComponent({
     })
 
     return () => {
-      return h('div', { class: 'v-video-player' }, [
+      // https://videojs.com/guides/embeds/
+      // https://videojs.com/guides/react/
+      return h('div', { 'data-vjs-player': '' }, [
         h('video', {
-          class: 'video-js',
+          class: ['video-js', 'v-video-player'],
           ref: videoElement
         }),
         mounted.value &&
