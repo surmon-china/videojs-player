@@ -12,13 +12,13 @@ export interface CreatePlayerOptions {
 export type PlayerResult = ReturnType<typeof createPlayer>
 export const createPlayer = ({ props, element, onEvent }: CreatePlayerOptions) => {
   // exclude fallback options
-  const { options: fallbackOptions = {}, ...rawProps } = props
+  const { options: fallbackOptions = {}, ...optProps } = props
 
   // exclude undefined value
   const propOptions: Omit<Props, 'options'> = {}
-  const rawPropKeys = Object.keys(rawProps) as Array<keyof typeof rawProps>
-  rawPropKeys.forEach((key) => {
-    const value = rawProps[key]
+  const optPropKeys = Object.keys(optProps) as Array<keyof typeof optProps>
+  optPropKeys.forEach((key) => {
+    const value = optProps[key]
     if (value !== undefined) {
       // @ts-ignore
       propOptions[key] = value
@@ -87,7 +87,7 @@ export const createPlayer = ({ props, element, onEvent }: CreatePlayerOptions) =
     }
   }) as VideoJsPlayer
 
-  // set new classnames
+  // set new class names to Video.js container element
   const updateClassNames = (oldClassName: string | void, newClassName: string | void) => {
     const oNames = oldClassName?.split(' ')
     if (oNames?.length) {
