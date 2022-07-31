@@ -159,20 +159,24 @@ const videoJsProps = {
   }),
   // https://videojs.com/guides/options/#fullscreen
   fullscreen: prop({
-    type: Object as PropType<{
-      options: FullscreenOptions
-      [key: string]: any
-    }>
+    type: Object as PropType<
+      Partial<{
+        options: FullscreenOptions
+        [key: string]: any
+      }>
+    >
   }),
   // https://videojs.com/guides/options/#liveui
   liveui: prop({ type: Boolean }),
   // https://videojs.com/guides/options/#livetrackertrackingthreshold
   liveTracker: prop({
-    type: Object as PropType<{
-      trackingThreshold: number
-      liveTolerance: number
-      [key: string]: any
-    }>
+    type: Object as PropType<
+      Partial<{
+        trackingThreshold: number
+        liveTolerance: number
+        [key: string]: any
+      }>
+    >
   }),
   disablePictureInPicture: prop({
     type: Boolean,
@@ -216,16 +220,17 @@ const videoJsComponentProps = {
 // Video.js tech Options
 // https://videojs.com/guides/options/#tech-options
 const videoJsTechProps = {
-  hls: prop({ type: Object }),
-  vhs: prop({ type: Object }),
   html5: prop({
-    type: Object as PropType<{
-      nativeControlsForTouch: boolean
-      nativeAudioTracks: boolean
-      nativeTextTracks: boolean
-      nativeVideoTracks: boolean
-      preloadTextTracks: boolean
-    }>
+    type: Object as PropType<
+      Partial<{
+        vhs: any
+        nativeControlsForTouch: boolean
+        nativeAudioTracks: boolean
+        nativeTextTracks: boolean
+        nativeVideoTracks: boolean
+        preloadTextTracks: boolean
+      }>
+    >
   })
 }
 
