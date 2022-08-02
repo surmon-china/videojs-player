@@ -245,55 +245,55 @@ e.g. a change in `volume` will cause the player to change the volume.
 
 Events emitted by Video.js, the argument type is always [`EventTarget`](https://docs.videojs.com/eventtarget).
 
-| Video.js Event                                                                               | Vue                      | React                     |
-| :------------------------------------------------------------------------------------------- | :----------------------- | :------------------------ |
-| [`event.loadstart`](https://docs.videojs.com/player#event:loadstart)                         | `@loadstart`             | `onLoadStart`             |
-| [`event.suspend`](https://docs.videojs.com/player#event:suspend)                             | `@suspend`               | `onSuspend`               |
-| [`event.abort`](https://docs.videojs.com/player#event:abort)                                 | `@abort`                 | `onAbort`                 |
-| [`event.error`](https://docs.videojs.com/player#event:error)                                 | `@error`                 | `onError`                 |
-| [`event.emptied`](https://docs.videojs.com/player#event:emptied)                             | `@emptied`               | `onEmptied`               |
-| [`event.stalled`](https://docs.videojs.com/player#event:stalled)                             | `@stalled`               | `onStalled`               |
-| [`event.loadedmetadata`](https://docs.videojs.com/player#event:loadedmetadata)               | `@loadedmetadata`        | `onLoadedMetadata`        |
-| [`event.loadeddata`](https://docs.videojs.com/player#event:loadeddata)                       | `@loadeddata`            | `onLoadedData`            |
-| [`event.canplay`](https://docs.videojs.com/player#event:canplay)                             | `@canplay`               | `onCanPlay`               |
-| [`event.canplaythrough`](https://docs.videojs.com/player#event:canplaythrough)               | `@canplaythrough`        | `onCanPlayThrough`        |
-| [`event.playing`](https://docs.videojs.com/player#event:playing)                             | `@playing`               | `onPlaying`               |
-| [`event.waiting`](https://docs.videojs.com/player#event:waiting)                             | `@waiting`               | `onWaiting`               |
-| [`event.seeking`](https://docs.videojs.com/player#event:seeking)                             | `@seeking`               | `onSeeking`               |
-| [`event.seeked`](https://docs.videojs.com/player#event:seeked)                               | `@seeked`                | `onSeeked`                |
-| [`event.ended`](https://docs.videojs.com/player#event:ended)                                 | `@ended`                 | `onEnded`                 |
-| [`event.durationchange`](https://docs.videojs.com/player#event:durationchange)               | `@durationchange`        | `onDurationChange`        |
-| [`event.timeupdate`](https://docs.videojs.com/player#event:timeupdate)                       | `@timeupdate`            | `onTimeUpdate`            |
-| [`event.progress`](https://docs.videojs.com/player#event:progress)                           | `@progress`              | `onProgress`              |
-| [`event.play`](https://docs.videojs.com/player#event:play)                                   | `@play`                  | `onPlay`                  |
-| [`event.pause`](https://docs.videojs.com/player#event:pause)                                 | `@pause`                 | `onpause`                 |
-| [`event.ratechange`](https://docs.videojs.com/player#event:ratechange)                       | `@ratechange`            | `onRateChange`            |
-| [`event.resize`](https://docs.videojs.com/player#event:resize)                               | `@resize`                | `onResize`                |
-| [`event.volumechange`](https://docs.videojs.com/player#event:volumechange)                   | `@volumechange`          | `onVolumeChange`          |
-| [`event.posterchange`](https://docs.videojs.com/player#event:posterchange)                   | `@posterchange`          | `onPosterChange`          |
-| [`event.languagechange`](https://docs.videojs.com/player#event:languagechange)               | `@languagechange`        | `onLanguageChange`        |
-| [`event.fullscreenchange`](https://docs.videojs.com/player#event:fullscreenchange)           | `@fullscreenchange`      | `onFullscreenChange`      |
-| [`event.playbackrateschange`](https://docs.videojs.com/player#event:playbackrateschange)     | `@playbackrateschange`   | `onPlaybackRatesChange`   |
-| [`event.controlsdisabled`](https://docs.videojs.com/player#event:controlsdisabled)           | `@controlsdisabled`      | `onControlsDisabled`      |
-| [`event.controlsenabled`](https://docs.videojs.com/player#event:controlsenabled)             | `@controlsenabled`       | `onControlsEnabled`       |
-| [`event.enterFullWindow`](https://docs.videojs.com/player#event:enterFullWindow)             | `@enterFullWindow`       | `onEnterFullWindow`       |
-| [`event.exitFullWindow`](https://docs.videojs.com/player#event:exitFullWindow)               | `@exitFullWindow`        | `onExitFullWindow`        |
-| [`event.enterpictureinpicture`](https://docs.videojs.com/player#event:enterpictureinpicture) | `@enterpictureinpicture` | `onEnterPictureInPicture` |
-| [`event.leavepictureinpicture`](https://docs.videojs.com/player#event:leavepictureinpicture) | `@leavepictureinpicture` | `onLeavePictureInPicture` |
-| [`event.sourceset`](https://docs.videojs.com/player#event:sourceset)                         | `@sourceset`             | `onSourceSet`             |
-| [`event.texttrackchange`](https://docs.videojs.com/player#event:texttrackchange)             | `@texttrackchange`       | `onTextTrackChange`       |
-| [`event.textdata`](https://docs.videojs.com/player#event:textdata)                           | `@textdata`              | `onTextData`              |
-| [`event.useractive`](https://docs.videojs.com/player#event:useractive)                       | `@useractive`            | `onUserActive`            |
-| [`event.userinactive`](https://docs.videojs.com/player#event:userinactive)                   | `@userinactive`          | `onUserInactive`          |
-| [`event.usingcustomcontrols`](https://docs.videojs.com/player#event:usingcustomcontrols)     | `@usingcustomcontrols`   | `onUsingCustomControls`   |
-| [`event.usingnativecontrols`](https://docs.videojs.com/player#event:usingnativecontrols)     | `@usingnativecontrols`   | `onUsingNativeControls`   |
-| [`event.dispose`](https://docs.videojs.com/player#event:dispose)                             | `@dispose`               | `onDispose`               |
-| [`event.beforepluginsetup`](https://docs.videojs.com/player#event:beforepluginsetup)         | `@beforepluginsetup`     | `onBeforePluginSetup`     |
-| [`event.pluginsetup`](https://docs.videojs.com/player#event:pluginsetup)                     | `@pluginsetup`           | `onPluginSetup`           |
-| [`event.componentresize`](https://docs.videojs.com/player#event:componentresize)             | `@componentresize`       | `onComponentResize`       |
-| [`event.playerresize`](https://docs.videojs.com/player#event:playerresize)                   | `@playerresize`          | `onPlayerResize`          |
-| [`event.tap`](https://docs.videojs.com/player#event:tap)                                     | `@tap`                   | `onTap`                   |
-| [`event.ready`](https://docs.videojs.com/player#event:ready)                                 | `@ready`                 | `onReady`                 |
+| Video.js Event                                                                               | -   | Vue                      | React                     |
+| :------------------------------------------------------------------------------------------- | :-- | :----------------------- | :------------------------ |
+| [`event.loadstart`](https://docs.videojs.com/player#event:loadstart)                         | -   | `@loadstart`             | `onLoadStart`             |
+| [`event.suspend`](https://docs.videojs.com/player#event:suspend)                             | -   | `@suspend`               | `onSuspend`               |
+| [`event.abort`](https://docs.videojs.com/player#event:abort)                                 | -   | `@abort`                 | `onAbort`                 |
+| [`event.error`](https://docs.videojs.com/player#event:error)                                 | -   | `@error`                 | `onError`                 |
+| [`event.emptied`](https://docs.videojs.com/player#event:emptied)                             | -   | `@emptied`               | `onEmptied`               |
+| [`event.stalled`](https://docs.videojs.com/player#event:stalled)                             | -   | `@stalled`               | `onStalled`               |
+| [`event.loadedmetadata`](https://docs.videojs.com/player#event:loadedmetadata)               | -   | `@loadedmetadata`        | `onLoadedMetadata`        |
+| [`event.loadeddata`](https://docs.videojs.com/player#event:loadeddata)                       | -   | `@loadeddata`            | `onLoadedData`            |
+| [`event.canplay`](https://docs.videojs.com/player#event:canplay)                             | -   | `@canplay`               | `onCanPlay`               |
+| [`event.canplaythrough`](https://docs.videojs.com/player#event:canplaythrough)               | -   | `@canplaythrough`        | `onCanPlayThrough`        |
+| [`event.playing`](https://docs.videojs.com/player#event:playing)                             | -   | `@playing`               | `onPlaying`               |
+| [`event.waiting`](https://docs.videojs.com/player#event:waiting)                             | -   | `@waiting`               | `onWaiting`               |
+| [`event.seeking`](https://docs.videojs.com/player#event:seeking)                             | -   | `@seeking`               | `onSeeking`               |
+| [`event.seeked`](https://docs.videojs.com/player#event:seeked)                               | -   | `@seeked`                | `onSeeked`                |
+| [`event.ended`](https://docs.videojs.com/player#event:ended)                                 | -   | `@ended`                 | `onEnded`                 |
+| [`event.durationchange`](https://docs.videojs.com/player#event:durationchange)               | -   | `@durationchange`        | `onDurationChange`        |
+| [`event.timeupdate`](https://docs.videojs.com/player#event:timeupdate)                       | -   | `@timeupdate`            | `onTimeUpdate`            |
+| [`event.progress`](https://docs.videojs.com/player#event:progress)                           | -   | `@progress`              | `onProgress`              |
+| [`event.play`](https://docs.videojs.com/player#event:play)                                   | -   | `@play`                  | `onPlay`                  |
+| [`event.pause`](https://docs.videojs.com/player#event:pause)                                 | -   | `@pause`                 | `onpause`                 |
+| [`event.ratechange`](https://docs.videojs.com/player#event:ratechange)                       | -   | `@ratechange`            | `onRateChange`            |
+| [`event.resize`](https://docs.videojs.com/player#event:resize)                               | -   | `@resize`                | `onResize`                |
+| [`event.volumechange`](https://docs.videojs.com/player#event:volumechange)                   | -   | `@volumechange`          | `onVolumeChange`          |
+| [`event.posterchange`](https://docs.videojs.com/player#event:posterchange)                   | -   | `@posterchange`          | `onPosterChange`          |
+| [`event.languagechange`](https://docs.videojs.com/player#event:languagechange)               | -   | `@languagechange`        | `onLanguageChange`        |
+| [`event.fullscreenchange`](https://docs.videojs.com/player#event:fullscreenchange)           | -   | `@fullscreenchange`      | `onFullscreenChange`      |
+| [`event.playbackrateschange`](https://docs.videojs.com/player#event:playbackrateschange)     | -   | `@playbackrateschange`   | `onPlaybackRatesChange`   |
+| [`event.controlsdisabled`](https://docs.videojs.com/player#event:controlsdisabled)           | -   | `@controlsdisabled`      | `onControlsDisabled`      |
+| [`event.controlsenabled`](https://docs.videojs.com/player#event:controlsenabled)             | -   | `@controlsenabled`       | `onControlsEnabled`       |
+| [`event.enterFullWindow`](https://docs.videojs.com/player#event:enterFullWindow)             | -   | `@enterFullWindow`       | `onEnterFullWindow`       |
+| [`event.exitFullWindow`](https://docs.videojs.com/player#event:exitFullWindow)               | -   | `@exitFullWindow`        | `onExitFullWindow`        |
+| [`event.enterpictureinpicture`](https://docs.videojs.com/player#event:enterpictureinpicture) | -   | `@enterpictureinpicture` | `onEnterPictureInPicture` |
+| [`event.leavepictureinpicture`](https://docs.videojs.com/player#event:leavepictureinpicture) | -   | `@leavepictureinpicture` | `onLeavePictureInPicture` |
+| [`event.sourceset`](https://docs.videojs.com/player#event:sourceset)                         | -   | `@sourceset`             | `onSourceSet`             |
+| [`event.texttrackchange`](https://docs.videojs.com/player#event:texttrackchange)             | -   | `@texttrackchange`       | `onTextTrackChange`       |
+| [`event.textdata`](https://docs.videojs.com/player#event:textdata)                           | -   | `@textdata`              | `onTextData`              |
+| [`event.useractive`](https://docs.videojs.com/player#event:useractive)                       | -   | `@useractive`            | `onUserActive`            |
+| [`event.userinactive`](https://docs.videojs.com/player#event:userinactive)                   | -   | `@userinactive`          | `onUserInactive`          |
+| [`event.usingcustomcontrols`](https://docs.videojs.com/player#event:usingcustomcontrols)     | -   | `@usingcustomcontrols`   | `onUsingCustomControls`   |
+| [`event.usingnativecontrols`](https://docs.videojs.com/player#event:usingnativecontrols)     | -   | `@usingnativecontrols`   | `onUsingNativeControls`   |
+| [`event.dispose`](https://docs.videojs.com/player#event:dispose)                             | -   | `@dispose`               | `onDispose`               |
+| [`event.beforepluginsetup`](https://docs.videojs.com/player#event:beforepluginsetup)         | -   | `@beforepluginsetup`     | `onBeforePluginSetup`     |
+| [`event.pluginsetup`](https://docs.videojs.com/player#event:pluginsetup)                     | -   | `@pluginsetup`           | `onPluginSetup`           |
+| [`event.componentresize`](https://docs.videojs.com/player#event:componentresize)             | -   | `@componentresize`       | `onComponentResize`       |
+| [`event.playerresize`](https://docs.videojs.com/player#event:playerresize)                   | -   | `@playerresize`          | `onPlayerResize`          |
+| [`event.tap`](https://docs.videojs.com/player#event:tap)                                     | -   | `@tap`                   | `onTap`                   |
+| [`event.ready`](https://docs.videojs.com/player#event:ready)                                 | -   | `@ready`                 | `onReady`                 |
 
 The events emitted by Component.
 
