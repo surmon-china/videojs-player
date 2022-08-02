@@ -2,18 +2,25 @@
   <table class="table">
     <tr :key="key" v-for="(value, key) in data">
       <td>{{ key }}</td>
-      <td>{{ value }}</td>
+      <td>{{ normalizeValue(value) }}</td>
     </tr>
   </table>
 </template>
 
 <script lang="ts">
-  import { defineComponent } from 'vue'
+  import { defineComponent, toRaw } from 'vue'
   export default defineComponent({
     props: {
       data: {
         type: Object,
         required: true
+      }
+    },
+    setup() {
+      return {
+        normalizeValue(value: any) {
+          return String(toRaw(value))
+        }
       }
     }
   })

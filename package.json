@@ -2,7 +2,7 @@
   "name": "videojs-player-monorepo",
   "description": "Video.js component for frameworks",
   "private": true,
-  "homepage": "https://github.com/surmon-china/videojs-player",
+  "homepage": "https://github.surmon.me/videojs-player",
   "keywords": [
     "vue video player",
     "react video player",

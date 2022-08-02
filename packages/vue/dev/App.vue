@@ -22,7 +22,7 @@
       poster: null
     },
     {
-      src: '//testxxx.net/abc.mp4',
+      src: 'https://logos-channel.scaleengine.net/logos-channel/live/biblescreen-ad-free/playlist.m3u8',
       poster: '//cloudfront.net/abc/test.png'
     }
   ]
@@ -30,8 +30,7 @@
   const player = shallowRef<VideoJsPlayer>()
   const state = shallowRef<VideoPlayerState>()
   const config: VideoPlayerProps = shallowReactive({
-    // src: sources[0].src!,
-    sources: [{ src: 'http://vjs.zencdn.net/v/oceans.mp4' }],
+    src: sources[0].src!,
     poster: sources[0].poster!,
     autoplay: autoplayOptions[0],
     width: 800,
@@ -199,7 +198,7 @@
         :class="['dev-player', 'custom-theme', { playing: state?.playing }]"
         :data-playing-status="state?.playing"
         :style="{ backgroundColor: state?.playing ? 'red' : 'blue' }"
-        :sources="config.sources"
+        :src="config.src"
         :autoplay="config.autoplay"
         :poster="config.poster"
         v-model:width="config.width"
@@ -226,8 +225,21 @@
             <button class="item" @click="player.muted(!state.muted)">
               {{ state.muted ? 'unmuted' : 'mute' }}
             </button>
-            <button class="item" @click="player.requestFullscreen()">
-              enter fullscreen {{ state.fullscreen }}
+            <button
+              class="item"
+              @click="state.isFullscreen ? player.exitFullscreen() : player.requestFullscreen()"
+            >
+              {{ state.isFullscreen ? 'Exit' : 'Enter' }} Fullscreen
+            </button>
+            <button
+              class="item"
+              @click="
+                state.isInPictureInPicture
+                  ? player.exitPictureInPicture()
+                  : player.requestPictureInPicture()
+              "
+            >
+              {{ state.isInPictureInPicture ? 'off' : 'on' }} PiP
             </button>
             <p>
               volume:{{ config.volume }}

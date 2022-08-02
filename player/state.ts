@@ -86,9 +86,16 @@ const StateConfig = {
     events: ['playbackrateschange'],
     getter: (player: Player) => player.playbackRates()
   },
-  fullscreen: {
+  isFullscreen: {
     events: ['fullscreenchange'],
     getter: (player: Player) => player.isFullscreen()
+  },
+  isInPictureInPicture: {
+    events: ['enterpictureinpicture', 'leavepictureinpicture'],
+    getter: (player: Player) => player.isInPictureInPicture()
+  },
+  isLive: {
+    getter: (player: Player) => player.liveTracker.isLive()
   },
   language: {
     events: ['languagechange'],

@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
+### v0.1.2 (2022-08-02)
+
+- feat: `state.fullscreen` > `state.isFullscreen`
+- feat: add new state `isInPictureInPicture`
+- feat: add new state `isLive`
+
 ### v0.1.1 (2022-07-30)
 
 - feat: new prop `disablePictureInPicture`

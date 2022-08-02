@@ -57,8 +57,9 @@ export const createPlayer = ({ props, element, onEvent }: CreatePlayerOptions) =
     // https://github.com/bytedance/xgplayer/blob/master/packages/xgplayer/src/skin/controls/playbackRate.js#L30
     if (playbackRate && Number.isFinite(playbackRate)) {
       // TODO: test!
-      this.playbackRate(playbackRate)
-      this.defaultPlaybackRate(playbackRate)
+      // console.log('----playbackRate', playbackRate)
+      // this.playbackRate(playbackRate)
+      // this.defaultPlaybackRate(playbackRate)
       // this.on('loadstart', (events) => {
       //   console.log('---loadstart', this.defaultPlaybackRate())
       // })

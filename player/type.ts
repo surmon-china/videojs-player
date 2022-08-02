@@ -13,6 +13,8 @@ export interface VideoJsPlayer extends Player {
   crossOrigin(value?: string): string
   // https://docs.videojs.com/player#disablePictureInPicture
   disablePictureInPicture(value?: boolean): boolean
+  // https://docs.videojs.com/player#isInPictureInPicture
+  isInPictureInPicture(value?: boolean): boolean
 }
 
 // Video.js Deprecated APIs
