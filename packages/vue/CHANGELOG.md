@@ -2,7 +2,7 @@
 
 All notable changes to this project will be documented in this file.
 
-### v0.1.2 (2022-08-02)
+### v0.1.3 (2022-08-02)
 
 - feat: `state.fullscreen` > `state.isFullscreen`
 - feat: add new state `isInPictureInPicture`
