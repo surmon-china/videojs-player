@@ -54,37 +54,15 @@ export const createPlayer = ({ props, element, onEvent }: CreatePlayerOptions) =
     // https://github.com/videojs/video.js/issues/5128
     // https://github.com/videojs/video.js/issues/2516
     // https://github.com/videojs/videojs-playlist/issues/158
+    // https://github.com/sampotts/plyr/blob/master/src/js/plyr.js#L677
     // https://github.com/bytedance/xgplayer/blob/master/packages/xgplayer/src/skin/controls/playbackRate.js#L30
     if (playbackRate && Number.isFinite(playbackRate)) {
-      // TODO: test!
-      // console.log('----playbackRate', playbackRate)
-      // this.playbackRate(playbackRate)
-      // this.defaultPlaybackRate(playbackRate)
-      // this.on('loadstart', (events) => {
-      //   console.log('---loadstart', this.defaultPlaybackRate())
-      // })
-      // this.on('loadedmetadata', (events) => {
-      //   console.log('---loadedmetadata', this.defaultPlaybackRate())
-      // })
-      // this.on('loadeddata', (events) => {
-      //   console.log('---loadeddata', this.defaultPlaybackRate())
-      // })
-      // this.on('progress', (events) => {
-      //   console.log('---progress', this.defaultPlaybackRate())
-      // })
-      // this.on('canplay', (events) => {
-      //   console.log('---canplay', this.defaultPlaybackRate())
-      // })
-      // this.on('canplaythrough', (events) => {
-      //   // this.playbackRate(playbackRate)
-      //   console.log('---canplaythrough', this.defaultPlaybackRate())
-      // })
-      // this.on('playing', (events) => {
-      //   console.log('---playing', this.defaultPlaybackRate())
-      // })
-      // this.on('play', (events) => {
-      //   console.log('---play', this.defaultPlaybackRate())
-      // })
+      // video always reads defaultPlaybackRate as the initial playbackRate when switching video sources.
+      this.defaultPlaybackRate(playbackRate)
+      // ensures that all synchronization code has been executed by the time playbackRate is executed.
+      setTimeout(() => {
+        this.playbackRate(playbackRate)
+      }, 0)
     }
   }) as VideoJsPlayer
 

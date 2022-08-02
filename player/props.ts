@@ -243,8 +243,17 @@ const componentProps = {
   }),
   playbackRate: prop({
     type: Number,
-    onChange: (player, rate) => player.playbackRate(rate),
-    onEvent: (player, cb) => player.on('ratechange', () => cb(player.playbackRate()))
+    onChange(player, rate) {
+      // when playbackRate changes, sync the value to defaultPlaybackRate to
+      // ensure that the last saved playbackRate is automatically read when the video changes source.
+      player.playbackRate(rate)
+      player.defaultPlaybackRate(rate)
+    },
+    onEvent(player, callback) {
+      player.on('ratechange', () => {
+        callback(player.playbackRate())
+      })
+    }
   }),
   // fallback for video.js options
   options: prop({

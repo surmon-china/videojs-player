@@ -2,11 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
-### v0.1.3 (2022-08-02)
+### v0.1.3 (2022-08-03)
 
 - feat: `state.fullscreen` > `state.isFullscreen`
 - feat: add new state `isInPictureInPicture`
 - feat: add new state `isLive`
+- fix: state `playbackRate`
 
 ### v0.1.1 (2022-07-30)
 
