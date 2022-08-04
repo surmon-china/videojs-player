@@ -46,6 +46,9 @@ export const App: React.FC = () => {
       </div>
       <div className="player-wrapper">
         <VideoPlayer
+          className={`videojs-player vjs-big-play-centered player-${
+            state?.playing ? 'playing' : 'not'
+          }`}
           src={config.src}
           poster={config.poster}
           volume={config.volume}
@@ -53,7 +56,6 @@ export const App: React.FC = () => {
           height={400}
           fluid={false}
           controls
-          videoJsChildren={[]}
           onStateChange={setState}
           onMounted={handlePlayerMounted}
           onReady={handlePlayerReady}
@@ -61,7 +63,16 @@ export const App: React.FC = () => {
         >
           {({ player, state }) => {
             return (
-              <div className="advanced-controls">
+              <div
+                className="advanced-controls"
+                style={{
+                  fontSize: 30,
+                  position: 'absolute',
+                  top: 0,
+                  width: '100%',
+                  display: 'block'
+                }}
+              >
                 <button
                   onClick={() => {
                     state.playing ? player.pause() : player.play()
@@ -72,6 +83,22 @@ export const App: React.FC = () => {
                 <button onClick={() => player.muted(!state.muted)}>
                   {state.muted ? 'unmuted' : 'mute'}
                 </button>
+                <button
+                  onClick={() => {
+                    state.isFullscreen ? player.exitFullscreen() : player.requestFullscreen()
+                  }}
+                >
+                  {state.isFullscreen ? '🖥 Exit' : '💻 Enter'} FS
+                </button>
+                <button
+                  onClick={() => {
+                    state.isInPictureInPicture
+                      ? player.exitPictureInPicture()
+                      : player.requestPictureInPicture()
+                  }}
+                >
+                  📺 {state.isInPictureInPicture ? 'Exit' : 'Enter'} PIP
+                </button>
               </div>
             )
           }}
@@ -79,7 +106,14 @@ export const App: React.FC = () => {
       </div>
       <hr />
       <div className="player-state">
-        <code>{JSON.stringify(state ?? {})}</code>
+        <code
+          style={{
+            maxWidth: '100%',
+            overflowWrap: 'anywhere'
+          }}
+        >
+          {JSON.stringify(state ?? {})}
+        </code>
       </div>
     </div>
   )

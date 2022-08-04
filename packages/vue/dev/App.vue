@@ -1,9 +1,9 @@
 <script setup lang="ts">
   import { shallowRef, shallowReactive } from 'vue'
-  import Table from './Table.vue'
-  import { VideoPlayer, VideoPlayerProps, VideoPlayerState } from '../src'
+  import { VideoPlayerProps, VideoPlayerState } from '../src'
   import { VideoJsPlayer } from 'video.js'
   import 'video.js/dist/video-js.css'
+  import Table from './Table.vue'
 
   const languagesOptions = ['en', 'zh']
   const autoplayOptions = [false, 'muted', 'play'] as const

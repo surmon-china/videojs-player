@@ -2,6 +2,8 @@
 
 All notable changes to this project will be documented in this file.
 
+### v0.2.0 (2022-08-05)
+
 ### v0.1.3 (2022-08-03)
 
 - feat: `state.fullscreen` > `state.isFullscreen`

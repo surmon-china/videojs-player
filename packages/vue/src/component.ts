@@ -1,15 +1,15 @@
 import { defineComponent, onMounted, onBeforeUnmount, h } from 'vue'
 import { shallowRef, ref, computed, readonly, watch, toRaw, DeepReadonly } from 'vue'
-import type { PlayerState, PlayerResult, PropKey } from '../../../player'
-import { createPlayer, createPlayerState, eventKeys, props as _props } from '../../../player'
-import { normalizeProps, normalizeEvents, bindPropUpdateEvent } from './helper'
+import { createPlayer, createPlayerState, propKeys } from '../../../player'
+import { PlayerState, PlayerResult } from '../../../player'
+import { normalizedProps, normalizedEvents, bindPropUpdateEvent } from './helper'
 
 const MOUNTED_EVENT_NAME = 'mounted'
 
 export default defineComponent({
   name: 'VueVideoPlayer',
-  props: { ...normalizeProps(_props), class: String },
-  emits: [...normalizeEvents(eventKeys), MOUNTED_EVENT_NAME],
+  props: { ...normalizedProps, class: String },
+  emits: [...normalizedEvents, MOUNTED_EVENT_NAME],
   // https://github.com/vuejs/rfcs/pull/192
   // https://github.com/vuejs/core/pull/2693
   // slots: Object as () => { player: VideoJsPlayer; state: DeepReadonly<PlayerState> },
@@ -29,48 +29,47 @@ export default defineComponent({
     onMounted(() => {
       // create player
       const { class: _, ...rawProps } = toRaw(props)
-      const _player = createPlayer({
+      const playerRes = createPlayer({
         element: videoElement.value!,
         props: rawProps,
         onEvent: context.emit
       })
 
-      // sync Video.js config change to update:prop event
+      // Sync Video.js config change to update:prop event.
       bindPropUpdateEvent({
-        player: _player.player,
+        player: playerRes.player,
         onEvent: context.emit
       })
 
-      // sync fallback options to Video.js config
-      watch(
-        () => props.options,
-        (newOptions) => _player.updateOptions(newOptions ?? {}),
-        { deep: true }
-      )
-
-      // sync vue class name to Video.js container
+      // Sync Vue class name to Video.js container.
       watch(
         () => props.class,
         (newClassName, oldClassName) => {
-          _player.updateClassNames(oldClassName, newClassName)
+          playerRes.updateClassNames(oldClassName, newClassName)
         },
         { immediate: true }
       )
 
-      // sync component props to Video.js config
-      Object.keys(_props)
+      // Sync fallback options to Video.js config.
+      watch(
+        () => props.options,
+        (newOptions) => playerRes.updateOptions(newOptions ?? {}),
+        { deep: true }
+      )
+
+      // Sync component props to Video.js config.
+      propKeys
         .filter((key) => key !== 'options')
         .forEach((key) => {
-          const k = key as PropKey
           watch(
-            () => props[k],
-            (newValue) => _player.updatePropOption(k, newValue),
+            () => props[key],
+            (newValue) => playerRes.updatePropOption(key, newValue),
             { deep: true }
           )
         })
 
       // create player state
-      createPlayerState(_player.player, {
+      createPlayerState(playerRes.player, {
         onInit(initState) {
           state.value = initState
         },
@@ -82,7 +81,7 @@ export default defineComponent({
       })
 
       // emit mounted event
-      playerResult.value = _player
+      playerResult.value = playerRes
       mounted.value = true
       context.emit(MOUNTED_EVENT_NAME, {
         video: videoElement.value,
@@ -109,9 +108,9 @@ export default defineComponent({
         }),
         mounted.value &&
           context.slots.default?.({
-            video: videoElement.value,
-            player: videoJsPlayer.value,
-            state: readOnlyState.value
+            video: videoElement.value!,
+            player: videoJsPlayer.value!,
+            state: readOnlyState.value!
           })
       ])
     }

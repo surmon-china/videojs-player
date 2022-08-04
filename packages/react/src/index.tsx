@@ -1,18 +1,10 @@
 import React, { useState, useRef, useEffect } from 'react'
-import {
-  createPlayer,
-  PlayerResult,
-  props as _props,
-  PropKey,
-  Props,
-  events,
-  CamelCaseEventKey,
-  createPlayerState,
-  PlayerState,
-  VideoJsPlayer
-} from '../../../player'
+import { propKeys, Props, eventsMap, camelCaseEvents, CamelCaseEventKey } from '../../../player'
+import { createPlayer, createPlayerState, PlayerResult, PlayerState } from '../../../player'
+import { VideoJsPlayer } from '../../../player'
 
 export type { PlayerState as VideoPlayerState } from '../../../player'
+export type { CamelCaseEventKey as VideoPlayerEvents } from '../../../player'
 
 type EventProps = Partial<Record<CamelCaseEventKey, (event: Event) => void>>
 type ChildRenderPayload = {
@@ -24,39 +16,59 @@ type ChildRenderPayload = {
 export interface VideoPlayerProps extends EventProps, Omit<Props, 'children'> {
   className?: string
   videoJsChildren?: Props['children']
-  onStateChange?: (state: PlayerState) => void
-  onMounted?: (payload: ChildRenderPayload) => void
-  children?: (payload: ChildRenderPayload) => React.ReactNode
+  onStateChange?(state: PlayerState): void
+  onMounted?(payload: ChildRenderPayload): void
+  children?(payload: ChildRenderPayload): React.ReactNode
 }
 
-export const VideoPlayer: React.FC<VideoPlayerProps> = ({ children, ...restProps }) => {
-  const props = {
-    ...restProps,
-    children: restProps.videoJsChildren
-  }
+export const VideoPlayer: React.FC<VideoPlayerProps> = ({
+  className,
+  videoJsChildren,
+  onStateChange,
+  onMounted,
+  children,
+  ...restProps
+}) => {
+  const props: Props = { children: videoJsChildren }
+  const events: Record<CamelCaseEventKey, (event: Event) => void> = {} as any
+  const restPropKeys = Object.keys(restProps) as Array<keyof typeof restProps>
+  restPropKeys.forEach((key) => {
+    // @ts-ignore
+    if (propKeys.includes(key)) props[key] = restProps[key]
+    // @ts-ignore
+    if (camelCaseEvents.includes(key)) events[key] = restProps[key]
+  })
 
   const [mounted, setMounted] = useState(false)
+  const [playerState, setPlayerState] = useState<PlayerState | null>(null)
   const videoElement = useRef<HTMLVideoElement | null>(null)
   const playerResult = useRef<PlayerResult | null>(null)
-  const [playerState, setPlayerState] = useState<PlayerState | null>(null)
 
-  // sync fallback options to Video.js config
+  // Sync React class name to Video.js container.
+  const oldClassName = useRef<string>()
+  useEffect(() => {
+    if (mounted) {
+      playerResult.current?.updateClassNames(oldClassName.current, className)
+      oldClassName.current = className
+    }
+  }, [mounted, className])
+
+  // Sync fallback options to Video.js config.
   useEffect(() => {
     if (mounted) {
       playerResult.current?.updateOptions(props.options ?? {})
     }
   }, [props.options])
 
-  // sync component props to Video.js config
-  Object.keys(_props)
+  // Sync component props to Video.js config.
+  propKeys
     .filter((key) => key !== 'options')
     .forEach((key) => {
-      const k = key as PropKey
       useEffect(() => {
         if (mounted) {
-          playerResult.current?.updatePropOption(k, props[k])
+          playerResult.current?.updatePropOption(key, props[key])
         }
-      }, [props[k]])
+      }, [props[key]])
     })
 
   useEffect(() => {
@@ -66,7 +78,7 @@ export const VideoPlayer: React.FC<VideoPlayerProps> = ({ children, ...restProps
         props,
         element: videoElement.current,
         onEvent: (eventKey, event) => {
-          props[events[eventKey]]?.(event)
+          events[eventsMap[eventKey]]?.(event)
         }
       })
 
@@ -79,12 +91,12 @@ export const VideoPlayer: React.FC<VideoPlayerProps> = ({ children, ...restProps
         },
         onUpdate(_, __, newState) {
           setPlayerState(newState)
-          props.onStateChange?.(newState)
+          onStateChange?.(newState)
         }
       })
 
       setMounted(true)
-      props.onMounted?.({
+      onMounted?.({
         video: videoElement.current!,
         player: playerResult.current!.player,
         state: tempState!
@@ -101,8 +113,10 @@ export const VideoPlayer: React.FC<VideoPlayerProps> = ({ children, ...restProps
   }, [])
 
   return (
-    <div className={['react-video-player', props.className].filter(Boolean).join(' ')}>
-      <video className="video-js" ref={videoElement} />
+    // https://videojs.com/guides/embeds/
+    // https://videojs.com/guides/react/
+    <div data-vjs-player>
+      <video className="video-js r-video-player" ref={videoElement} />
       {mounted &&
         children?.({
           video: videoElement.current!,

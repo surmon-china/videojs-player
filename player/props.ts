@@ -261,15 +261,18 @@ const componentProps = {
   })
 }
 
-export const props = {
+export const propsConfig = {
   ...videoProps,
   ...videoJsProps,
   ...videoJsComponentProps,
   ...videoJsTechProps,
   ...componentProps
+} as const
+
+export type PropsConfig = typeof propsConfig
+export type PropKey = keyof PropsConfig
+export type Props = {
+  [K in PropKey]?: InferPropType<typeof propsConfig[K]['type']>
 }
 
-export type PropKey = keyof typeof props
-export type Props = {
-  [K in keyof typeof props]?: InferPropType<typeof props[K]['type']>
-}
+export const propKeys = Object.keys(propsConfig) as Array<PropKey>

@@ -1,7 +1,7 @@
 {
   "name": "@videojs-player/react",
   "description": "Video.js component for React",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "private": false,
   "license": "MIT",
   "author": "Surmon",
@@ -36,10 +36,8 @@
     "dev": "vite",
     "build": "libundler"
   },
-  "dependencies": {
-    "@types/video.js": "7.x"
-  },
   "peerDependencies": {
+    "@types/video.js": "7.x",
     "react": "^16.8 || ^17",
     "react-dom": "^16.8 || ^17",
     "video.js": "7.x"

@@ -3,7 +3,7 @@ import Component from './component'
 
 export type {
   Props as VideoPlayerProps,
-  EventKey as VideoPlayerEventKey,
+  EventKey as VideoPlayerEvents,
   PlayerState as VideoPlayerState
 } from '../../../player'
 

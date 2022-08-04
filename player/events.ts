@@ -1,7 +1,7 @@
 // https://www.w3.org/2010/05/video/mediaevents.html
 // https://developer.mozilla.org/en-US/docs/Web/HTML/Element/video#events
 // https://github.com/videojs/video.js/blob/main/src/js/tech/html5.js#L1204
-const HTML5Events = {
+const html5EventsMap = {
   loadstart: 'onLoadStart',
   suspend: 'onSuspend',
   abort: 'onAbort',
@@ -28,7 +28,7 @@ const HTML5Events = {
 } as const
 
 // https://docs.videojs.com/player#event
-const VideoJsEvents = {
+const videoJsEventsMap = {
   posterchange: 'onPosterChange',
   languagechange: 'onLanguageChange',
   fullscreenchange: 'onFullscreenChange',
@@ -50,28 +50,29 @@ const VideoJsEvents = {
   dispose: 'onDispose'
 } as const
 
-const PluginEvents = {
+const videoJsPluginEventsMap = {
   beforepluginsetup: 'onBeforePluginSetup',
   pluginsetup: 'onPluginSetup'
-  /*'pluginsetup:$name'*/
+  // pluginsetup:$name
 } as const
 
-const ComponentEvents = {
+const videoJsComponentEventsMap = {
   componentresize: 'onComponentResize',
   playerresize: 'onPlayerResize',
   ready: 'onReady',
   tap: 'onTap'
 } as const
 
-export const events = {
-  ...HTML5Events,
-  ...VideoJsEvents,
-  ...PluginEvents,
-  ...ComponentEvents
+export const eventsMap = {
+  ...html5EventsMap,
+  ...videoJsEventsMap,
+  ...videoJsPluginEventsMap,
+  ...videoJsComponentEventsMap
 } as const
 
-export type EventKey = keyof typeof events
-export const eventKeys = Object.keys(events) as Array<EventKey>
+export type EventMap = typeof eventsMap
+export type EventKey = keyof EventMap
+export const events = Object.keys(eventsMap) as Array<EventKey>
 
-export type CamelCaseEventKey = typeof camelCaseEventKeys[number]
-export const camelCaseEventKeys = Object.values(events)
+export const camelCaseEvents = Object.values(eventsMap)
+export type CamelCaseEventKey = typeof camelCaseEvents[number]

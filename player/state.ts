@@ -95,7 +95,7 @@ const StateConfig = {
     getter: (player: Player) => player.isInPictureInPicture()
   },
   isLive: {
-    getter: (player: Player) => player.liveTracker.isLive()
+    getter: (player: Player) => player.liveTracker?.isLive()
   },
   language: {
     events: ['languagechange'],
@@ -160,10 +160,7 @@ export interface CreatePlayerStateOptions {
 export const createPlayerState = (player: Player, options: CreatePlayerStateOptions) => {
   const keys = Object.keys(StateConfig) as Array<keyof typeof StateConfig>
   const state = keys.reduce(
-    (result, key) => {
-      const value = StateConfig[key].getter(player) as never
-      return { ...result, [key]: value }
-    },
+    (result, key) => ({ ...result, [key]: StateConfig[key].getter(player) }),
     { playing: false, waiting: false } as PlayerState
   )
 

@@ -1,7 +1,7 @@
 {
   "name": "@videojs-player/vue",
   "description": "Video.js component for Vue",
-  "version": "0.1.3",
+  "version": "0.2.0",
   "private": false,
   "license": "MIT",
   "author": "Surmon",
@@ -36,10 +36,8 @@
     "dev": "vite",
     "build": "libundler"
   },
-  "dependencies": {
-    "@types/video.js": "7.x"
-  },
   "peerDependencies": {
+    "@types/video.js": "7.x",
     "video.js": "7.x",
     "vue": "3.x"
   },
