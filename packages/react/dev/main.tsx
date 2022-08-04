@@ -5,6 +5,8 @@ import { VideoJsPlayer } from 'video.js'
 import 'video.js/dist/video-js.css'
 
 export const App: React.FC = () => {
+  const [enabledPlayer, setEnabledPlayer] = useState(true)
+
   const playerRef = useRef<VideoJsPlayer>()
   const [state, setState] = useState<VideoPlayerState>()
   const [config, setConfig] = useState<VideoPlayerProps>(() => ({
@@ -23,8 +25,16 @@ export const App: React.FC = () => {
     setState(payload.state)
   }
 
+  const handlePlayerUnmounted = () => {
+    console.log('---handlePlayerUnmounted')
+  }
+
   const handlePlayerReady = (event: Event) => {
     console.log('---handlePlayerReady', event)
+  }
+
+  const handlePlayerDispose = (event: Event) => {
+    console.log('---handlePlayerDispose', event)
   }
 
   const handleVolumeChange = (event: Event) => {
@@ -44,65 +54,73 @@ export const App: React.FC = () => {
           onChange={(event) => updateConfig('volume', Number(event.target.value))}
         />
       </div>
+      <br />
+      <button onClick={() => setEnabledPlayer(!enabledPlayer)}>toggle player</button>
+      <br />
+      <br />
       <div className="player-wrapper">
-        <VideoPlayer
-          className={`videojs-player vjs-big-play-centered player-${
-            state?.playing ? 'playing' : 'not'
-          }`}
-          src={config.src}
-          poster={config.poster}
-          volume={config.volume}
-          width={600}
-          height={400}
-          fluid={false}
-          controls
-          onStateChange={setState}
-          onMounted={handlePlayerMounted}
-          onReady={handlePlayerReady}
-          onVolumeChange={handleVolumeChange}
-        >
-          {({ player, state }) => {
-            return (
-              <div
-                className="advanced-controls"
-                style={{
-                  fontSize: 30,
-                  position: 'absolute',
-                  top: 0,
-                  width: '100%',
-                  display: 'block'
-                }}
-              >
-                <button
-                  onClick={() => {
-                    state.playing ? player.pause() : player.play()
+        {enabledPlayer && (
+          <VideoPlayer
+            className={`videojs-player vjs-big-play-centered player-${
+              state?.playing ? 'playing' : 'not'
+            }`}
+            src={config.src}
+            poster={config.poster}
+            volume={config.volume}
+            width={600}
+            height={400}
+            fluid={false}
+            controls
+            onStateChange={setState}
+            onMounted={handlePlayerMounted}
+            onUnmounted={handlePlayerUnmounted}
+            onReady={handlePlayerReady}
+            onDispose={handlePlayerDispose}
+            onVolumeChange={handleVolumeChange}
+          >
+            {({ player, state }) => {
+              return (
+                <div
+                  className="advanced-controls"
+                  style={{
+                    fontSize: 30,
+                    position: 'absolute',
+                    top: 0,
+                    width: '100%',
+                    display: 'block'
                   }}
                 >
-                  {state.playing ? 'pause' : 'play'}
-                </button>
-                <button onClick={() => player.muted(!state.muted)}>
-                  {state.muted ? 'unmuted' : 'mute'}
-                </button>
-                <button
-                  onClick={() => {
-                    state.isFullscreen ? player.exitFullscreen() : player.requestFullscreen()
-                  }}
-                >
-                  {state.isFullscreen ? '🖥 Exit' : '💻 Enter'} FS
-                </button>
-                <button
-                  onClick={() => {
-                    state.isInPictureInPicture
-                      ? player.exitPictureInPicture()
-                      : player.requestPictureInPicture()
-                  }}
-                >
-                  📺 {state.isInPictureInPicture ? 'Exit' : 'Enter'} PIP
-                </button>
-              </div>
-            )
-          }}
-        </VideoPlayer>
+                  <button
+                    onClick={() => {
+                      state.playing ? player.pause() : player.play()
+                    }}
+                  >
+                    {state.playing ? 'pause' : 'play'}
+                  </button>
+                  <button onClick={() => player.muted(!state.muted)}>
+                    {state.muted ? 'unmuted' : 'mute'}
+                  </button>
+                  <button
+                    onClick={() => {
+                      state.isFullscreen ? player.exitFullscreen() : player.requestFullscreen()
+                    }}
+                  >
+                    {state.isFullscreen ? '🖥 Exit' : '💻 Enter'} FS
+                  </button>
+                  <button
+                    onClick={() => {
+                      state.isInPictureInPicture
+                        ? player.exitPictureInPicture()
+                        : player.requestPictureInPicture()
+                    }}
+                  >
+                    📺 {state.isInPictureInPicture ? 'Exit' : 'Enter'} PIP
+                  </button>
+                </div>
+              )
+            }}
+          </VideoPlayer>
+        )}
       </div>
       <hr />
       <div className="player-state">

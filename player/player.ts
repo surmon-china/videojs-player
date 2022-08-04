@@ -88,9 +88,11 @@ export const createPlayer = ({ props, element, onEvent }: CreatePlayerOptions) =
     propsConfig[key]?.onChange?.(player, value as never)
   }
 
+  const disposePlayer = () => player.dispose()
+
   return {
     player,
-    dispose: player.dispose,
+    dispose: disposePlayer,
     updateClassNames,
     updateOptions,
     updatePropOption

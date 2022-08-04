@@ -297,10 +297,11 @@ Events emitted by Video.js, the argument type is always [`EventTarget`](https://
 
 The events emitted by Component.
 
-| Component Event | Description                                                                                                               | Vue        | React           |
-| :-------------- | :------------------------------------------------------------------------------------------------------------------------ | :--------- | :-------------- |
-| mounted         | Fires when player component mounted. <br> `({ video: HTMLVideoElement, player: VideoJsPlayer, state: VideoPlayerState })` | `@mounted` | `onMounted`     |
-| stateChange     | Fires when player state changed (React only). `(state: VideoPlayerState)`                                                 | -          | `onStateChange` |
+| Component Event | Description                                                                                                               | Vue          | React           |
+| :-------------- | :------------------------------------------------------------------------------------------------------------------------ | :----------- | :-------------- |
+| mounted         | Fires when player component mounted. <br> `({ video: HTMLVideoElement, player: VideoJsPlayer, state: VideoPlayerState })` | `@mounted`   | `onMounted`     |
+| unmounted       | Fires when player component unmounted.                                                                                    | `@unmounted` | `onUnmounted`   |
+| stateChange     | Fires when player state changed (React only). `(state: VideoPlayerState)`                                                 | -            | `onStateChange` |
 
 ### Player State
 

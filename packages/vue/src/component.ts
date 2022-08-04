@@ -5,11 +5,12 @@ import { PlayerState, PlayerResult } from '../../../player'
 import { normalizedProps, normalizedEvents, bindPropUpdateEvent } from './helper'
 
 const MOUNTED_EVENT_NAME = 'mounted'
+const UNMOUNTED_EVENT_NAME = 'unmounted'
 
 export default defineComponent({
   name: 'VueVideoPlayer',
   props: { ...normalizedProps, class: String },
-  emits: [...normalizedEvents, MOUNTED_EVENT_NAME],
+  emits: [...normalizedEvents, MOUNTED_EVENT_NAME, UNMOUNTED_EVENT_NAME],
   // https://github.com/vuejs/rfcs/pull/192
   // https://github.com/vuejs/core/pull/2693
   // slots: Object as () => { player: VideoJsPlayer; state: DeepReadonly<PlayerState> },
@@ -95,6 +96,7 @@ export default defineComponent({
         playerResult.value.dispose()
         playerResult.value = null
         state.value = null
+        context.emit(UNMOUNTED_EVENT_NAME)
       }
     })
 

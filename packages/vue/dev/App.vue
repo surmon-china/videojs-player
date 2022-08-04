@@ -27,6 +27,11 @@
     }
   ]
 
+  const onPlayer = shallowRef(true)
+  const togglePlayer = () => {
+    onPlayer.value = !onPlayer.value
+  }
+
   const player = shallowRef<VideoJsPlayer>()
   const state = shallowRef<VideoPlayerState>()
   const config: VideoPlayerProps = shallowReactive({
@@ -36,7 +41,7 @@
     width: 800,
     height: 400,
     volume: 0.8,
-    playbackRate: 2,
+    playbackRate: 2.5,
     playbackRates: playbackRatesOptions[0],
     controls: true,
     fluid: false,
@@ -60,8 +65,16 @@
     player.value = payload.player
   }
 
+  const handleUnmounted = () => {
+    console.log('---handleUnmounted')
+  }
+
   const handlePlayerReady = (event: any) => {
     console.log('---handlePlayerReady', event)
+  }
+
+  const handlePlayerDispose = (event: any) => {
+    console.log('---handlePlayerDispose', event)
   }
 
   const timeRangesToString = (timeRanges?: TimeRanges) => {
@@ -193,7 +206,11 @@
           <Table :data="config" />
         </div>
       </div>
+      <button @click="togglePlayer">toggle player</button>
+      <br />
+      <br />
       <video-player
+        v-if="onPlayer"
         id="VideoPlayer"
         :class="['dev-player', 'custom-theme', { playing: state?.playing }]"
         :data-playing-status="state?.playing"
@@ -214,7 +231,9 @@
         :language="config.language"
         :languages="config.languages"
         @ready="handlePlayerReady"
+        @dispose="handlePlayerDispose"
         @mounted="handleMounted"
+        @unmounted="handleUnmounted"
       >
         <template v-slot="{ player, state, video }">
           <div class="player-advance-controls">

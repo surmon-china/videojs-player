@@ -2,6 +2,11 @@
 
 All notable changes to this project will be documented in this file.
 
+### v0.3.0 (2022-08-05)
+
+- fix: player `dispose` error
+- feat: add new event `unmounted`
+
 ### v0.2.1 (2022-08-05)
 
 - fix: preprocessing of prop `class`

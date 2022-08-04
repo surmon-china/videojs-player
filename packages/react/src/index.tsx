@@ -18,6 +18,7 @@ export interface VideoPlayerProps extends EventProps, Omit<Props, 'children'> {
   videoJsChildren?: Props['children']
   onStateChange?(state: PlayerState): void
   onMounted?(payload: ChildRenderPayload): void
+  onUnmounted?(): void
   children?(payload: ChildRenderPayload): React.ReactNode
 }
 
@@ -26,6 +27,7 @@ export const VideoPlayer: React.FC<VideoPlayerProps> = ({
   videoJsChildren,
   onStateChange,
   onMounted,
+  onUnmounted,
   children,
   ...restProps
 }) => {
@@ -108,6 +110,7 @@ export const VideoPlayer: React.FC<VideoPlayerProps> = ({
         playerResult.current.dispose()
         playerResult.current = null
         setPlayerState(null)
+        onUnmounted?.()
       }
     }
   }, [])
