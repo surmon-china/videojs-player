@@ -1,7 +1,7 @@
 {
   "name": "@videojs-player/vue",
   "description": "Video.js component for Vue",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "private": false,
   "license": "MIT",
   "author": "Surmon",

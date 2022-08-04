@@ -1,6 +1,6 @@
 <script setup lang="ts">
   import { shallowRef, shallowReactive } from 'vue'
-  import { VideoPlayerProps, VideoPlayerState } from '../src'
+  import { VideoPlayer, VideoPlayerProps, VideoPlayerState } from '../src'
   import { VideoJsPlayer } from 'video.js'
   import 'video.js/dist/video-js.css'
   import Table from './Table.vue'

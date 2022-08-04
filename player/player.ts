@@ -68,8 +68,16 @@ export const createPlayer = ({ props, element, onEvent }: CreatePlayerOptions) =
 
   // Set new class names to Video.js container element.
   const updateClassNames = (oldClassName: string | void, newClassName: string | void) => {
-    oldClassName?.split(' ').map((name) => player.removeClass(name))
-    newClassName?.split(' ').map((name) => player.addClass(name))
+    oldClassName
+      ?.trim()
+      .replace(/\s+/g, ' ')
+      .split(' ')
+      .map((name) => player.removeClass(name))
+    newClassName
+      ?.trim()
+      .replace(/\s+/g, ' ')
+      .split(' ')
+      .map((name) => player.addClass(name))
   }
 
   // Set new options to Video.js config.
