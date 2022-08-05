@@ -389,7 +389,10 @@ pnpm release
 
 ### Changelog
 
-Detailed changes for each release are documented in the [release notes](/CHANGELOG.md).
+- [@videojs-player/vue](./packages/vue/CHANGELOG.md)
+- [@videojs-player/react](./packages/react/CHANGELOG.md)
+- [vue-video-player](./legacy/CHANGELOG.md)
+
 
 ### License
 
