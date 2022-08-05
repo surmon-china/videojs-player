@@ -42,8 +42,8 @@ If you are looking for an legacy version of the component for **Vue2**, use the 
 ### Component Documentation
 
 - [Examples](https://github.surmon.me/videojs-player)
-- [Usage of Vue](#usage-vue)
-- [Usage of React](#usage-react)
+- [Usage in Vue](#usage-vue)
+- [Usage in React](#usage-react)
 - [Component Props](#component-props)
 - [Component Events](#component-events)
 - [Player State](#player-state)
