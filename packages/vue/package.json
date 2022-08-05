@@ -12,6 +12,7 @@
     "vue player",
     "vue video"
   ],
+  "homepage": "https://github.surmon.me/videojs-player",
   "repository": {
     "type": "git",
     "url": "https://github.com/surmon-china/videojs-player.git",
