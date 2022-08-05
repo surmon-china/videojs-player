@@ -22,7 +22,7 @@
 &nbsp;
 [![react-video-player](https://img.shields.io/npm/v/@videojs-player/react?color=c7343a&label=@videojs-player/react&style=for-the-badge)](https://www.npmjs.com/package/@videojs-player/react)
 
-[Video.js](https://github.com/videojs/video.js) player component for Vue(3) and React.
+[**Video.js**](https://github.com/videojs/video.js) player component for **Vue(3)** and **React**.
 
 ---
 
