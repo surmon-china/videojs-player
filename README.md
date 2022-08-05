@@ -20,7 +20,7 @@
 
 ### BREAKING CHANGE ⚠️
 
-The `vue-video-player` package has now been renamed to `@videojs-player/vue` due to the addition of support for React. Also, support for Vue has undergone a Breaking change, with the latest version of the component only supporting Vue3.
+The `vue-video-player` package has now been **renamed** to `@videojs-player/vue` due to the addition of support for React. Also, support for Vue has undergone a Breaking change, with the latest version of the component **only supporting Vue3**.
 
 The last version of the `vue-video-player` package will be released in v6.0, which will just re-export everything from `@videojs-player/vue`, so if you're ready to use the new version of `vue-video-player`, please just improt `@videojs-player/vue`.
 
@@ -28,7 +28,7 @@ The latest version of videojs-player supports responsiveness for the vast majori
 
 ### Legacy Version
 
-If you are looking for an legacy version of the component for Vue2, use the [vue-video-player@4.x](https://github.com/surmon-china/videojs-player/tree/vue-video-player).
+If you are looking for an legacy version of the component for **Vue2**, use the [vue-video-player@4.x](https://github.com/surmon-china/videojs-player/tree/vue-video-player).
 
 ---
 
