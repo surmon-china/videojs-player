@@ -19,7 +19,7 @@ support dynamic change options
 
 ### v5.0.0
 
-- add brower support
+- add bower support
 - add test scripts
 - add global default options
 - update babel and webpack configs
