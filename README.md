@@ -148,7 +148,7 @@ yarn add video.js @videojs-player/react
 
 #### Component
 
-```jsx
+```tsx
 import React from 'react'
 import { VideoPlayer } from '@videojs-player/react'
 
@@ -174,7 +174,7 @@ export const Component: React.FC = () => {
 
 #### Custom player controls
 
-```jsx
+```tsx
 import React from 'react'
 import { VideoPlayer } from '@videojs-player/react'
 
