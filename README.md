@@ -1,3 +1,4 @@
+<br />
 <p></p>
 <p align="center">
   <a href="https://videojs.com/" target="_blank">
