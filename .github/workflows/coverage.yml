@@ -11,16 +11,21 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - uses: actions/setup-node@v2
+      - uses: actions/setup-node@v3
         with:
-          node-version: '16'
-          cache: 'yarn'
+          node-version: 16
+          
+      - uses: pnpm/action-setup@v2.0.1
+        name: Install pnpm
+        id: pnpm-install
+        with:
+          version: 7
 
       - name: Install dependencies
-        run: yarn install
+        run: pnpm install
 
       - name: Test
-        run: yarn test
+        run: pnpm test
 
       - name: Upload coverage to Codecov
         uses: codecov/codecov-action@v2
