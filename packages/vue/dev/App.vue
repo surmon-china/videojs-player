@@ -103,7 +103,7 @@
                 :value="config.src"
                 @change="(event) => handleSelectSource(event.target.selectedIndex)"
               >
-                <option :key="source.src" :value="source.src" v-for="(source, index) in sources">
+                <option :key="source.src!" :value="source.src" v-for="(source, index) in sources">
                   {{ index + 1 }}
                 </option>
               </select>
@@ -212,7 +212,7 @@
       <video-player
         v-if="onPlayer"
         id="VideoPlayer"
-        :class="['dev-player', 'custom-theme', { playing: state?.playing }]"
+        :class="['dev-player', 'custom-theme', { playing: Boolean(state?.playing) }]"
         :data-playing-status="state?.playing"
         :style="{ backgroundColor: state?.playing ? 'red' : 'blue' }"
         :src="config.src"
@@ -276,7 +276,7 @@
       </video-player>
     </div>
     <div class="right">
-      <Table :data="state" />
+      <Table :data="state!" />
       <hr />
       <p>buffered: {{ timeRangesToString(state?.buffered) }}</p>
       <p>played: {{ timeRangesToString(state?.played) }}</p>

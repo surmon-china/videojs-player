@@ -1,4 +1,7 @@
 {
   "extends": "../../tsconfig.json",
+  "compilerOptions": {
+    "jsx": "preserve"
+  },
   "include": ["./src", "./dev", "./test", "./vite.config.ts"]
 }
