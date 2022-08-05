@@ -308,7 +308,7 @@ Events emitted by Video.js, the argument type is always [`EventTarget`](https://
 | [event.tap](https://docs.videojs.com/player#event:tap)                                     | -           | `@tap`                   | `onTap`                   |
 | [event.ready](https://docs.videojs.com/player#event:ready)                                 | -           | `@ready`                 | `onReady`                 |
 
-The events emitted by Component.
+The events emitted by videojs-player component.
 
 | Component Event | Description                                                                                                               | Vue          | React           |
 | :-------------- | :------------------------------------------------------------------------------------------------------------------------ | :----------- | :-------------- |
