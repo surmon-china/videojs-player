@@ -196,7 +196,7 @@ All parameters are optional and Video.js determines the default value of each pr
 Video.js will automatically respond to the corresponding update,
 e.g. a change in `volume` will cause the player to change the volume.
 
-| Prop name                                       | Video.js API Doc or description                                                                    | Type                   | Responsive |
+| Prop Name                                       | Video.js API Doc & Description                                                                     | Type                   | Responsive |
 | :---------------------------------------------- | :------------------------------------------------------------------------------------------------- | :--------------------- | :--------- |
 | id                                              | [options.id](https://videojs.com/guides/options/#id)                                               | `String`               |            |
 | src                                             | [options.src](https://videojs.com/guides/options/#src)                                             | `String`               | ✓          |
@@ -249,7 +249,7 @@ e.g. a change in `volume` will cause the player to change the volume.
 
 Events emitted by Video.js, the argument type is always [`EventTarget`](https://docs.videojs.com/eventtarget).
 
-| Video.js Event                                                                             | Description | Vue                      | React                     |
+| Video.js Event                                                                             | 🫥 🫥 🫥 🫥 🫥 🫥 | Vue                      | React                     |
 | :----------------------------------------------------------------------------------------- | :---------- | :----------------------- | :------------------------ |
 | [event.loadstart](https://docs.videojs.com/player#event:loadstart)                         | -           | `@loadstart`             | `onLoadStart`             |
 | [event.suspend](https://docs.videojs.com/player#event:suspend)                             | -           | `@suspend`               | `onSuspend`               |
@@ -316,7 +316,7 @@ you can get this object via the `mounted` event or `stateChange` (React Only).
 | :------------------- | :------------------------------------------------------------- | :--------------------------------------------------------------------------------- |
 | src                  | The URL of the currently playing video.                        | `String`                                                                           |
 | currentSrc           | ditto                                                          | `String`                                                                           |
-| currentSource        | The currently playing video source Object.                     | [`videojs.Tech.SourceObject`](https://docs.videojs.com/tech#~SourceObject)         |
+| currentSource        | The currently playing video source object.                     | [`videojs.Tech.SourceObject`](https://docs.videojs.com/tech#~SourceObject)         |
 | width                | Player's width.                                                | `Number`                                                                           |
 | height               | Player's height.                                               | `Number`                                                                           |
 | currentWidth         | ditto                                                          | `Number`                                                                           |
