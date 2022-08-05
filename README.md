@@ -86,8 +86,8 @@ app.use(VueVideoPlayer)
 ```vue
 <template>
   <video-player
-    src="/your-xxx-path/video.mp4"
-    poster="/your-xxx-path/poster.jpg"
+    src="/your-path/video.mp4"
+    poster="/your-path/poster.jpg"
     :loop="true"
     :volume="0.6"
     ...
@@ -154,8 +154,8 @@ import { VideoPlayer } from '@videojs-player/react'
 export const Component: React.FC = () => {
   return (
     <VideoPlayer
-      src="/your-xxx-path/video.mp4"
-      poster="/your-xxx-path/poster.jpg"
+      src="/your-path/video.mp4"
+      poster="/your-path/poster.jpg"
       loop={true}
       volume={0.6}
       // more props...
