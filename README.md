@@ -1,7 +1,6 @@
 <br />
-<p></p>
 <p align="center">
-  <a href="https://videojs.com/" target="_blank">
+  <a href="https://videojs.com#gh-dark-mode-only" target="_blank">
     <img height="52px" src="/videojs-logo.png" />
   </a>
 </p>
