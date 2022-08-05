@@ -5,9 +5,8 @@ All notable changes to this project will be documented in this file.
 ### v6.0.0 (2022-07-23)
 
 - feat: upgrade Video.js to v7
-- feat: refactoring to pnpm monorepo
-  - `@videojs-player/react`
-  - `@videojs-player/vue`
+- feat: refactoring to `pnpm` monorepo
+- feat: re-exports [`@videojs-player/vue`](../packages/vue)
 
 ### v5.0.2
 
