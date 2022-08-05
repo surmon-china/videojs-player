@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
+### v1.0.0-beta.0 (2022-08-06)
+
+- fix: prop `class` type
+- fix: player `updateClassNames`
+- fix: remove prop `restoreEl` `Element` type
+
 ### v0.3.0 (2022-08-05)
 
 - fix: player `dispose` error

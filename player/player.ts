@@ -70,7 +70,8 @@ export const createPlayer = ({ props, element, onEvent }: CreatePlayerOptions) =
   const updateClassNames = (oldClassName: string | void, newClassName: string | void) => {
     // Preprocessing of className: ` test-a    test-b   test-c  ` > `test-a test-b test-c`
     const standardize = (name: string | void) => {
-      return name?.trim().replace(/\s+/g, ' ').split(' ') ?? []
+      const trimmed = name?.trim().replace(/\s+/g, ' ')
+      return trimmed ? trimmed.split(' ') ?? [] : []
     }
 
     standardize(oldClassName).map((name) => player.removeClass(name))

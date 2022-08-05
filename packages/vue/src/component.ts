@@ -1,4 +1,4 @@
-import { defineComponent, onMounted, onBeforeUnmount, h } from 'vue'
+import { defineComponent, onMounted, onBeforeUnmount, h, normalizeClass } from 'vue'
 import { shallowRef, ref, computed, readonly, watch, toRaw, DeepReadonly } from 'vue'
 import { createPlayer, createPlayerState, propKeys } from '../../../player'
 import { PlayerState, PlayerResult } from '../../../player'
@@ -9,7 +9,7 @@ const UNMOUNTED_EVENT_NAME = 'unmounted'
 
 export default defineComponent({
   name: 'VueVideoPlayer',
-  props: { ...normalizedProps, class: String },
+  props: { ...normalizedProps, class: [String, Object, Array] },
   emits: [...normalizedEvents, MOUNTED_EVENT_NAME, UNMOUNTED_EVENT_NAME],
   // https://github.com/vuejs/rfcs/pull/192
   // https://github.com/vuejs/core/pull/2693
@@ -46,7 +46,9 @@ export default defineComponent({
       watch(
         () => props.class,
         (newClassName, oldClassName) => {
-          playerRes.updateClassNames(oldClassName, newClassName)
+          const ocn = normalizeClass(oldClassName)
+          const ncn = normalizeClass(newClassName)
+          playerRes.updateClassNames(ocn, ncn)
         },
         { immediate: true }
       )

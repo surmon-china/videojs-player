@@ -200,7 +200,7 @@ const videoJsProps = {
   plugins: prop({
     type: Object as PropType<NonNullable<VideoJsPlayerOptions['plugins']>>
   }),
-  restoreEl: prop({ type: [Boolean, Element] as unknown as PropType<boolean | Element> }),
+  restoreEl: prop({ type: [Boolean, Object] as unknown as PropType<boolean | Element> }),
   'vtt.js': prop({ type: String })
 }
 
