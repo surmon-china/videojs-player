@@ -5,7 +5,6 @@
   </a>
 </p>
 
-
 # videojs-player
 
 [![GitHub stars](https://img.shields.io/github/stars/surmon-china/videojs-player.svg?style=for-the-badge)](https://github.com/surmon-china/videojs-player/stargazers)
@@ -88,6 +87,7 @@ app.use(VueVideoPlayer)
   <video-player
     src="/your-path/video.mp4"
     poster="/your-path/poster.jpg"
+    controls
     :loop="true"
     :volume="0.6"
     ...
@@ -156,6 +156,7 @@ export const Component: React.FC = () => {
     <VideoPlayer
       src="/your-path/video.mp4"
       poster="/your-path/poster.jpg"
+      controls
       loop={true}
       volume={0.6}
       // more props...
@@ -400,7 +401,6 @@ pnpm release
 - [@videojs-player/vue](./packages/vue/CHANGELOG.md)
 - [@videojs-player/react](./packages/react/CHANGELOG.md)
 - [vue-video-player](./legacy/CHANGELOG.md)
-
 
 ### License
 
