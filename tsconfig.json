@@ -1,0 +1,14 @@
+{
+  "compilerOptions": {
+    "module": "esnext",
+    "target": "ES6",
+    "moduleResolution": "node",
+    "strict": true,
+    "sourceMap": true,
+    "esModuleInterop": true,
+    "declaration": true,
+    "lib": ["esnext", "dom"],
+    "types": ["vitest"]
+  },
+  "exclude": ["node_modules"]
+}
