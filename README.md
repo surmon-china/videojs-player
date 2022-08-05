@@ -196,55 +196,54 @@ All parameters are optional and Video.js determines the default value of each pr
 Video.js will automatically respond to the corresponding update,
 e.g. a change in `volume` will cause the player to change the volume.
 
-| Prop name                                       | Video.js API Doc or description                                                                                       | Type                   | Responsive |
-| :---------------------------------------------- | :-------------------------------------------------------------------------------------------------------------------- | :--------------------- | :--------- |
-| id                                              | [options.id](https://videojs.com/guides/options/#id)                                                                  | `String`               |            |
-| src                                             | [options.src](https://videojs.com/guides/options/#src)                                                                | `String`               | ✓          |
-| sources                                         | [options.sources](https://videojs.com/guides/options/#sources)                                                        | `Array`                | ✓          |
-| width                                           | [options.width](https://videojs.com/guides/options/#width)                                                            | `Number`               | ✓          |
-| height                                          | [options.height](https://videojs.com/guides/options/#height)                                                          | `Number`               | ✓          |
-| preload                                         | [options.preload](https://videojs.com/guides/options/#preload)                                                        | `String`               | ✓          |
-| loop                                            | [options.loop](https://videojs.com/guides/options/#loop)                                                              | `Boolean`              | ✓          |
-| muted                                           | [options.muted](https://videojs.com/guides/options/#muted)                                                            | `Boolean`              | ✓          |
-| poster                                          | [options.poster](https://videojs.com/guides/options/#poster)                                                          | `String`               | ✓          |
-| controls                                        | [options.controls](https://videojs.com/guides/options/#controls)                                                      | `Boolean`              | ✓          |
-| autoplay                                        | [options.autoplay](https://videojs.com/guides/options/#autoplay)                                                      | `Boolean \| String`    | ✓          |
-| playsInline                                     | [options.playsInline](https://docs.videojs.com/player#playsinline)                                                    | `Boolean`              | ✓          |
-| crossOrigin                                     | [options.crossOrigin](https://docs.videojs.com/player#crossorigin)                                                    | `String`               | ✓          |
-| volume                                          | A number, between 0 and 1, control the volume of the player.                                                          | `Number`               | ✓          |
-| playbackRate                                    | Control the playback rate of the player.                                                                              | `Number`               | ✓          |
-| playbackRates                                   | [options.playbackRates](https://videojs.com/guides/options/#playbackrates)                                            | `Array<Number>`        | ✓          |
-| fluid                                           | [options.fluid](https://videojs.com/guides/options/#fluid)                                                            | `Boolean`              | ✓          |
-| fill                                            | [options.fill](https://videojs.com/guides/options/#fill)                                                              | `Boolean`              | ✓          |
-| language                                        | [options.language](https://videojs.com/guides/options/#language)                                                      | `String`               | ✓          |
-| languages                                       | [options.languages](https://videojs.com/guides/options/#languages)                                                    | `Object`               |            |
-| tracks                                          | [options.tracks](https://videojs.com/guides/text-tracks/)                                                             | `Array`                | ✓          |
-| textTrackSettings                               | [options.textTrackSettings](https://docs.videojs.com/texttracksettings)                                               | `Object`               | ✓          |
-| responsive                                      | [options.responsive](https://videojs.com/guides/options/#responsive)                                                  | `Boolean`              | ✓          |
-| breakpoints                                     | [options.breakpoints](https://videojs.com/guides/options/#breakpoints)                                                | `Object`               | ✓          |
-| fullscreen                                      | [options.fullscreen](https://videojs.com/guides/options/#fullscreen)                                                  | `FullscreenOptions`    |            |
-| aspectRatio                                     | [options.aspectRatio](https://videojs.com/guides/options/#aspectratio)                                                | `Boolean`              | ✓          |
-| liveui                                          | [options.liveui](https://videojs.com/guides/options/#liveui)                                                          | `Boolean`              |            |
-| liveTracker                                     | [options.liveTracker](https://videojs.com/guides/options/#livetrackertrackingthreshold)                               | `Object`               |            |
-| disablePictureInPicture                         | [options.disablePictureInPicture](https://docs.videojs.com/html5#disablePictureInPicture)                             | `Boolean`              | ✓          |
-| notSupportedMessage                             | [options.notSupportedMessage](https://videojs.com/guides/options/#notsupportedmessage)                                | `String`               | ✓          |
-| normalizeAutoplay                               | [options.normalizeAutoplay](https://videojs.com/guides/options/#normalizeautoplay)                                    | `Boolean`              | ✓          |
-| audioPosterMode                                 | [options.audioPosterMode](https://videojs.com/guides/options/#audiopostermode)                                        | `Boolean`              | ✓          |
-| audioOnlyMode                                   | [options.audioOnlyMode](https://videojs.com/guides/options/#audioonlymode)                                            | `Boolean`              | ✓          |
-| noUITitleAttributes                             | [options.noUITitleAttributes](https://videojs.com/guides/options/#nouititleattributes)                                | `Boolean`              |            |
-| preferFullWindow                                | [options.preferFullWindow](https://videojs.com/guides/options/#preferfullwindow)                                      | `Boolean`              |            |
-| suppressNotSupportedError                       | [options.suppressNotSupportedError](https://videojs.com/guides/options/#suppressnotsupportederror)                    | `Boolean`              |            |
-| techCanOverridePoster                           | [options.techCanOverridePoster](https://videojs.com/guides/options/#techcanoverrideposter)                            | `Boolean`              |            |
-| techOrder                                       | [options.techOrder](https://videojs.com/guides/options/#techorder)                                                    | `Array`                |            |
-| inactivityTimeout                               | [options.inactivityTimeout](https://videojs.com/guides/options/#inactivitytimeout)                                    | `Number`               |            |
-| userActions                                     | [options.userActions](https://videojs.com/guides/options/#useractions)                                                | `Object`               |            |
-| restoreEl                                       | [options.restoreEl](https://videojs.com/guides/options/#restoreel)                                                    | `Boolean \| Element`   |            |
-| vtt.js                                          | [options['vtt.js']](https://videojs.com/guides/options/#vttjs)                                                        | `String`               |            |
-| `children` (Vue) <br> `videoJsChildren` (React) | [options.children](https://videojs.com/guides/options/#children)                                                      | `Array \| Object`      |            |
-| html5                                           | [options.html5](https://videojs.com/guides/options/#html5)                                                            | `Object`               |            |
-| plugins                                         | [options.plugins](https://videojs.com/guides/options/#plugins)                                                        | `Object`               |            |
-| options                                         | A fallback scheme, if you need to use options that don't exist in props, pass them to `options`.                      | `VideoJsPlayerOptions` |            |
-| autoDestroy                                     | Default: `true`, which means that the Video.js instance will be automatically destroyed before the component unmount. | `Boolean`              |            |
+| Prop name                                       | Video.js API Doc or description                                                                    | Type                   | Responsive |
+| :---------------------------------------------- | :------------------------------------------------------------------------------------------------- | :--------------------- | :--------- |
+| id                                              | [options.id](https://videojs.com/guides/options/#id)                                               | `String`               |            |
+| src                                             | [options.src](https://videojs.com/guides/options/#src)                                             | `String`               | ✓          |
+| sources                                         | [options.sources](https://videojs.com/guides/options/#sources)                                     | `Array`                | ✓          |
+| width                                           | [options.width](https://videojs.com/guides/options/#width)                                         | `Number`               | ✓          |
+| height                                          | [options.height](https://videojs.com/guides/options/#height)                                       | `Number`               | ✓          |
+| preload                                         | [options.preload](https://videojs.com/guides/options/#preload)                                     | `String`               | ✓          |
+| loop                                            | [options.loop](https://videojs.com/guides/options/#loop)                                           | `Boolean`              | ✓          |
+| muted                                           | [options.muted](https://videojs.com/guides/options/#muted)                                         | `Boolean`              | ✓          |
+| poster                                          | [options.poster](https://videojs.com/guides/options/#poster)                                       | `String`               | ✓          |
+| controls                                        | [options.controls](https://videojs.com/guides/options/#controls)                                   | `Boolean`              | ✓          |
+| autoplay                                        | [options.autoplay](https://videojs.com/guides/options/#autoplay)                                   | `Boolean \| String`    | ✓          |
+| playsInline                                     | [options.playsInline](https://docs.videojs.com/player#playsinline)                                 | `Boolean`              | ✓          |
+| crossOrigin                                     | [options.crossOrigin](https://docs.videojs.com/player#crossorigin)                                 | `String`               | ✓          |
+| volume                                          | A number, between 0 and 1, control the volume of the player.                                       | `Number`               | ✓          |
+| playbackRate                                    | Control the playback rate of the player.                                                           | `Number`               | ✓          |
+| playbackRates                                   | [options.playbackRates](https://videojs.com/guides/options/#playbackrates)                         | `Array<Number>`        | ✓          |
+| fluid                                           | [options.fluid](https://videojs.com/guides/options/#fluid)                                         | `Boolean`              | ✓          |
+| fill                                            | [options.fill](https://videojs.com/guides/options/#fill)                                           | `Boolean`              | ✓          |
+| language                                        | [options.language](https://videojs.com/guides/options/#language)                                   | `String`               | ✓          |
+| languages                                       | [options.languages](https://videojs.com/guides/options/#languages)                                 | `Object`               |            |
+| tracks                                          | [options.tracks](https://videojs.com/guides/text-tracks/)                                          | `Array`                | ✓          |
+| textTrackSettings                               | [options.textTrackSettings](https://docs.videojs.com/texttracksettings)                            | `Object`               | ✓          |
+| responsive                                      | [options.responsive](https://videojs.com/guides/options/#responsive)                               | `Boolean`              | ✓          |
+| breakpoints                                     | [options.breakpoints](https://videojs.com/guides/options/#breakpoints)                             | `Object`               | ✓          |
+| fullscreen                                      | [options.fullscreen](https://videojs.com/guides/options/#fullscreen)                               | `FullscreenOptions`    |            |
+| aspectRatio                                     | [options.aspectRatio](https://videojs.com/guides/options/#aspectratio)                             | `Boolean`              | ✓          |
+| liveui                                          | [options.liveui](https://videojs.com/guides/options/#liveui)                                       | `Boolean`              |            |
+| liveTracker                                     | [options.liveTracker](https://videojs.com/guides/options/#livetrackertrackingthreshold)            | `Object`               |            |
+| disablePictureInPicture                         | [options.disablePictureInPicture](https://docs.videojs.com/html5#disablePictureInPicture)          | `Boolean`              | ✓          |
+| notSupportedMessage                             | [options.notSupportedMessage](https://videojs.com/guides/options/#notsupportedmessage)             | `String`               | ✓          |
+| normalizeAutoplay                               | [options.normalizeAutoplay](https://videojs.com/guides/options/#normalizeautoplay)                 | `Boolean`              | ✓          |
+| audioPosterMode                                 | [options.audioPosterMode](https://videojs.com/guides/options/#audiopostermode)                     | `Boolean`              | ✓          |
+| audioOnlyMode                                   | [options.audioOnlyMode](https://videojs.com/guides/options/#audioonlymode)                         | `Boolean`              | ✓          |
+| noUITitleAttributes                             | [options.noUITitleAttributes](https://videojs.com/guides/options/#nouititleattributes)             | `Boolean`              |            |
+| preferFullWindow                                | [options.preferFullWindow](https://videojs.com/guides/options/#preferfullwindow)                   | `Boolean`              |            |
+| suppressNotSupportedError                       | [options.suppressNotSupportedError](https://videojs.com/guides/options/#suppressnotsupportederror) | `Boolean`              |            |
+| techCanOverridePoster                           | [options.techCanOverridePoster](https://videojs.com/guides/options/#techcanoverrideposter)         | `Boolean`              |            |
+| techOrder                                       | [options.techOrder](https://videojs.com/guides/options/#techorder)                                 | `Array`                |            |
+| inactivityTimeout                               | [options.inactivityTimeout](https://videojs.com/guides/options/#inactivitytimeout)                 | `Number`               |            |
+| userActions                                     | [options.userActions](https://videojs.com/guides/options/#useractions)                             | `Object`               |            |
+| restoreEl                                       | [options.restoreEl](https://videojs.com/guides/options/#restoreel)                                 | `Boolean \| Element`   |            |
+| vtt.js                                          | [options['vtt.js']](https://videojs.com/guides/options/#vttjs)                                     | `String`               |            |
+| `children` (Vue) <br> `videoJsChildren` (React) | [options.children](https://videojs.com/guides/options/#children)                                   | `Array \| Object`      |            |
+| html5                                           | [options.html5](https://videojs.com/guides/options/#html5)                                         | `Object`               |            |
+| plugins                                         | [options.plugins](https://videojs.com/guides/options/#plugins)                                     | `Object`               |            |
+| options                                         | A fallback scheme, if you need to use options that don't exist in props, pass them to `options`.   | `VideoJsPlayerOptions` |            |
 
 ### Component Events
 
