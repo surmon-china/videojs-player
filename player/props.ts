@@ -100,7 +100,7 @@ const videoJsProps = {
       while (index--) {
         player.removeRemoteTextTrack(oldTracks[index] as any as HTMLTrackElement)
       }
-      // add new text tracks
+      // Add new text tracks.
       player.ready(() => {
         newTracks.forEach((track) => player.addRemoteTextTrack(track, false))
       })
@@ -244,7 +244,7 @@ const componentProps = {
   playbackRate: prop({
     type: Number,
     onChange(player, rate) {
-      // when playbackRate changes, sync the value to defaultPlaybackRate to
+      // When playbackRate changes, sync the value to defaultPlaybackRate to
       // ensure that the last saved playbackRate is automatically read when the video changes source.
       player.playbackRate(rate)
       player.defaultPlaybackRate(rate)
@@ -255,7 +255,7 @@ const componentProps = {
       })
     }
   }),
-  // fallback for video.js options
+  // Fallback for video.js options
   options: prop({
     type: Object as PropType<VideoJsPlayerOptions>
   })
