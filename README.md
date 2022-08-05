@@ -1,3 +1,11 @@
+<p></p>
+<p align="center">
+  <a href="https://videojs.com/" target="_blank">
+    <img height="52px" src="/videojs-logo.png" />
+  </a>
+</p>
+
+
 # videojs-player
 
 [![GitHub stars](https://img.shields.io/github/stars/surmon-china/videojs-player.svg?style=for-the-badge)](https://github.com/surmon-china/videojs-player/stargazers)
