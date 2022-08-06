@@ -64,14 +64,8 @@ const videoProps = {
     type: [Boolean, String] as unknown as PropType<boolean | 'muted' | 'play' | 'any'>,
     onChange: (player, autoplay) => player.autoplay(autoplay)
   }),
-  playsinline: prop({
-    type: Boolean,
-    onChange: (player, value) => player.playsinline(value)
-  }),
-  playsInline: prop({
-    type: Boolean,
-    onChange: (player, value) => player.playsinline(value)
-  }),
+  // https://github.com/videojs/video.js/blob/main/src/js/player.js#L793
+  // Support both crossOrigin and crossorigin to reduce confusion and issues around the name.
   crossorigin: prop({
     type: String,
     onChange: (player, value) => player.crossOrigin(value)
@@ -79,6 +73,14 @@ const videoProps = {
   crossOrigin: prop({
     type: String,
     onChange: (player, value) => player.crossOrigin(value)
+  }),
+  playsinline: prop({
+    type: Boolean,
+    onChange: (player, value) => player.playsinline(value)
+  }),
+  playsInline: prop({
+    type: Boolean,
+    onChange: (player, value) => player.playsinline(value)
   })
 }
 

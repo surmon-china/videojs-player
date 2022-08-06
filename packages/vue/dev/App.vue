@@ -47,7 +47,7 @@
     fluid: false,
     muted: false,
     loop: false,
-    crossOrigin: 'anonymous',
+    crossorigin: 'anonymous',
     language: languagesOptions[0],
     languages: {
       zh: {}
@@ -227,7 +227,7 @@
         :playbackRates="config.playbackRates"
         :fluid="config.fluid"
         :loop="config.loop"
-        :crossOrigin="config.crossOrigin"
+        :crossorigin="config.crossOrigin"
         :language="config.language"
         :languages="config.languages"
         @ready="handlePlayerReady"

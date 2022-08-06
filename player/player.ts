@@ -31,8 +31,19 @@ export const createPlayer = ({ props, element, onEvent }: CreatePlayerOptions) =
     ...fallbackOptions
   }
 
+  // Merge some confusing prop names.
+  const videoJsOptions = {
+    ...initOptions,
+    // https://videojs.com/guides/options/#restoreel
+    // Since the dispose > restore element side effect of Video.js occurs after the component has been unmounted,
+    // a DOM retention error will occur if true, so it cannot be set to true.
+    // restoreEl: initOptions.restoreEl ?? false,
+    // Video.js only supports the `playsinline` property.
+    playsinline: initOptions.playsinline ?? initOptions.playsInline
+  }
+
   // init player
-  const player = videoJs(element, initOptions, function () {
+  const player = videoJs(element, videoJsOptions, function () {
     // Stringing video.js events to vue emits.
     events.forEach((eventKey) => {
       this.on(eventKey, (payload) => {

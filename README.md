@@ -218,8 +218,8 @@ e.g. a change in `volume` will cause the player to change the volume.
 | poster                                          | [options.poster](https://videojs.com/guides/options/#poster)                                       | `String`               | ✓          |
 | controls                                        | [options.controls](https://videojs.com/guides/options/#controls)                                   | `Boolean`              | ✓          |
 | autoplay                                        | [options.autoplay](https://videojs.com/guides/options/#autoplay)                                   | `Boolean \| String`    | ✓          |
-| playsInline                                     | [options.playsInline](https://docs.videojs.com/player#playsinline)                                 | `Boolean`              | ✓          |
-| crossOrigin                                     | [options.crossOrigin](https://docs.videojs.com/player#crossorigin)                                 | `String`               | ✓          |
+| playsinline                                     | [options.playsinline](https://docs.videojs.com/player#playsinline)                                 | `Boolean`              | ✓          |
+| crossorigin                                     | [options.crossOrigin](https://docs.videojs.com/player#crossorigin)                                 | `String`               | ✓          |
 | volume                                          | A number, between 0 and 1, control the volume of the player.                                       | `Number`               | ✓          |
 | playbackRate                                    | Control the playback rate of the player.                                                           | `Number`               | ✓          |
 | playbackRates                                   | [options.playbackRates](https://videojs.com/guides/options/#playbackrates)                         | `Array<Number>`        | ✓          |

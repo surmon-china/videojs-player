@@ -2,6 +2,11 @@
 
 All notable changes to this project will be documented in this file.
 
+### v1.0.0-beta.1 (2022-08-06)
+
+- feat: normalize prop name `playsinline` and `crossorigin`
+- fix: prop name confusion `playsInline` > `playsinline`
+
 ### v1.0.0-beta.0 (2022-08-06)
 
 - fix: prop `class` type
