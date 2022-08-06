@@ -86,7 +86,8 @@ export const VideoPlayer: React.FC<VideoPlayerProps> = ({
         }
       })
 
-      // Add initClassName immediately after player initialization, `useEffect` will not work until the next rendering cycle, which may cause CSS flicker.
+      // Add initClassName immediately after player initialization,
+      // `useEffect` will not work until the next rendering cycle, which may cause CSS flicker.
       playerResult.current?.updateClassNames(void 0, initClassName)
 
       // create player state
