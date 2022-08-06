@@ -74,6 +74,7 @@ yarn add video.js @videojs-player/vue
 ```javascript
 import { createApp } from 'vue'
 import VueVideoPlayer from '@videojs-player/vue'
+import 'video.js/dist/video-js.css'
 
 const app = createApp()
 
@@ -104,6 +105,7 @@ app.use(VueVideoPlayer)
 <script>
   import { defineComponent } from 'vue'
   import { VideoPlayer } from '@videojs-player/vue'
+  import 'video.js/dist/video-js.css'
 
   export default defineComponent({
     components: {
@@ -150,6 +152,7 @@ yarn add video.js @videojs-player/react
 ```tsx
 import React from 'react'
 import { VideoPlayer } from '@videojs-player/react'
+import 'video.js/dist/video-js.css'
 
 export const Component: React.FC = () => {
   return (
