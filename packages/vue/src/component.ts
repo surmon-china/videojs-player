@@ -15,6 +15,7 @@ export default defineComponent({
   // https://github.com/vuejs/core/pull/2693
   // slots: Object as () => { player: VideoJsPlayer; state: DeepReadonly<PlayerState> },
   setup(props, context) {
+    const { class: initClassName, ...rawProps } = toRaw(props)
     const mounted = shallowRef(false)
     const videoElement = shallowRef<HTMLVideoElement | null>(null)
     const playerResult = shallowRef<PlayerResult | null>(null)
@@ -29,7 +30,6 @@ export default defineComponent({
 
     onMounted(() => {
       // create player
-      const { class: _, ...rawProps } = toRaw(props)
       const playerRes = createPlayer({
         element: videoElement.value!,
         props: rawProps,
@@ -105,7 +105,7 @@ export default defineComponent({
     return () => {
       // https://videojs.com/guides/embeds/
       // https://videojs.com/guides/react/
-      return h('div', { 'data-vjs-player': '' }, [
+      return h('div', { 'data-vjs-player': '', class: normalizeClass(initClassName) }, [
         h('video', {
           class: ['video-js', 'v-video-player'],
           ref: videoElement

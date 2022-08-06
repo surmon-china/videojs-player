@@ -2,6 +2,10 @@
 
 All notable changes to this project will be documented in this file.
 
+### v1.0.0-beta.2 (2022-08-07)
+
+- feat: `className` will now work from the beginning
+
 ### v1.0.0-beta.1 (2022-08-06)
 
 - feat: normalize prop name `playsinline` and `crossorigin`
