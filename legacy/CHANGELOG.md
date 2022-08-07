@@ -6,7 +6,7 @@ All notable changes to this project will be documented in this file.
 
 - feat: upgrade Video.js to v7
 - feat: refactoring to `pnpm` monorepo
-- feat: re-exports [`@videojs-player/vue`](../packages/vue)
+- feat: re-exports [`@videojs-player/vue`](https://github.com/surmon-china/videojs-player/tree/main/packages/vue)
 
 ### v5.0.2
 

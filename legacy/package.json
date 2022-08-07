@@ -3,7 +3,6 @@
   "description": "Video.js component for Vue",
   "version": "6.0.0",
   "license": "MIT",
-  "private": false,
   "author": "Surmon",
   "keywords": [
     "vue-video-player",
@@ -19,6 +18,7 @@
     "directory": "legacy"
   },
   "files": [
+    "CHANGELOG.md",
     "index.d.ts",
     "index.js"
   ],
