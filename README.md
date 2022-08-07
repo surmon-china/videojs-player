@@ -121,7 +121,7 @@ app.use(VueVideoPlayer)
 <template>
   <video-player :children="[]" ...>
     <template v-slot="{ player, state }">
-      <div class="player-controls">
+      <div class="custom-player-controls">
         <button @click="state.playing ? player.pause() : player.play()">
           {{ state.playing ? 'Pause' : 'Play' }}
         </button>
@@ -185,7 +185,7 @@ export const Component: React.FC = () => {
   return (
     <VideoPlayer videoJsChildren={[]} /* props... */>
       {({ player, state }) => (
-        <div class="player-controls">
+        <div class="custom-player-controls">
           <button onClick={() => state.playing ? player.pause() : player.play()}>
             {{ state.playing ? 'Pause' : 'Play' }}
           </button>
