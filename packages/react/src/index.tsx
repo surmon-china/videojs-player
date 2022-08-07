@@ -46,9 +46,8 @@ export const VideoPlayer: React.FC<VideoPlayerProps> = ({
   const videoElement = useRef<HTMLVideoElement | null>(null)
   const playerResult = useRef<PlayerResult | null>(null)
 
-  // Initialize with the initial className for the container element.
-  const [initClassName] = useState(className)
   // Sync React class name to Video.js container.
+  const [initClassName] = useState(className)
   const oldClassName = useRef<string>()
   useEffect(() => {
     if (mounted) {
@@ -77,20 +76,17 @@ export const VideoPlayer: React.FC<VideoPlayerProps> = ({
 
   useEffect(() => {
     if (videoElement.current) {
-      // create player
+      // Create player.
       playerResult.current = createPlayer({
         props,
         element: videoElement.current,
+        className: initClassName,
         onEvent: (eventKey, event) => {
           events[eventsMap[eventKey]]?.(event)
         }
       })
 
-      // Add initClassName immediately after player initialization,
-      // `useEffect` will not work until the next rendering cycle, which may cause CSS flicker.
-      playerResult.current?.updateClassNames(void 0, initClassName)
-
-      // create player state
+      // Create player state.
       let tempState: PlayerState | null = null
       createPlayerState(playerResult.current!.player, {
         onInit(initState) {
@@ -103,6 +99,7 @@ export const VideoPlayer: React.FC<VideoPlayerProps> = ({
         }
       })
 
+      // Emit mounted event.
       setMounted(true)
       onMounted?.({
         video: videoElement.current!,
@@ -122,8 +119,6 @@ export const VideoPlayer: React.FC<VideoPlayerProps> = ({
   }, [])
 
   return (
-    // https://videojs.com/guides/embeds/
-    // https://videojs.com/guides/react/
     <div data-vjs-player className={initClassName}>
       <video className="video-js r-video-player" ref={videoElement} />
       {mounted &&

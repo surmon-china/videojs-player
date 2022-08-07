@@ -212,7 +212,12 @@
       <video-player
         v-if="onPlayer"
         id="VideoPlayer"
-        :class="['dev-player', 'custom-theme', { playing: Boolean(state?.playing) }]"
+        :class="[
+          'dev-player',
+          'custom-theme',
+          'vjs-big-play-centered',
+          { playing: Boolean(state?.playing) }
+        ]"
         :data-playing-status="state?.playing"
         :style="{ backgroundColor: state?.playing ? 'red' : 'blue' }"
         :src="config.src"

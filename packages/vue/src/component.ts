@@ -29,7 +29,7 @@ export default defineComponent({
     })
 
     onMounted(() => {
-      // create player
+      // Create player.
       const playerRes = createPlayer({
         element: videoElement.value!,
         props: rawProps,
@@ -71,7 +71,7 @@ export default defineComponent({
           )
         })
 
-      // create player state
+      // Create player state.
       createPlayerState(playerRes.player, {
         onInit(initState) {
           state.value = initState
@@ -83,7 +83,7 @@ export default defineComponent({
         }
       })
 
-      // emit mounted event
+      // Emit mounted event.
       playerResult.value = playerRes
       mounted.value = true
       context.emit(MOUNTED_EVENT_NAME, {
@@ -103,8 +103,6 @@ export default defineComponent({
     })
 
     return () => {
-      // https://videojs.com/guides/embeds/
-      // https://videojs.com/guides/react/
       return h('div', { 'data-vjs-player': '', class: normalizeClass(initClassName) }, [
         h('video', {
           class: ['video-js', 'v-video-player'],
