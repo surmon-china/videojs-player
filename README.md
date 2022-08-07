@@ -31,7 +31,7 @@ The `vue-video-player` package has now been **renamed** to `@videojs-player/vue`
 
 The last version of the `vue-video-player` package will be released in v6.0, which will just re-export everything from `@videojs-player/vue`, so if you're ready to use the new version of `vue-video-player`, please just improt `@videojs-player/vue`.
 
-The latest version of videojs-player supports responsiveness for the vast majority of Video.js configuration options and allows you to fully customize the player's control panel and interaction details, thanks to the fact that the component does enough processing internally for different frameworks.
+The latest version of videojs-player supports **responsiveness** for the vast majority of Video.js configuration options and allows you to fully customize the player's control panel and interaction details, thanks to the fact that the component does enough processing internally for different frameworks.
 
 ### Legacy Version
 
