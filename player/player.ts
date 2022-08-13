@@ -5,6 +5,8 @@ import type { VideoJsPlayer } from './type'
 
 /**
  * Transform `string` className to `array`.
+ * @link https://github.com/videojs/video.js/pull/7798
+ * @link https://github.com/videojs/video.js/issues/7685
  * @description ```
  *  input: " test-a    test-b   test-c  "
  *  output: ["test-a", "test-b", "test-c"]

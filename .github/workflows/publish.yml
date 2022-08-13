@@ -1,30 +1,42 @@
 # This workflow will run tests using node and then publish a package to GitHub Packages when a release is created
 # For more information see: https://help.github.com/actions/language-and-framework-guides/publishing-nodejs-packages
-# Fork from: https://github.com/actions/starter-workflows/blob/master/ci/npm-publish.yml
+# https://github.com/actions/starter-workflows/blob/master/ci/npm-publish.yml
+# https://github.com/vitejs/vite/blob/main/.github/workflows/publish.yml
 
-name: Publish
+name: Publish Package
 
 on:
-  release:
-    types: [created]
   push:
     tags:
-      - 'v*'
+      - '@videojs-player/*' # Push events to matching sub-packages, i.e. @videojs-player/(vue|react)@1.0.0
 
 jobs:
-  publish-npm:
+  publish:
+    # prevents this action from running on forks
+    if: github.repository == 'surmon-china/videojs-player'
     runs-on: ubuntu-latest
+    environment: Release
     steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-node@v2
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Install pnpm
+        uses: pnpm/action-setup@v2.2.2
+
+      - name: Set node version to 16.x
+        uses: actions/setup-node@v3
         with:
-          node-version: '16'
-          cache: 'yarn'
+          node-version: 16.x
           registry-url: https://registry.npmjs.org/
-      - run: yarn install
-      - run: yarn rebirth
-      # TODO: yarn to pnpm
-      # TODO: cd target dir
-      - run: npm publish --access=public
+          cache: 'pnpm'
+
+      - name: Install deps
+        run: pnpm install
+
+      - name: Build package
+        run: pnpm run rebirth
+
+      - name: Publish package
+        run: pnpm run npm-publish ${{ github.ref_name }}
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
