@@ -17,9 +17,11 @@
 &nbsp;
 [![license](https://img.shields.io/github/license/mashape/apistatus.svg?style=for-the-badge)](/LICENSE)
 
-[![vue-video-player](https://img.shields.io/npm/v/@videojs-player/vue?color=c7343a&label=@videojs-player/vue&style=for-the-badge)](https://www.npmjs.com/package/@videojs-player/vue)
+[![@videojs-player/vue](https://img.shields.io/npm/v/@videojs-player/vue?color=c7343a&label=@videojs-player/vue&style=for-the-badge)](https://www.npmjs.com/package/@videojs-player/vue)
 &nbsp;
-[![react-video-player](https://img.shields.io/npm/v/@videojs-player/react?color=c7343a&label=@videojs-player/react&style=for-the-badge)](https://www.npmjs.com/package/@videojs-player/react)
+[![@videojs-player/react](https://img.shields.io/npm/v/@videojs-player/react?color=c7343a&label=@videojs-player/react&style=for-the-badge)](https://www.npmjs.com/package/@videojs-player/react)
+&nbsp;
+[![vue-video-player](https://img.shields.io/npm/v/vue-video-player?color=c7343a&label=vue-video-player&style=for-the-badge)](https://www.npmjs.com/package/vue-video-player)
 
 [**Video.js**](https://github.com/videojs/video.js) player component for **Vue(3)** and **React**.
 
