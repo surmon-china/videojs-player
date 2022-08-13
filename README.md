@@ -21,7 +21,7 @@
 &nbsp;
 [![@videojs-player/react](https://img.shields.io/npm/v/@videojs-player/react?color=c7343a&label=@videojs-player/react&style=for-the-badge)](https://www.npmjs.com/package/@videojs-player/react)
 &nbsp;
-[![vue-video-player](https://img.shields.io/npm/v/vue-video-player?color=c7343a&label=vue-video-player&style=for-the-badge)](https://www.npmjs.com/package/vue-video-player)
+[![vue-video-player](https://img.shields.io/npm/v/vue-video-player?color=c7343a&label=legacy&style=for-the-badge)](https://www.npmjs.com/package/vue-video-player)
 
 [**Video.js**](https://github.com/videojs/video.js) player component for **Vue(3)** and **React**.
 
