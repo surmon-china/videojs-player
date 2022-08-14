@@ -2,6 +2,10 @@
 
 All notable changes to this project will be documented in this file.
 
+### v1.0.0 (2022-08-15)
+
+- chore: release v1.0.0
+
 ### v1.0.0-beta.4 (2022-08-14)
 
 - fix: video.js types
