@@ -1,3 +1,4 @@
+import videojs from 'video.js'
 import type { VideoJsPlayerOptions } from 'video.js'
 import type { VideoJsPlayer } from './type'
 
@@ -68,11 +69,11 @@ const videoProps = {
   // Support both crossOrigin and crossorigin to reduce confusion and issues around the name.
   crossorigin: prop({
     type: String,
-    onChange: (player, value) => player.crossOrigin(value)
+    onChange: (player, value) => player.crossOrigin(value as any)
   }),
   crossOrigin: prop({
     type: String,
-    onChange: (player, value) => player.crossOrigin(value)
+    onChange: (player, value) => player.crossOrigin(value as any)
   }),
   playsinline: prop({
     type: Boolean,
@@ -143,7 +144,7 @@ const videoJsProps = {
     onChange: (player, value) => player.responsive(value)
   }),
   breakpoints: prop({
-    type: Object,
+    type: Object as PropType<Partial<videojs.Breakpoint>>,
     onChange: (player, value) => player.breakpoints(value)
   }),
   fluid: prop({
@@ -161,12 +162,7 @@ const videoJsProps = {
   }),
   // https://videojs.com/guides/options/#fullscreen
   fullscreen: prop({
-    type: Object as PropType<
-      Partial<{
-        options: FullscreenOptions
-        [key: string]: any
-      }>
-    >
+    type: Object as PropType<NonNullable<VideoJsPlayerOptions['fullscreen']>>
   }),
   // https://videojs.com/guides/options/#liveui
   liveui: prop({ type: Boolean }),

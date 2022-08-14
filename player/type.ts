@@ -4,17 +4,17 @@ export interface VideoJsPlayer extends Player {
   // https://docs.videojs.com/player#playbackRates
   playbackRates(newRates?: number[]): number[]
   // https://docs.videojs.com/player#audioOnlyMode
-  audioOnlyMode(value: boolean): Promise<unknown>
+  // audioOnlyMode(value: boolean): Promise<unknown>
   // https://docs.videojs.com/player#audioPosterMode
-  audioPosterMode(value: boolean): Promise<unknown>
+  // audioPosterMode(value: boolean): Promise<unknown>
   // https://docs.videojs.com/player#breakpoints
-  breakpoints(value: object | boolean): object
+  // breakpoints(value: object | boolean): object
   // https://docs.videojs.com/player#crossOrigin
-  crossOrigin(value?: string): string
+  // crossOrigin(value?: string): string
   // https://docs.videojs.com/player#disablePictureInPicture
-  disablePictureInPicture(value?: boolean): boolean
+  // disablePictureInPicture(value?: boolean): boolean
   // https://docs.videojs.com/player#isInPictureInPicture
-  isInPictureInPicture(value?: boolean): boolean
+  // isInPictureInPicture(value?: boolean): boolean
 }
 
 // Video.js Deprecated APIs
