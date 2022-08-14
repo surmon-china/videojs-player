@@ -1,7 +1,7 @@
 {
   "name": "@videojs-player/react",
   "description": "Video.js component for React",
-  "version": "1.0.0-beta.3",
+  "version": "1.0.0-beta.4",
   "private": false,
   "license": "MIT",
   "author": "Surmon",
