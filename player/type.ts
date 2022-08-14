@@ -4,9 +4,9 @@ export interface VideoJsPlayer extends Player {
   // https://docs.videojs.com/player#playbackRates
   playbackRates(newRates?: number[]): number[]
   // https://docs.videojs.com/player#audioOnlyMode
-  // audioOnlyMode(value: boolean): Promise<unknown>
+  // audioOnlyMode(value: boolean): Promise<void>
   // https://docs.videojs.com/player#audioPosterMode
-  // audioPosterMode(value: boolean): Promise<unknown>
+  // audioPosterMode(value: boolean): Promise<void>
   // https://docs.videojs.com/player#breakpoints
   // breakpoints(value: object | boolean): object
   // https://docs.videojs.com/player#crossOrigin
