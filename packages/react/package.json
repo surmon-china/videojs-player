@@ -19,7 +19,8 @@
     "directory": "packages/react"
   },
   "files": [
-    "dist"
+    "dist",
+    "CHANGELOG.md"
   ],
   "main": "./dist/videojs-player.cjs.js",
   "module": "./dist/videojs-player.esm.js",

@@ -2,5 +2,5 @@
 
 Video.js player component for React.
 
-- [Documentation](../../README.md)
+- [Documentation](https://github.com/surmon-china/videojs-player)
 - [Changelog](./CHANGELOG.md)
