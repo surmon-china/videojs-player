@@ -60,12 +60,14 @@ const main = async () => {
     await standardVersion(standardVersionBaseConfig)
   } else {
     // isStandardVersion === false > fetch tags && standardVersion({ skip: ... })
-    let remoteTag = null
+    let existsRemoteTag = false
     try {
-      remoteTag = await exec(`git fetch origin ${tagRefName}`)
-    } catch (_) {}
-
-    if (remoteTag) {
+      await exec(`git fetch origin ${tagRefName}`)
+      existsRemoteTag = true
+    } catch (_) {
+      existsRemoteTag = false
+    }
+    if (existsRemoteTag) {
       throw new Error(`${tagRefName} already exists!`)
     }
 

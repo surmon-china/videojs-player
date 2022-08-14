@@ -1,18 +1,15 @@
-const { exec } = require('child_process')
+const util = require('util')
+const exec = util.promisify(require('child_process').exec)
 
-module.exports = async (command) => {
-  return new Promise((resolve, reject) => {
-    exec(command, (error, stdout, stderr) => {
-      // If exec returns an error, print it and exit with return code 1
-      if (error) {
-        console.error(command, error.stderr || error.message)
-        return reject(error)
-      }
+module.exports = (command) => {
+  return exec(command)
+    .then((result) => {
       // If exec returns content in stderr, but no error, print it as a warning
-      if (stderr) {
-        console.warn(command, stderr)
-      }
-      return resolve(stdout)
+      if (result.stderr) console.warn(result.stderr)
+      return result
     })
-  })
+    .catch((error) => {
+      console.error(error.stderr || error.message)
+      return Promise.reject(error)
+    })
 }
