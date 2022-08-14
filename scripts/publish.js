@@ -29,7 +29,9 @@ async function main() {
     publicArgs.push(`--tag`, releaseTag)
   }
 
-  await exec(`cd ${dirPath} && npm ${publicArgs.join(' ')}`)
+  const { stdout, stderr } = await exec(`cd ${dirPath} && npm ${publicArgs.join(' ')}`)
+  console.log('stdout:', stdout)
+  console.log('stderr:', stderr)
   console.log()
 }
 
