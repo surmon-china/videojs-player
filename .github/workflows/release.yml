@@ -17,15 +17,18 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
-      - name: Get package name for tag
-        id: tag
-        run: |
-          # `%@*` truncates @ and version number from the right side.
-          # https://stackoverflow.com/questions/9532654/expression-after-last-specific-character
-          # https://www.edwardthomson.com/blog/github_actions_15_sharing_data_between_steps.html
-          # https://docs.github.com/en/actions/using-workflows/workflow-commands-for-github-actions#example-setting-an-output-parameter
-          pkgName=${GITHUB_REF_NAME%@*}
-          echo "::set-output name=pkgName::$pkgName"
+      # `%@*` truncates @ and version number from the right side.
+      # https://stackoverflow.com/questions/9532654/expression-after-last-specific-character
+      # https://www.edwardthomson.com/blog/github_actions_15_sharing_data_between_steps.html
+      # https://docs.github.com/en/actions/using-workflows/workflow-commands-for-github-actions#example-setting-an-output-parameter
+      # https://docs.github.com/en/actions/learn-github-actions/environment-variables#default-environment-variables
+      # GITHUB_REF_NAME === The branch or tag name that triggered the workflow run. For example, `@videojs-player/vue@1.0.0`.
+      # MARK: package dir should not be coupled with package name. `@videojs-player/vue@1.0.0` > `vue`
+      # - name: Get package name for tag
+      #   id: tag
+      #   run: |
+      #     pkgDirName=${GITHUB_REF_NAME%@*}
+      #     echo "::set-output name=pkgDirName::$pkgDirName"
 
       - name: Create Release
         id: create_release
@@ -36,4 +39,4 @@ jobs:
           tag_name: ${{ github.ref }}
           release_name: Release ${{ github.ref }}
           body: |
-            Please refer to [CHANGELOG.md](https://github.com/surmon-china/videojs-player/blob/${{ github.ref_name }}/packages/${{ steps.tag.outputs.pkgName }}/CHANGELOG.md) for details.
+            Please refer to [CHANGELOG.md](https://github.com/surmon-china/videojs-player#changelog) for details.

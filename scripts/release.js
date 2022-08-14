@@ -2,27 +2,18 @@
 // https://github.com/vuejs/core/blob/main/scripts/release.js
 // https://github.com/vitejs/vite/blob/main/scripts/publishCI.ts
 
-const fs = require('fs-extra')
 const path = require('path')
 const prompts = require('prompts')
 const standardVersion = require('standard-version')
-const exec = require('./exec')
-
-const rootDirPath = path.join(__dirname, '..')
-const packagesDirPath = path.join(rootDirPath, 'packages')
-const packages = fs.readdirSync(packagesDirPath).map((dirName) => {
-  const dirPath = path.join(packagesDirPath, dirName)
-  const json = require(path.resolve(dirPath, 'package.json'))
-  return { dirName, dirPath, json }
-})
+const { exec, packages, getPackageByName, getPrereleaseTagByVersion } = require('./utils')
 
 const main = async () => {
   // select package
-  const { packageDirName } = await prompts({
+  const { selectedPackageName } = await prompts({
     type: 'select',
-    name: 'packageDirName',
+    name: 'selectedPackageName',
     message: 'Select package',
-    choices: packages.map((i) => ({ value: i.dirName, title: i.json.name }))
+    choices: packages.map((i) => ({ value: i.json.name, title: i.json.name }))
   })
 
   // isStandardVersion?
@@ -33,22 +24,17 @@ const main = async () => {
     initial: false
   })
 
-  const selectedPackage = packages.find((p) => p.dirName === packageDirName)
+  const selectedPackage = getPackageByName(selectedPackageName)
   const changelogFile = path.resolve(selectedPackage.dirPath, 'CHANGELOG.md')
   const packageFile = path.resolve(selectedPackage.dirPath, 'package.json')
   const packageVersion = selectedPackage.json.version
   const tagPrefix = `${selectedPackage.json.name}@`
   const tagRefName = `${tagPrefix}${packageVersion}`
-  const prerelease = packageVersion.includes('beta')
-    ? 'beta'
-    : packageVersion.includes('alpha')
-    ? 'alpha'
-    : false
 
   const standardVersionBaseConfig = {
     commitAll: true,
     tagPrefix,
-    prerelease,
+    prerelease: getPrereleaseTagByVersion(packageVersion) ?? false,
     packageFiles: [packageFile],
     bumpFiles: [packageFile],
     infile: changelogFile,
@@ -88,9 +74,9 @@ const main = async () => {
 
   if (isPushToGitHub) {
     await exec(`git push --follow-tags origin main`)
-    console.log(
-      '\nPushed, publishing should starts shortly on CI.\nhttps://github.com/surmon-china/videojs-player/actions/workflows/publish.yml'
-    )
+    const message = `Pushed, publishing should starts shortly on CI.`
+    const url = `https://github.com/surmon-china/videojs-player/actions/workflows/publish.yml`
+    console.log(`\n${message}\n${url}`)
     console.log()
   }
 }
