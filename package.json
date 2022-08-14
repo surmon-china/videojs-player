@@ -19,7 +19,8 @@
     "test": "vitest run --coverage",
     "lint": "eslint packages/*/{src,test}/**",
     "rebirth": "pnpm lint && pnpm test && pnpm build",
-    "release": "node ./scripts/release.js"
+    "release": "node ./scripts/release.js",
+    "npm-publish": "node ./scripts/publish.js"
   },
   "devDependencies": {
     "@surmon-china/libundler": "^2.3.0",
@@ -30,8 +31,11 @@
     "eslint": "^8.20.0",
     "eslint-config-prettier": "^8.5.0",
     "eslint-plugin-prettier": "^4.2.1",
+    "fs-extra": "^10.1.0",
     "jsdom": "^20.0.0",
+    "standard-version": "^9.5.0",
     "prettier": "^2.7.1",
+    "prompts": "^2.4.2",
     "sass": "^1.54.0",
     "tslib": "^2.4.0",
     "typescript": "^4.7.4",
