@@ -9,6 +9,7 @@
     "video player",
     "videojs player"
   ],
+  "packageManager": "pnpm@7.9.0",
   "scripts": {
     "dev:vue": "pnpm -r --parallel --filter=vue run dev",
     "dev:react": "pnpm -r --parallel --filter=react run dev",
