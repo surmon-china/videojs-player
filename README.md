@@ -37,7 +37,7 @@ The latest version of videojs-player supports **responsiveness** for the vast ma
 
 ### Legacy Version
 
-If you are looking for a legacy version of the component for **Vue2**, use the [vue-video-player@4.x](https://github.com/surmon-china/videojs-player/tree/vue-video-player).
+If you are looking for a legacy version of the component for **Vue2**, use the [vue-video-player@5.x](https://github.com/surmon-china/videojs-player/tree/vue-video-player).
 
 ---
 
